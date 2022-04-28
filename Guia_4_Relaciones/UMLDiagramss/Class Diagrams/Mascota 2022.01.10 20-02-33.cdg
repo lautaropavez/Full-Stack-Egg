@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Mascota">
+  <ClassDiagramComponents>
+    <Class name="Mascota" package="Mascota" visibility="public" xPosition="68.0" yPosition="62.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apodo" type="String" visibility="private"/>
+        <Field name="tipo" type="String" visibility="private"/>
+        <Field name="color" type="String" visibility="private"/>
+        <Field name="raza" type="String" visibility="private"/>
+        <Field name="edad" type="Integer" visibility="private"/>
+        <Field name="cola" type="boolean" visibility="private"/>
+        <Field name="energia" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apodo"/>
+          <Argument type="String" name="tipo"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apodo"/>
+          <Argument type="String" name="tipo"/>
+          <Argument type="String" name="color"/>
+          <Argument type="String" name="raza"/>
+          <Argument type="Integer" name="edad"/>
+          <Argument type="boolean" name="cola"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="setApodo" returnType="void" visibility="public">
+          <Argument type="String" name="apodo"/>
+        </Method>
+        <Method name="setTipo" returnType="void" visibility="public">
+          <Argument type="String" name="tipo"/>
+        </Method>
+        <Method name="setColor" returnType="void" visibility="public">
+          <Argument type="String" name="color"/>
+        </Method>
+        <Method name="setRaza" returnType="void" visibility="public">
+          <Argument type="String" name="raza"/>
+        </Method>
+        <Method name="setEdad" returnType="void" visibility="public">
+          <Argument type="int" name="edad"/>
+        </Method>
+        <Method name="setCola" returnType="void" visibility="public">
+          <Argument type="boolean" name="cola"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="getApodo" returnType="String" visibility="public"/>
+        <Method name="getTipo" returnType="String" visibility="public"/>
+        <Method name="getColor" returnType="String" visibility="public"/>
+        <Method name="getRaza" returnType="String" visibility="public"/>
+        <Method name="getEdad" returnType="Integer" visibility="public"/>
+        <Method name="isCola" returnType="boolean" visibility="public"/>
+        <Method name="pasear" returnType="int" visibility="public">
+          <Argument type="int" name="energiaRestar"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Mascota" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Usuario" package="Mascota" visibility="public" xPosition="917.0" yPosition="62.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="dni" type="Integer" visibility="private"/>
+        <Field name="pais" type="String" visibility="private"/>
+        <Field name="edad" type="int" visibility="private"/>
+        <Field name="nacimiento" type="Date" visibility="private"/>
+        <Field name="Mascota" type="List&lt;Mascota&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="pais"/>
+          <Argument type="int" name="edad"/>
+          <Argument type="Date" name="nacimiento"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="setApellido" returnType="void" visibility="public">
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="setPais" returnType="void" visibility="public">
+          <Argument type="String" name="pais"/>
+        </Method>
+        <Method name="setDni" returnType="void" visibility="public">
+          <Argument type="Integer" name="dni"/>
+        </Method>
+        <Method name="setEdad" returnType="void" visibility="public">
+          <Argument type="int" name="edad"/>
+        </Method>
+        <Method name="setNacimiento" returnType="void" visibility="public">
+          <Argument type="Date" name="nacimiento"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="getApellido" returnType="String" visibility="public"/>
+        <Method name="getPais" returnType="String" visibility="public"/>
+        <Method name="getDni" returnType="Integer" visibility="public"/>
+        <Method name="getEdad" returnType="int" visibility="public"/>
+        <Method name="getNacimiento" returnType="Date" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="Mascota" source="Mascota.Usuario" target="Mascota.Mascota" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Mascota&gt;"/>
+    <UseRelation source="Mascota.Mascota" target="Mascota.Mascota" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
