@@ -98,7 +98,7 @@ public class MascotaService {
         }
     }
 
-    public void mostarXRaza(String raza) throws Exception {
+    public void mostrarXRaza(String raza) throws Exception {
         try {
             //Listamos los mascotas
             Collection<Mascota> mascotas = daoMascota.listarMascotasRaza(raza);

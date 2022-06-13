@@ -171,6 +171,8 @@ public class Menu {
 
     }
 
+    //======================= MÉTODOS DE PRODUCTOS =============================
+    
     public void crearProducto() { //Integer codigo, String nombre, Double precio, Integer cod_fab
         try {
             System.out.println("INGRESE CODIGO: ");
@@ -288,7 +290,8 @@ public class Menu {
     }
 
     //======================= MÉTODOS DE FABRICANTES ===========================
-    public void crearFabricante() { //Integer codigo, String nombre, String nacionalidad
+    
+    public void crearFabricante() { 
         try {
             System.out.println("INGRESE CODIGO: ");
             int codigo = leer.nextInt();

@@ -49,7 +49,11 @@ public class PersonaDAO extends DAO {
     }
     
     public Persona buscarPorDni(Long dni){
-        return (Persona) em.createQuery("SELECT p FROM Persona p WHERE p.dni = :dni ").setParameter("dni", dni).getSingleResult();
+        return (Persona) em.createQuery("SELECT p "
+                + " FROM Persona p "
+                + " WHERE p.dni = :dni ").
+                setParameter("dni", dni).
+                getSingleResult();
     }
     
     public List<Persona> listarTodas(){

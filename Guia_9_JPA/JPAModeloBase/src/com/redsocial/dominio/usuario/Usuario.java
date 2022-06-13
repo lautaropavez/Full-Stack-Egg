@@ -42,7 +42,7 @@ public class Usuario {
     @OneToOne(cascade = CascadeType.REMOVE)//Esto indicado para que si elimino al PADRE,elimino el vinculado
     private Direccion direccion;
 
-    //Siempre que manejo fechas, debo utilizar esta anotacion
+    //Siempre que manejo fechas, debo utilizar esta anotacion (Clase 1° min 39)
     @Temporal(TemporalType.DATE)
     private Date nacimiento;
 

@@ -18,8 +18,7 @@ public class UsuarioService {
         this.direccionService = new DireccionService();   
     }
 
-    public void crearUsuario(String correoElectronico, String clave, String dni, Date nacimiento, String pais,
-            String provincia) throws Exception {
+    public void crearUsuario(String correoElectronico, String clave, String dni, Date nacimiento, String pais, String provincia) throws Exception {
 
         try {
             //Validamos
@@ -76,7 +75,7 @@ public class UsuarioService {
 
             //Validamos
             if (!usuario.getClave().equals(claveActual)) {
-                throw new Exception("La clave actual no es la regsitrada en el sistema para el correo electrónico indicado");
+                throw new Exception("La clave actual no es la registrada en el sistema para el correo electrónico indicado");
             }
             //Modificamos
             usuario.setClave(nuevaClave);

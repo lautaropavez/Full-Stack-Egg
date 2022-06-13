@@ -23,8 +23,7 @@ public class UsuarioService {
         this.mascotaService = new MascotaService();  
     }
 
-    public void crearUsuario(String correoElectronico, String clave, String dni, Date nacimiento, String pais,
-            String provincia) throws Exception {
+    public void crearUsuario(String correoElectronico, String clave, String dni, Date nacimiento, String pais, String provincia) throws Exception {
 
         try {
             //Validamos

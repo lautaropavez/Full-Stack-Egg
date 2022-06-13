@@ -58,8 +58,5 @@ public final class UsuarioDAO {
         List<Usuario> usuarios = em.createQuery("SELECT d FROM Usuario d")
                 .getResultList();
         return usuarios;
-    }
-
-  
-  
+    } 
 }

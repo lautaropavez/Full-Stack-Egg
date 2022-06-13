@@ -11,7 +11,7 @@ public final class MascotaDAO  {
     //El parametro de este atributo, es COMO SE NOMBRA MI ARCHIVO PERSISTENCIA (persistence.xml, Persistencia Unit Name)
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPAModeloBasePU");
     private final EntityManager em = emf.createEntityManager();
-
+    
     public void guardarMascota(Mascota mascota) throws Exception { // Este metodo es para ingresar 
         em.getTransaction().begin();
         em.persist(mascota); // Para guardar - envio el objeto completo

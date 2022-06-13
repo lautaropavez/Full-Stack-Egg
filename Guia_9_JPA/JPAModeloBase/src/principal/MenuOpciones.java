@@ -61,7 +61,7 @@ public class MenuOpciones {
                     mascotaService.imprimirMascotas();
                     break;
                 case 5:
-                    mascotaService.mostarXRaza(cargarRaza());
+                    mascotaService.mostrarXRaza(cargarRaza());
                     break;
                 case 6:
                     usuarioService.modificarClaveUsuario(ingresarIdUsuario(), cargarClave(), cargarNuevaClave());

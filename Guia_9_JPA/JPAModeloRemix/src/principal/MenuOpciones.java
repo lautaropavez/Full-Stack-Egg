@@ -92,14 +92,13 @@ public class MenuOpciones {
     }
 
     public void limpiarPantalla() throws AWTException {
-        //Dejo esre metodo para ir borrando la consola.. y que no sea un desorden.
+        //Dejo este metodo para ir borrando la consola.. y que no sea un desorden.
         Robot pressbot = new Robot();
         pressbot.setAutoDelay(30); // Tiempo de espera antes de borrar
         pressbot.keyPress(17); // Orden para apretar CTRL key
         pressbot.keyPress(76);// Orden para apretar L key
         pressbot.keyRelease(17); // Orden para soltar CTRL key
         pressbot.keyRelease(76); // Orden para soltar L key
-
     }
 
     public String cargarCorreo() throws Exception {
