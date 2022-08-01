@@ -7,7 +7,7 @@ public class Spring {
 
     public static void main(String[] args) {
        /*
-        ========== Info Complementaria ========== 
+        ========================== Info Complementaria ========================= 
        IMPORTANTE: https://es.stackoverflow.com/questions/73955/cual-es-la-diferencia-entre-spring-jsf-jsp
        @Transactional(readOnly = true) : https://www.arquitecturajava.com/spring-transactional-readonly-y-optimizaciones/ 
                                          https://stackoverflow.com/questions/1614139/spring-transactional-read-only-propagation
@@ -23,16 +23,49 @@ public class Spring {
                         -  https://www.arimetrics.com/glosario-digital/uri
         @RequestParam vs @PathVariable : -  https://es.stackoverflow.com/questions/380131/cual-es-basicamente-la-diferencia-entre-la-anotacion-requestparam-y-pathvari#:~:text=Mi%20recomendaci%C3%B3n%20es%20que%20uses,un%20recurso%20o%20entidad%20%C3%BAnica.
                                          -  https://www.iteramos.com/pregunta/48857/requestparam-vs-pathvariable
+        Info de consultas a la Base de datos avanzadas: el que dice 137 --> https://stackoverflow.com/questions/21456494/spring-jpa-query-with-like 
+        Posible solución para problema con el mail(Búsqueda->application properties email spring boot): (MODIFICACIÓN APPLICATION PROPERTIES) https://www.geeksforgeeks.org/spring-boot-sending-email-via-smtp/
+                                                                                                        https://howtodoinjava.com/spring-core/send-email-with-spring-javamailsenderimpl-example/
+                                                                                                        https://stackoverflow.com/questions/24776669/failed-to-load-applicationcontext-from-unit-test-filenotfound
         endpoints: buscar info
         API restful: buscar info(@RequestParam vs @PathVariable- link de stack)
         scope: buscar info(sale en el html de thymeleaf)
         Documentación thymeleaf
         Enum repasar
-       ========== Charla Informativa ========== 
+        BUSCAR INFO (claseServiceUsuario) --> ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                        HttpSession session = attr.getRequest().getSession(true);
+        
+        Info sobre problemas con css styles: - https://github.com/apache/netbeans/blob/master/ide/css.lib/src/org/netbeans/modules/css/lib/nbparser/CssParser.java
+                                             - https://stackoverflow.com/questions/10022796/why-am-i-getting-this-error-premature-end-of-file
+                                             - https://stackoverflow.com/questions/23453551/how-do-i-get-rid-of-these-errors-that-netbeans-is-reporting-on-my-preprocessed-c
+                                             - https://itecnote.com/tecnote/css-how-to-get-rid-of-these-errors-that-netbeans-is-reporting-on-the-preprocessed-css/
+                                             - https://community.bmc.com/s/article/Remedy-AR-System-Server-Remedy-Web-Service-is-not-getting-loaded-in-Developer-Studio
+                                             - https://www.youtube.com/watch?v=qxw3lqWmFUE (Como poner bootstrap en Netbeans)
+                                             - ERROR QUE ME SALIA: Filter out the "Premature end of file " CSS Parsing errors.
+                                             - 
+        
+        
+        Info sobre problemas con el mail(Solucionado): - https://stackoverflow.com/questions/51274765/how-to-have-javamailsender-not-fail-the-application-context-loading-on-a-wrong-m
+                                          - https://medium.com/karibu-blog/c%C3%B3mo-enviar-un-mail-con-spring-boot-f86c2f7af678
+                                          - https://www.geeksforgeeks.org/spring-boot-sending-email-via-smtp/
+       
+        Recursos con los que hago el email sender: https://www.youtube.com/watch?v=kyL0m9y1n0A Send Email from Spring Boot Application (sin imagen y con imagen)
+                                                   https://www.youtube.com/watch?v=ugIUObNHZdo Send Email Using Spring Boot | Gmail SMTP | Java Mail Sender
+                                                   https://www.youtube.com/watch?v=XV92kJ8tmmA (Todavía no lo he visto)
+                                                   https://www.youtube.com/watch?v=QwQuro7ekvc  Java Tutorial - Complete User Login and Registration Backend + Email Verification
+        
+        Spring security: - https://stackoverflow.com/questions/72381114/spring-security-upgrading-the-deprecated-websecurityconfigureradapter-in-spring
+                         - https://pharos.sh/codificacion-de-contrasena-con-spring-security/
+                         - https://foroayuda.es/la-propiedad-security-basic-enabled-esta-obsoleta-la-configuracion-automatica-de-seguridad-ya-no-se-puede-personalizar/
+        Dato: RESTful API is an architectural style for an application program interface (API) that uses HTTP requests to access and use data. That data can be used to GET, PUT, POST and DELETE data types, which refers to the reading, updating, creating and deleting of operations concerning resources.
+        
+        Curso de Spring Boot 9hs, Spring DATA JPA, Spring Security: https://www.youtube.com/watch?v=zvR-Oif_nxg
+        Curso de Spring Boot Aplication CRUD: https://www.youtube.com/watch?v=TW5PD_TJMXo
+        ========================== Charla Informativa =========================== 
         
         Para usar Spring tenemos 2 opciones: 1)Podemos usar STS que es como el propio id de Spring o 2) Un Pluggin en Netbeans 
         
-       ========== Guia Programación Web ========== 
+       ===================== Guia Programación Web =============================
        ----------------- Notas -----------------
         Pág 8 POM: Project Object Model
                jar: Un archivo JAR es un tipo de archivo que permite ejecutar aplicaciones y herramientas escritas en el lenguaje Java. Las siglas están deliberadamente escogidas para que coincidan con la palabra inglesa "jar". Los archivos JAR están comprimidos con el formato ZIP y cambiada su extensión a .jar
@@ -48,7 +81,7 @@ public class Spring {
         Un URI es por tanto una cadena de caracteres que se utilizan para identificar un recurso o un nombre en internet. Su propósito es permitir la interacción entre diferentes recursos en Internet y otro tipo de red. 
         Mi recomendación es que uses la anotación @RequestParam para filtrar una consulta, y la anotación @PathVariable para identificar un recurso o entidad única. (Info al final de info de complementaria/URI/stackOver...)
        
-        ========== Intro Spring Parte 1 - Mañana ==========
+        ===================== Intro Spring Parte 1 - Mañana ====================
        
         Dice lo mismo que V1 de Videos Egg
         Metodo POST: Generalmente se emplean cuando llenamos formularios
@@ -80,10 +113,10 @@ public class Spring {
         min 37 en Name lo que queramos pero ese va a ser el nombre de nuestra carpeta del proyecto 
         Min 38 en Packagin podemos elegir jar o war, tienen diferentes formas de estructurar los archivos al trabajar pero cuando es un proyecto grande y nosotros queremos subirlo despues a algún lugar a veces es mejor trabajar con war porque genera un archivo de web aplication y jar trabaja con archivos más separados
         Min 40 desde netbeans vamos a utilizar un plugin
-        Min 45 que es repositorio
+        Min 45 Que es repositorio
         Min 48 Con las dependencias no vamos a tener la unidad de persistencia, no vamos a tener que crear el entity manager
        
-       ========== Intro Spring Parte 1 - Tarde ==========
+       ===================== Intro Spring Parte 1 - Tarde ======================
        
         Min 6 HTTP MIME: tipo estandarizado de señalar cierto formato de nuestros archivos
         Min 9 Gráfico de peticiones y respuestas
@@ -124,7 +157,7 @@ public class Spring {
         Min 1:08 localhost:8080 --> 8080 es el puerto por defecto de Sprin Boot como en mysql que era el 306
         Min 1:09 En application.properties es donde establecemos nuestra configuración de la aplicaciónm si queremos configurar la base de datos es acá
        
-       ==========Intro Spring Parte 2- Mañana==========
+       ===================== Intro Spring Parte 2- Mañana ======================
        
         Min 1 Vamos a la pág Sprin Initializer a descargar más dependencias en el proyecto que descargamos la clase pasada
         Min 2 Vamos a necesitar 3 dependencias, MySQL DRIVER, Spring Data JPA( Motor para persistir datos de JPA), Thymeleaf (por ahora nos va a permitir mostrar html en las vistas(pagina de localhost) pero tiene mas funcionalidades)
@@ -149,7 +182,7 @@ public class Spring {
         Min 18 @GetMapping 
         Min 26 Los repositorios serian nuestros nuevos DAOs donde estarian todos los métodos y las QUERYS 
        
-       ==========Intro Spring Parte 2- Tarde==========
+       ====================== Intro Spring Parte 2- Tarde ======================
        
         Min 1 Maven es una herramienta para construir proyectos, Spring es un framework para crear páginas Web
         Min 2 Arquitectura de capas 
@@ -183,7 +216,7 @@ public class Spring {
         Min 42 Diferencia de cuando lo corrimos con Profe Cristian, debemos acordarnos que es un servidor y el servidor siempre va a estar corriendo, además como yo elegí mi dependencia Spring Security y no la configuro, por defecto Spring me genera un password
         Min 44 En usuario ponemos user y en contra la contra que nos dieron
         
-       ========== Entidades y Repositorios Spring - Mañana ==========
+       =============== Entidades y Repositorios Spring - Mañana ================
        
         Min 1 Entidades es muy parecido a lo que haciamos con JPA, para que la Base de datos entienda que estas clases van a ser tablas, tenemos que definirlas como entidades con @Entity y toda entidad tenia que tener una anotación @Id
         Min 3 Forma de hacer los id como se hacen en los proyectos reales, se usa un generador de tipo universal, uuid(identificador unico universal) y vamos a usar una estrategia de identificador uuid2
@@ -199,7 +232,7 @@ public class Spring {
         Min 20 creamos un método para que nos devuelva un objeto Persona y no un Option
         Min 31:26 método delete para eliminar
         
-        ========== Entidades y Repositorios Spring - Tarde=========
+        ================ Entidades y Repositorios Spring - Tarde ===============
        
         Min 2 Spring Data JPA lo que hace es trabajar la parte de persistencia de datos
         Min 3 Spring data se divide en muchos subproyectos, uno es JPA, otro puede ser MongoDB que son Base de Datos no relaciones, o con MYSQL o con PostGress
@@ -216,7 +249,7 @@ public class Spring {
                esta tabla intermedia se pide evitarla para que haya un buen diseño de base de datos, igualmente en algunos casos es imposible obviar la tabla intermedia pero en este caso OneToMany y ManyToOne se puede obviar de algún lado
         Min 22 Entonces si nosotros queremos trabajarla de manera bidireccional tenemos que usar el mappedby --> @OneToMany(mappedBy = "usuario") , entre "" va el nombre del atributo con el que lo voy a relacionar en la otra clase
                Con esto establezco que en la base de datos no se grafique una relación, una tabla intermedia pero si en Java por ende a la entidad Mascota le asignamos la entidad de la relación
-        Min 25 EXPLICACIÓN IMPORTANTE, la propietaria de la relación va a ser la entidad macota porque es la que tiene llave foránea
+        Min 25 EXPLICACIÓN IMPORTANTE, la propietaria de la relación va a ser la entidad mascota porque es la que tiene llave foránea
         Min 26 Que pasa si yo no coloco el mappedby
         Min 32 EXPLICACIÓN IMPORTANTE, la tabla intermedia me permite hacer una relación de Uno a Muchos y Muchos a Uno
         Min 38 Porque usamos Mappedby
@@ -233,7 +266,7 @@ public class Spring {
         De esta forma vamos a poder acceder a metodos como antes usabamos el merge,commit,etc
         Min 1:09 JpaRepository a su vez extiende de otra clase y esta de otra y asi, generando un hilo de herencias.
         
-        ========== Servicios Spring - Mañana ==========
+        ======================= Servicios Spring - Mañana ======================
         
         Min 2 anotación @Autowired: Spring va a instanciar la clase por nosotros, es decir, va a crear un objeto y cuando lo necesite alguna clase usar lo va a mandar solamente a ese objeto
         Min 4 Creación métodos
@@ -257,7 +290,7 @@ public class Spring {
         Min 54 Pasos para crear Proyecto: creo las entidades, luego los repositorios con sus querys, los servicios y los controladores. El profe creaba una vista y en función a eso creaba el controlador.
                A veces para crear el controlador necesitas tener creada la vista para ver donde va X botón que haga tal cosa y de ahí saco la lógica para hacer el html con thymeleaf, es como el controlador y las vistas van más en conjunto 
         
-        ========== Servicios Spring - Tarde ==========
+        ======================= Servicios Spring - Tarde =======================
         
         Min 1 Vamos a usar el Proyecto Perros 1 subido en GitHub
               Los servicios deben contener todas las lógicas necesarias para procesar las transacciones de negocios(alta,baja,modific,busqueda,etc)
@@ -281,6 +314,7 @@ public class Spring {
         Min 13 @Transactional debo ponerla en todo método que manipule la base de datos si no lo ponemos trabaja mal internamente aunque no de ERROR. El @Transactional le advierte que al procesar los datos hace un duplicado del objeto para luego mandarlo si esta bien
                Este atributo propagation es una forma de como pueden comportarse las transacciones, poniendole la anotacion rollbackFor se hace de forma directa. Por defecto esta transaccion nace con esos atributos asi que no es necesario ponerlos
         Min 15 Hay otras Transacciones que podemos tener, IMPORTANTE vemos PDF de la Profe sobre anotaciones y distintos tipos de propagation de la anotación Transaction
+               @Transactional(readOnly = true) -> Optimiza el funcionamiento de mi aplicación, SÓLO SE USA SI SON OPERACIONES DE CONSULTA
         Min 18 Transaction a importar es la de Spring, NO javax
         Min 19 Método validar y funcionamiento Excepciones
         Min 20 Método perro alta y baja
@@ -308,9 +342,9 @@ public class Spring {
         Min 40 Para usar el findById con cualquier tipo de Id(Integer o String)tengo que utilizar la clase Optional sino se puede utilizar getOne pero se encuentra obsoleta
         Min 42 INNER JOIN: NO es necesario hacerlos porque... ver video
         
-        ========== THYMELEAF + CONTROLLER - Mañana ==========
+        =================== THYMELEAF + CONTROLLER - Mañana ====================
         
-        Min 1 Es un motor de plantillas(plantillas serian los templates, sea los html)
+        Min 1 Es un motor de plantillas(plantillas serian los templates, osea los html)
         Min 2 Usa template Suits
         Min 3 vemos entidad Perro de proyecto PerroV1
         Min 5 dependencia de thymeleaf
@@ -322,13 +356,14 @@ public class Spring {
         Min 10 @GetMapping : a través de una operación GET vamos a acceder a una URL desde la barra. Esta notación seria a lo que llamamos verbos HTTP o métodos HTTP, y estos métodos lo que hacen es definir la acción que se va a realizar sobre un determinado recurso
         Min 11 Diferencia entre GET y POST :
                                             - GET se utiliza únicamente para consultar información al servidor, podemos decir que es muy parecido a realizar un SELECT(pq cuando hacemos un select hacemos una petición a la BD  para que nos traiga info) en la BD
-                                            - POST es utilizado para solicitar la creación de un nuveo registro, parecido a cuando hacemos un INSERT en la BD, es la creación de algo nuevo
+                                            - POST es utilizado para solicitar la creación de un nuevo registro, parecido a cuando hacemos un INSERT en la BD, es la creación de algo nuevo
         Min 14 Nuestro index lo que va a hacer es renderizar. RENDERIZAR: Mostrar una Vista, mostrarla, plasmarla, armarla
         Min 15 Muestra el index, también los th que necesitamos para tener thymeleaf y spring security, con esta linea de codigo ya vamos a poder implementar etiquetas dinámicas adentro del html
         Min 18 muestra Perro Controller
         Min 21 Con el @Autowired inicializamos la clase PerroService
         Min 22 Los controladores son los que se comunican con la Vista(templates) y el Back mediante los servicios. Se manejan solo con las lógicas de vistas, decide que info viene y va que peticiones hacemos y que se muestra en la vista
         Min 25 vamos a hacer todo lo que es el CRUD (Registro,modificación y baja pq eliminación esta explic en los videos)
+        Min 25:59 muestra todo el html de form perro
         Min 26 formulario
                @GetMapping va a renderizar esta vista(return form-perro) cuando mi URL sea la del coment de la linea de abajo, osea cuando entramos a esta URL te retorna el formulario
         Min 27 Método @PostMapping, desde el mismo /registro (podrian no tener el mismo nombre y cambiar el nombre del método), lo que importa es que cuando haga la misma URL me lleguen algunas determinandas variables o parametros, por ej: nombre, foto, apodo, raza
@@ -388,16 +423,18 @@ public class Spring {
         Min 1:54 Como tiramos las excepciones que tenemos en el servicio --> e.getMessage()
         Min 1:55 Diferencia entre modelo.put y modelo.addAttribute: Para mandar una Collection es lo mismo pero el addAttribute puede mandar colecciones, mapas,objetos, string con el nomrbe del atributo más el objeto. La diferencia del addAttribute es que te trabaja objetos no valores
         
-        ========== THYMELEAF + CONTROLLER - Tarde ==========
+        =================== THYMELEAF + CONTROLLER - Tarde =====================
         
         Min 2 vemos atributos
         Min 3 si o si tenemos que poner @Controller para avisarle a spring que la clase es un controlador
         Min 4
         
+        ======================= Consulta - Tarde 09-11 =========================
+        
+        
        ###########################################################################################################################################################################################
        ##########################################################################  Sección Videos Egg ############################################################################################
        ###########################################################################################################################################################################################
-       
         ========== Fundamentos web | Programación | Spring Framework | V1 | Egg Educación ========== 
        
         HTTP es un protocolo sin estado porque no guarda información sobre las peticiones que realizo el cliente con anterioridad
@@ -409,9 +446,9 @@ public class Spring {
        
         ========== Configuración - Spring Initializer - Dependencias | Programación | Spring Framework | V2 ========== 
        
-          Min Creamos proyecto en Spring Initializer
-          Min Dependencias que vamos a usar: Spring Web, Thymeleaf(es para que nuestro html sea dinámico, entonces a través de ciertos TABs vamos a poder darle dinamismo a ese html y utilizar los modelos de Spring para enviar info dsde los controladores a las interfaces),
-              Spring Data JPA, Spring Security, MySQL Driver, Java Mail Sender (Para enviar mails en la plataforma)
+        Min Creamos proyecto en Spring Initializer
+        Min Dependencias que vamos a usar: Spring Web, Thymeleaf(es para que nuestro html sea dinámico, entonces a través de ciertos TABs vamos a poder darle dinamismo a ese html y utilizar los modelos de Spring para enviar info dsde los controladores a las interfaces),
+            Spring Data JPA, Spring Security, MySQL Driver, Java Mail Sender (Para enviar mails en la plataforma)
        
         ========== Capa de acceso a datos - Entidades - Repositorios | Programación | Spring Framework | V3 ========== 
        
@@ -433,17 +470,82 @@ public class Spring {
         Min 18 metodo que busca una lista de Votos Propios(los que hice yo), ordenada por fecha descendente (de más nuevo a más viejo)
         Min 19 metodo que busca una lista de Votos recibidos
         
-        ========== Capa de servicios 1: Servicios - Clase Error - Optional | Programación | Spring Framework | V4 ========== 
+        ============ Capa de servicios 1: Servicios - Clase Error - Optional | Programación | Spring Framework | V4 ============ 
+        
         Min 0 vemos la clase Servicio Usuario
         Hacemos todo lo que dijo en nuestra clase Libreria Web --> Usuario
-        ========== Capa de Servicios 2 | Programación | Spring Framework | V5  ========== 
         
-        ========== V6 ========== 
-        ========== V7 ========== 
-        ========== V8 ========== 
-        ========== V9 ========== 
-        ========== V10 ========== 
+        ============================= Capa de Servicios 2 | Programación | Spring Framework | V5  ============================== 
+        Min 1 crear Mascota
+        Min 3:30 modificar mascota
+        Min 10 eliminar / dar de baja mascota
         
+        ============================= Capa de Servicios 3 | Programación | Spring Framework | V6  ============================== 
+        
+        Min 0 método voto
+        Min 8 método devolver voto
+        Min 9 agregamos seguridad
+ 
+        ====================== Capa de servicios 4 - Entidad Foto | Programación | Spring Framework | V7  ====================== 
+        
+        Min 1 creamos entidad foto
+        Min 2 atributo mime nos dice que tipo de foto es
+              @Lob para las fotos, es para archivos grandes en general
+              @Basic(fetch = Fetch.TYPE.LAZY) con esto le indicamos que no queremos que inmediatamente se cargue la foto, sino que lo cargue solamente cuando lo pida, haciendo que los querys sean mas livianos
+              Cuando consulte la foto, sólo va a traer los atributos que están marcados como viber y mediante un método get traigo los atributos lazy
+        Min 3:44 creamos get y sets
+        Min 4 creamos la relación con mascota OneToOne como atributo
+        Min 5 creamos repositorio portada 
+              creamos servicio portada: archivo MultipartFile(es el archivo donde se almacena el archivo de la foto)
+              archivo.getContentType nos devuelve el mime, osea el tipo de archivo
+        Min 9 creamos método actualizar : Esto funciona para 2 casos, 1° que el usuario o la mascota que yo quiero modificar haya tenido una foto(portada) cargada, entonces va a buscar esa foto y la cambia y 2° caso si la primera vez no le cargue foto, entonces se va a crear en la BD y la va a persistir
+        Min 11:50 vinculamos el servicio foto con el servicio usuario y mascota
+        
+        ===================== Capa de servicios 5 - Spring Security | Programación | Spring Framework | V8 ===================== 
+        
+        Min 0 Conectamos usuario con Spring Security
+              Nuestro sevicio usuario implementa una interfaz que establece Spring Security que se llama UserDetailsService
+              La interfaz nos obliga a implementar un método Abstracto que se llama LoadByUserName(lo usamos en Libreria Web usuarioService)
+        Min 4:20 creamos el método ConfigureGlobal
+        Min 4:50 vamos al servicio de usuario y utilizamos el mismo encriptador
+        Min 5 modificamos método de registro y método modificar de Usuario
+        
+        ======================= Capa de servicios 6 - Mail Sender | Programación | Spring Framework | V9 ======================== 
+        
+        Antes que nada descargo la dependencia del mail sender(nose si tengo que poner algo en application properties)
+        Min 0 creamos método enviar
+        Min 2 marco método enviar como @Asinc (asíncrono): lo que hace esto es que el hilo de ejecución no espera a que se termine de enviar el mail, lo ejecuta en un hilo paralelo
+              Por eso el usuario tiene una respuesta inmediata, no tiene que esperar a que se termine de enviar el mail
+        
+        ========== Capa de servicios 7 - Transactional | Programación | Spring Framework | V10 ========== 
+        
+        Min 1 @Transactional: Si el método se ejecuta sin lanzar excepciones, entonces se hace un commit a la BD y se aplican todos los cambios
+                              Si lanza una excepción se vuelve atrás(rollback)
+        
+        ==================================================================================================================================================================================
+        =================================================================***** MVC *****==================================================================================================
+        ==================================================================================================================================================================================
+        
+        ========================= Inicio, Login y Registro | Programación | Modelo Vista Controlador | V1 =========================
+        
+        Min 0:39 nos muestra las páginas que tiene el proyecto TINDER MASCOTAS
+        Min 2:07 muestra el index
+        Min 3 vemos el index
+        Min 4 pestaña Navigation la ponemos desde Window
+        Min 5 el puerto localhost8080 se puede cambiar desde la configuración de la aplicación 
+        Min 7:20 vemos el index código completo(casi)
+        Min 8:06 vemos el código de registro
+        
+        ========================= Guardar Formulario de registro | Programación | Modelo Vista Controlador | V2 =========================
+
+        Min 1 vemos el código de registro
+        Min 2 creamos método POST registrar
+        Min 3 Los inputs tienen un nombre( nombre de la variable con la que va a viajar el controlador) 
+        Min 3:34 @RequestParam: con RequestParam podemos indicar si es obligatorio o si es opcional, por defecto son obligatorios
+        Min 6:15 El controlador deberia tomar estos datos y derivarlos al componente UsuarioService
+        Min 6:23 vemos UsuarioService. Por el momento no mandamos la foto ni la lógica del mail
+        Min 7 llamamos a Usuario Service
+        Min 8 ponemos try and catch en el controlador
         
         
        */       

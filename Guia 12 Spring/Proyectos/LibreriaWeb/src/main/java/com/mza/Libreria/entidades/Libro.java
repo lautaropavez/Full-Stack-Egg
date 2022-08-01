@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 
@@ -40,6 +41,9 @@ public class Libro {
     
     @ManyToOne(cascade = CascadeType.ALL)// Esto indicado para que si modifico al PADRE,modifico el vinculado
     private Editorial editorial;
+    
+    @OneToOne
+    private Portada portada;
 
 //  CONSTRUCTORES (No lo ponemos porque Netbeans entiende que hay un constructor vacío por defecto)
     
@@ -124,6 +128,14 @@ public class Libro {
     public void setEditorial(Editorial editorial) {
         this.editorial = editorial;
     }   
+    
+    public Portada getPortada() {
+        return portada;
+    }
+        
+    public void setPortada(Portada portada) {
+        this.portada = portada;
+    }
     
 }
 

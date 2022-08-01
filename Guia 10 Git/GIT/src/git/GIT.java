@@ -1,7 +1,7 @@
 package git;
 /**
  * @author Lautaro Pavez
- */
+*/
 public class GIT {
 
     public static void main(String[] args) {
@@ -137,8 +137,8 @@ public class GIT {
         * git fetch : Con esto traemos todas las ramas que se hayan generado, commits o cambios realizados
         * git branch -a : Ahora si nos sale la rama develop que ha sido creada en remoto(Nos muestra en rojo lo que esta en el repositorio remoto, en blanco las locales y verde donde estoy parado)
         * Para crear una rama desde otra rama: nos posicionamos en la rama develop con git checkout develop, ahora deberemos crear la rama nueva con
-        * git branch feature/agustin/login , feature: es una denominacion para encapsular el ordenamiento del nombre de la rama, entonces va a ser una rama perteneciente a agustin, todas mis ramas van a permanecer a esa carpeta(contenedor) y el nombre de la tare va a ser login
-        * No es correcto realizar ramas unicamente por nombre. ej: yo trabajo siempre sobre agutin, NO. Yo tengo que trabajar sobre la rama de mi tarea.
+        * git branch feature/agustin/login , feature: es una denominacion para encapsular el ordenamiento del nombre de la rama, entonces va a ser una rama perteneciente a agustin, todas mis ramas van a permanecer a esa carpeta(contenedor) y el nombre de la tarea va a ser login
+        * No es correcto realizar ramas unicamente por nombre. ej: yo trabajo siempre sobre agustin, NO. Yo tengo que trabajar sobre la rama de mi tarea.
         * git branch -a : Y vemos que está en verde la rama que estoy parado y en blanco las ramas locales y rojo las remotas. Ponemos:
         * git checkout feature/agustin/login y nos posicionamos en dicha rama
         * git push origin feature/agustin/login : y le digo que estos cambios hay que empujarlos al login. Vemos en github y esta creada la nueva rama que fue generada desde mi computadora y yo envie la info al repositor remoto. 
@@ -174,14 +174,17 @@ public class GIT {
         */
         /* Video 2 Pildoras Informaticas */
         /* 
-        * git reset --hard 01cdac6 : Si hicimos 2 commits, con esto podemos volver al primero pero el 2do commit lo elimina
-        * git log --oneline :
+        * git reset --hard 01cdac6(codigo de la instantanea a la que queremos retornar) : Si hicimos 2 commits, con esto podemos volver al primero pero el 2do commit lo elimina
+        * git log --oneline : nos muestra lo del git log en una linea
         * git commit -am "" : Te hace el commit y el add a la vez
         * git commit --amend : Para editar el commit si lo escribimos mal, nos manda al editor vin, acá tenemos que poner :i (esto le dice al editor que podemos empezar a editar), apretamos la tecla 
+        * git config --global user.username (como cambiar el user de git)
+        * git config --global user.email (como cambiar el email de git)
         * Suprimir para borrar esa descripcion, tecla ESC para salir de modo edición y ahora para escribir una nueva edicion(commit) :i, ENTER y escribimos lo que iria en el commit, luego ENTER Y ESC y listo, para salir del editor tenemos que poner :wq
         * 
         */
         /* Video 3 Pildoras Informaticas */
+        /* min 8 Podemos modificar el nombre del commit */
         /* Video 4 Pildoras Informaticas */
         /*
         * tags: Etiquetas que nos permiten especificar versiones de nuestro proyecto.
@@ -216,6 +219,34 @@ public class GIT {
         /* Video 9 Pildoras Informaticas */
         /* Video 10 Pildoras Informaticas */
         /* Video 11 Pildoras Informaticas */
+        /* ERRORES */
+        /*
+        fatal: The current branch master has no upstream branch, INFO:
+        https://stackoverflow.com/questions/23401652/fatal-the-current-branch-master-has-no-upstream-branch
+        https://www.delftstack.com/es/howto/git/reset-and-restore-in-git/
+        https://stackoverflow.com/questions/17096311/why-do-i-need-to-explicitly-push-a-new-branch/17096880#17096880
+        https://ajaxhispano.com/ask/por-que-necesito-hacer-set-set-upstream-todo-el-tiempo-14543/
+        ERROR COMPLETO fatal: The current branch con-14 has no upstream branch.To push the current branch and set the remote as upstream, use
+        git push --set-upstream origin con-14
+        Solucionado con: git push --set-upstream origin con-14 . Lo que me salio cuando lo hice:
+        git push --set-upstream origin con-14
+        $ git push --set-upstream origin con-14
+        Enumerating objects: 28, done.
+        Counting objects: 100% (28/28), done.
+        Delta compression using up to 2 threads
+        Compressing objects: 100% (22/22), done.
+        Writing objects: 100% (22/22), 3.65 KiB | 534.00 KiB/s, done.
+        Total 22 (delta 18), reused 0 (delta 0), pack-reused 0
+        remote: Analyzing objects... (22/22) (284 ms)
+        remote: Storing packfile... done (55 ms)
+        remote: Storing index... done (49 ms)
+        To https://tercerbit.visualstudio.com/ADMC/_git/ADMC
+         * [new branch]      con-14 -> con-14
+        branch 'con-14' set up to track 'origin/con-14'.
+        
+        
+        */
+
     }
 
 }

@@ -442,16 +442,12 @@ public class ServiceLibro {
     
      public List<Libro> buscaTodo() { //OTRA MANERA DE LISTAR 
         List<Libro> buscado = null;
-
         try
         {
-
             buscado = daolibro.listarTodos();
-
             return buscado;
 
-        } catch (Exception e)
-        {
+        } catch (Exception e){
             System.out.println(e.getMessage());
             return null;
         }
