@@ -34,6 +34,8 @@ public class Spring {
         Enum repasar
         BUSCAR INFO (claseServiceUsuario) --> ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
                         HttpSession session = attr.getRequest().getSession(true);
+        CONTROLADOR DE ERRORES EJ: https://stackoverflow.com/questions/31134333/this-application-has-no-explicit-mapping-for-error
+        
         
         Info sobre problemas con css styles: - https://github.com/apache/netbeans/blob/master/ide/css.lib/src/org/netbeans/modules/css/lib/nbparser/CssParser.java
                                              - https://stackoverflow.com/questions/10022796/why-am-i-getting-this-error-premature-end-of-file
@@ -42,9 +44,37 @@ public class Spring {
                                              - https://community.bmc.com/s/article/Remedy-AR-System-Server-Remedy-Web-Service-is-not-getting-loaded-in-Developer-Studio
                                              - https://www.youtube.com/watch?v=qxw3lqWmFUE (Como poner bootstrap en Netbeans)
                                              - ERROR QUE ME SALIA: Filter out the "Premature end of file " CSS Parsing errors.
-                                             - 
+        PROBLEMA PRINCIPAL localhost/:106 Refused to apply style from 'http://localhost:8080/static/css/style.css' because its MIME type ('application/json') is not a supported stylesheet MIME type, and strict MIME checking is enabled.                                     
+                                             - https://stackoverflow.com/questions/3027891/how-to-get-rid-of-library-references-issue-in-netbeans-java?rq=1
+                   IMPORTANTE PARA  PROBLEMA - https://community.magento.com/t5/Magento-2-x-Programming/How-to-fix-its-MIME-type-text-html-is-not-a-supported-stylesheet/td-p/128970
+                   IMPORTANTE PARA  PROBLEMA - https://developerf1.com/how-to/solving-stylesheet-not-loaded-because-of-mime-type
+             IMPORTANTE VIDEO PARA  PROBLEMA - https://www.youtube.com/watch?v=G6TegxmaI9o Integrar Correctamente Plantilla Bootstrap en Proyecto SpringBoot con Thymeleaf
+                                      (HECHO)- https://github.com/froala/angular-froala/issues/170
+                                      (HECHO)- https://exerror.com/mime-type-text-html-is-not-a-supported-stylesheet-mime-type-and-strict-mime-checking-is-enabled/ 
+                                      (HECHO)- https://stackoverflow.com/questions/48248832/stylesheet-not-loaded-because-of-mime-type
+                                       (MIME)- https://github.com/h5bp/server-configs-nginx/blob/main/mime.types   
+                                 (IMPORTANTE)- https://stackoverflow.com/questions/477816/what-is-the-correct-json-content-type
+                          (IMPORTANTE)(HECHO)- https://stackoverflow.com/questions/60306334/spring-serves-static-content-as-application-json-no-matter-what
+                                 (SIN HACER) - https://www.faqcode4u.com/faq/352660/bootstrap-not-working-with-spring-boot
+                                 (SIN HACER) - https://stackoverflow.com/questions/58505262/thymeleaf-with-spring-boot-and-bootstrap-dont-work-in-page-with-pathvariable
+                                 (SIN HACER) - https://stackoverflow.com/questions/51390127/bootstrap-not-working-with-spring-boot
+                                 (SIN HACER) - https://stackoverflow.com/questions/49263433/refused-to-apply-style-because-its-mime-type-application-json-is-not-a-suppo
+                                      (HECHO)- https://stackoverflow.com/questions/21203402/css-not-loading-in-spring-boot
+                                      (HECHO)- https://stackoverflow.com/questions/31947707/why-will-netbeans-not-run-my-css-file
+                                      (HECHO)- https://github.com/jaylindquist/spring-boot-service-and-static EJEMPLO
+                  POSIBLE RECURSO DE ESTUDIO - http://www.profesor-p.com/2-spring/
+        DOCUMENTACIÓN: 
+                                             - https://docs.spring.io/spring-restdocs/docs/current/reference/html5/
+                                             - https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#application-properties.templating.spring.thymeleaf.reactive.media-types
+                                             - https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#web
+                                             - https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-http2
         
         
+        BUSQUEDAS:
+                                             - https://www.google.com/search?q=my+netbeans+dont+read+bootstrap&oq=my+netbeans+dont+read+boots&aqs=chrome.1.69i57j33i10i160l3.11457j0j7&sourceid=chrome&ie=UTF-8
+                                             - https://www.google.com/search?q=how+to+change+content+type+of+file&oq=how+to+ch&aqs=chrome.1.69i57j69i59j46i512j0i512l2j69i60l2j69i61.4035j0j7&sourceid=chrome&ie=UTF-8
+                                             - https://www.google.com/search?q=Content-Type%3A+application%2Fjson&sxsrf=ALiCzsbe5gvUI5m0IJFGnl7Aa7wx4Sg-iw%3A1659366622247&ei=3uznYozPDvGJ1sQP_cWhgAc&ved=0ahUKEwiMtsiw9qX5AhXxhJUCHf1iCHAQ4dUDCA4&uact=5&oq=Content-Type%3A+application%2Fjson&gs_lcp=Cgdnd3Mtd2l6EAMyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEdKBAhBGABKBAhGGABQygNYygNgwQVoAHADeACAAQCIAQCSAQCYAQCgAQHIAQjAAQE&sclient=gws-wiz
+     IMPORTANTE BUSQUEDA QUE NO LLEGUE A VER - https://www.google.com/search?q=spring+boot+changed+style+css+class+to+application%2Fjson&oq=spring+boot+changed+style+css+class+to+application%2F&aqs=chrome.1.69i57j33i10i160l4j33i22i29i30.31131j0j7&sourceid=chrome&ie=UTF-8
         Info sobre problemas con el mail(Solucionado): - https://stackoverflow.com/questions/51274765/how-to-have-javamailsender-not-fail-the-application-context-loading-on-a-wrong-m
                                           - https://medium.com/karibu-blog/c%C3%B3mo-enviar-un-mail-con-spring-boot-f86c2f7af678
                                           - https://www.geeksforgeeks.org/spring-boot-sending-email-via-smtp/
@@ -61,6 +91,13 @@ public class Spring {
         
         Curso de Spring Boot 9hs, Spring DATA JPA, Spring Security: https://www.youtube.com/watch?v=zvR-Oif_nxg
         Curso de Spring Boot Aplication CRUD: https://www.youtube.com/watch?v=TW5PD_TJMXo
+        Crear una API REST desde cero con Spring Boot https://www.youtube.com/watch?v=jO-o3qQZDuU
+        Introducción a Spring MVC + Thymeleaf usando Spring Boot  https://www.youtube.com/watch?v=bVM6MX-dGJI
+        7.-Desarrollo web con Spring: Petición POST a través de formulario https://www.youtube.com/watch?v=rTDKYXZc178
+        Curso PHP MYSQL SWEETALERT Y BOOTSTRAP: https://www.youtube.com/watch?v=nWKREPF8xyk
+        Desarrollar Api Rest con Java Spring Boot https://www.youtube.com/watch?v=vTu2HQrXtyw
+        Conceptos básicos: Spring framework, Spring MVC y Spring Boot  https://www.youtube.com/watch?v=cTozN8W6FGo
+        Inicio de sesión y registro de usuarios con Spring Security + Thymeleaf + MySQL y Bootstrap https://www.youtube.com/watch?v=0wTsLRxS3gA&t=6s
         ========================== Charla Informativa =========================== 
         
         Para usar Spring tenemos 2 opciones: 1)Podemos usar STS que es como el propio id de Spring o 2) Un Pluggin en Netbeans 
@@ -366,32 +403,35 @@ public class Spring {
         Min 25:59 muestra todo el html de form perro
         Min 26 formulario
                @GetMapping va a renderizar esta vista(return form-perro) cuando mi URL sea la del coment de la linea de abajo, osea cuando entramos a esta URL te retorna el formulario
-        Min 27 Método @PostMapping, desde el mismo /registro (podrian no tener el mismo nombre y cambiar el nombre del método), lo que importa es que cuando haga la misma URL me lleguen algunas determinandas variables o parametros, por ej: nombre, foto, apodo, raza
+        Min 27 Método @PostMapping, desde el mismo /registro (podrian no tener el mismo nombre y cambiar el nombre del método), lo que importa es que cuando haga la misma URL me lleguen algunas determinadas variables o parametros, por ej: nombre, foto, apodo, raza
         Min 28 ModelMap, además de poder inyectar mensajes sirve para pasar valores y Collections(colecciones de valores) (en 2da lista de reproducción MVC vamos a encontrar todo esto)
         Min 29 @RequestParam indica que determinada variable es requerido para el método 
         Min 32 @PostMapping entra recién cuando tengamos un botón que haga submit sino con el @GetMapping sólo lo mostramos
                vemos PerroService: desde el Controlador llamo al servicio, al método guardar y le paso lo que quiero que guarde(el guardar perro no le pasa el objeto, sino que le pasa los atributos)
         Min 33 botón submit: el tipo submit sabe que tiene que enviar información, es importante que el botón esté dentro del formulario para que sepa que hacer
+        Min 34: muestra un a que dice volver en form perro
         Min 35 vemos html y relación de @PostMapping con el a través de método POST
         Min 39 ModelMap es una clase de Java con métodos, a través del ModelMap inyecto 
         Min 40 método .put : recibe una llave? y un valor --> modelo.put("éxito","Registro exitoso"); "éxito" es la llave y "Registro exitoso" es el valor de esta llave
         Min 41 cómo hago desde el front para saber que tengo que mostrar esto? (esto= ventana emergente que dice que se realizo con éxito)
-        Min 42 IMPORTANTE nos muestra html. Con el th hacemos referencia que es una etiqueta thymeleaf, poniendo th:text manejamos el texto que le queremos poner dede nuestro controlador
+        Min 42 IMPORTANTE nos muestra html. Con el th hacemos referencia que es una etiqueta thymeleaf, poniendo th:text manejamos el texto que le queremos poner desde nuestro controlador
         Min 45 card: rectángulo gigante (verde en este caso) 
-        Min 48 vemos que pasa si lo agarra el try and catch
-        Min 49 vemos el html mas completo
-        Min 50 cuando seteamos valores o variables usamos el signo $, ahora que estamos haciendo un action estamos haciendo referencia a una URL, entonces le avisamos que cuando entre a la URL /perro/registro del método POST, quedaria asi --> th:action="@{/perro/registro}" method="POST" , vamos a enviar toda la información de mi formulario
+        Min 48 Vemos que pasa si lo agarra el try and catch
+        Min 49 Vemos el html mas completo, vemos el formulario completo
+        Min 50 Cuando seteamos valores o variables usamos el signo $, ahora que estamos haciendo un action estamos haciendo referencia a una URL, entonces le avisamos que cuando entre a la URL /perro/registro del método POST, quedaria asi --> th:action="@{/perro/registro}" method="POST" , vamos a enviar toda la información de mi formulario
         Min 51 en el model.put podemos pasarle como llave cualquier cantidad de palabras pq le pasamos el String, lo único también debemos cambiarlo en el html y siempre deben ser solo 2 parametros
         Min 52 card title
         Min 54 IMPORTANTE Duda URL, mirar clase. No se concatenan lo que tenga en el requesmapping de mi clase main con lo que tenga en mi requestmapping de cualquier otra clase
         Min 56 Método POST no puede estar declarado en el botón, se declara en el formulario 
         Min 57 href lo que hace es mandarme a una URL, si le agrego la etiqueta th: quedaria th:href="@{/}" le pongo una @, pasa lo mismo que el action(min 50), le avisamos a que ruta va a ir acá le digo
         Min 58 tabla de html común
-        Min 1:00 Nueva funcionalidad e thymeleaf, que es recorrer una lista con th:each ="perro : ${perros}", funciona igual que un for each, por ejemplo acá le pasamos un auxiliar que se llama perro y le pasamos la variable entre llaves con el signo $(pesos) con una lista perros
+        Min 1:00 Nueva funcionalidad de thymeleaf, que es recorrer una lista con th:each ="perro : ${perros}", funciona igual que un for each, por ejemplo acá le pasamos un auxiliar que se llama perro y le pasamos la variable entre llaves con el signo $(pesos) con una lista perros
                  Cuando sabe con que lista trabajar, de donde vienen estos perros? Eso lo vemos a través de nuestro modelo, con nuestro modelo vamos a inyectarle una lista para que thymeleaf la recorra
                  Vemos el método @GetMapping("/lista") en el controller y lo armamos de cero, uso el método que creamos en el service que trae todos
+        Min 1:04 vemos el método en service Perro que lista todos (activos e inactivos)
+        Min 1:06 Mandamos la lista con modelo .addAttribute. .addAttribute tiene otras funcionalidades para mandar un atributo o una colección por ej.
         Min 1:09 scope investigar
-        Min 1:11 cuando queremos poner un sino, algo que equivale a un else en html ponemos unless
+        Min 1:11 cuando queremos poner un sino, algo que equivale a un else en thymeleaf ponemos unless (th:if = if, unless = else)
         Min 1:12 referencias href--> alta,baja modificar
         Min 1:17 vemos Controller(controlador) perro completo
         Min 1:18 como sabemos que está conectado a la Base de datos? Porque en el output dice Hibernate, Hibernate utiliza JPA como motor de persistencia para poder crear nuestras tablas
@@ -406,12 +446,14 @@ public class Spring {
         Min 1:30 @PathVariable es una anotación, en este caso lo usamos con nuestro Id
         Min 1:31 le inyectamos el modelo, usa el perroService y dentro de el, el método getOne 
         Min 1:32 basicamente lo que hace es recibir el id y buscarlo mediante el servicio perro y mostrarlo en el html, que lo manda(al html) a través del modelo 
-        Min 1:34-43 MODIFICAMOS html de formulario perro modificar 
+        Min 1:33:33 EXPLICACION IMPORTANTE de como funciona modificacion a través de URL
+        Min 1:34:43 MODIFICAMOS html de formulario perro modificar 
                  vemos el método @PostMapping que es el que le va a mandar el perro
         Min 1:35 Mandamos el id, como se evaluan las expresiones en thymeleaf cuando queremos pasar este tipo de cosas? Existe una sintaxis: __${perro.id}__  (esto se pone en el html pero es para avisarle a thymeleaf y Spring), que hago con estos guines bajos? es una expresión de preprocesamiento que es interna y se evalua antes de la expresión, en otras palabras le estoy dando prioridad, osea que lo primero que se va a evaluar va a ser "perro.id"
+                 En otras palabras le digo: "Antes de irte al controlador de modificar, evaluame cuál es el id."
                  Y una vez que tenemos el resultado del id, te permite ingresar a toda la URL de este controlador 
-        Min 1:38 Hago lo mismo con el botón de modificar, le agrego __${perro.id}__
-        Min 1:40 etiqueta(tag) nueva de thymeleaf --> th:valid se usa mucho en los input, ej: th:value=${perro.nombre}
+        Min 1:38 Hago lo mismo con el botón de modificar de list-usuario y list-libro , le agrego __${perro.id}__
+        Min 1:40 etiqueta(tag) nueva de thymeleaf --> th:value se usa mucho en los input, ej: th:value=${perro.nombre}
         Min 1:42 el name de los tags tiene que coincidir con el nombre de las variables que estamos poniendo
         Min 1:43 le agregamos ModelMap modelo al @PostMapping de perro Controller
         Min 1:44 placeholder: en el caso de que no haya nada se va a mostrar lo que pusimos en el place holder en html
@@ -421,16 +463,40 @@ public class Spring {
         Min 1:49 placeholder 
         Min 1:52 input hidden: Cuando nosotros vamos a querer modificar y utilizamos un formulario, y queremos trabajar con un objeto en específico, con una entidad que nosotros tenemos creada, necesitamos esa id para que el formulario sepa que vamos a trabajar con esa entidad, si no lo enviamos, cuando hagamos el submmit va a crear otro objeto nuevo en lugar de modificar el que nosotros modificamos ya que no tendria el id que le pasamos.
         Min 1:54 Como tiramos las excepciones que tenemos en el servicio --> e.getMessage()
-        Min 1:55 Diferencia entre modelo.put y modelo.addAttribute: Para mandar una Collection es lo mismo pero el addAttribute puede mandar colecciones, mapas,objetos, string con el nomrbe del atributo más el objeto. La diferencia del addAttribute es que te trabaja objetos no valores
+        Min 1:55 Diferencia entre modelo.put y modelo.addAttribute: Para mandar una Collection es lo mismo pero el addAttribute puede mandar colecciones, mapas,objetos, string con el nombre del atributo más el objeto. La diferencia del addAttribute es que te trabaja objetos no valores
+        Min 1:57 Profe en clase thy pone un return pero se lo devuelve lista vacía (mirar clase thy turno tarde min 1:28)
         
         =================== THYMELEAF + CONTROLLER - Tarde =====================
         
         Min 2 vemos atributos
         Min 3 si o si tenemos que poner @Controller para avisarle a spring que la clase es un controlador
-        Min 4
+        Min 8 muestra dependencia de thymeleaf
+              Tiene 2 url de thymeleaf, 1 de thymeleaf y otra para la seguridad
+        Min 14 Como pasar las referencias de los controllers sin thymeleaft, ej: 
+                                                                                con th --> th:href="@{/usuario/lista}" 
+                                                                                sin th -->  href="/usuario/lista"
+        Min 19:10 muestra su index con los 2 botones de cargar perro y mostrar lista perros
+        Min 21-23 Consulta(IMPORTANTE): Habla sobre Controladores. El profe hace un solo Controlador y ahi hace todos los métodos, pero lo ideal por buenas prácticas es que haya un controlador para cada entidad 
+        Min 36: cuando en el HTML ponemos $ es porque trabajamos con variables, si es con @ trabajamos con URLs
+        Min 40-41 Porque el DevTools nos sirve para cargar todo dinamico menos los controladores, pq los controladores son estáticos no dinamicos, por lo que tenemos que reiniciar el proyecto
+                  Hay una forma de evitar tener que reiniciar, configurando el pom --> que estadio queremos que se configure de manera automática pero NO es recomendable pq por ej si tenes un usuario logueado, al hacer eso que se reinicia de forma automática perderias el usuario logueado
+        Min 44 ERROR rollback puede ser porque están mal las validaciones en el servicio
+        Min 51 __${perro.id}__ Normalmente se va a utilizar esto solo cuando hagamos referencia a los id, solo en las URL, los action o href que hagan referencia a un id
+        Min 52-53 Si yo NO pongo el id dentro del formulario me va a crear un nuevo objeto de forma automática en lugar de modificar el existente
+                  El id lo pongo con un input hidden
+        Min 56 vemos método get One que es parecido al findbyid
+        Min 59 cuando nos tira ese tipo de ERROR (error 500) ponemos CTRL + F y buscamos line asi nos dice la linea en la que vamos a tener el error
+        Min 1:25 Cada vez que nosotros hacemos una modificación en la BD vamos a ver en el Output que se nos aparece --> Hibernate: Es una ORM (object relational mapping) que utiliza a JPA como motor de persistencia y lo que hace es mapear todo lo que pasa a nivel entidades y base
+                 y en base a ee mapeo genera las tablas y los insert correspondientes. Por lo que cada vez que hagamos algun tipo de modificación o hagamos un método POST es muy probable que nos salga --> Hibernate: select usuario...
+                 Esto está configurado en el aplication properties.
+        Min 1:28 IMPORTANTE soluciona problema de video anterior con redirect que lo usa en alta y baja
+        Min 1:29 IMPORTANTE métodos de alta y baja Controladores y service
+        Min 1:30 En la BD nunca debemos eliminar registros
         
         ======================= Consulta - Tarde 09-11 =========================
         
+        
+        ======================= Consulta - Tarde 11-11 =========================
         
        ###########################################################################################################################################################################################
        ##########################################################################  Sección Videos Egg ############################################################################################
@@ -538,7 +604,7 @@ public class Spring {
         
         ========================= Guardar Formulario de registro | Programación | Modelo Vista Controlador | V2 =========================
 
-        Min 1 vemos el código de registro
+        Min 1 vemos el código de registro(dato para crear el formulario)
         Min 2 creamos método POST registrar
         Min 3 Los inputs tienen un nombre( nombre de la variable con la que va a viajar el controlador) 
         Min 3:34 @RequestParam: con RequestParam podemos indicar si es obligatorio o si es opcional, por defecto son obligatorios
@@ -548,6 +614,23 @@ public class Spring {
         Min 8 ponemos try and catch en el controlador
         
         
+        
+        ========================= Validar formularios | Programación | Modelo Vista Controlador | V3 =========================
+        Min 1:40 Creamos un parámetro ModelMap: Esto va a contener el modelo, recordemos la clase modelo... los modelos en Spring servian para que nosotros insertaramos toda esa información que vamos a mostrar en pantalla que vamos a necesitar en las interfaces de usuario
+        Min 2 modelo.put("error", ex);  Este modelo lo vamos a utilizar para enviar en este caso el mensaje de error en la pantalla. Usamos el método put, vamos a elegir un nombre de variable para que la pantalla recupere este valor, vamos a tomar la excepción y vamos a retornar a la pantalla el mensaje vinculado a esa excepción
+        Min 8 como Ingresamos las variables nuevamente
+        Min 9 Cuando se loguea con exito, lo mandamos a la pag exito 
+        ========================= Guardar imagen | Programación | Modelo Vista Controlador | V4 =========================
+        
+        =========================  | Programación | Modelo Vista Controlador | V5 =========================
+        =========================  | Programación | Modelo Vista Controlador | V6 =========================
+        =========================  | Programación | Modelo Vista Controlador | V7 =========================
+        =========================  | Programación | Modelo Vista Controlador | V8 =========================
+        =========================  | Programación | Modelo Vista Controlador | V9 =========================
+        =========================  | Programación | Modelo Vista Controlador | V10 =========================
+        =========================  | Programación | Modelo Vista Controlador | V11 =========================
+        =========================  | Programación | Modelo Vista Controlador | V12 =========================
+
        */       
     }
 

@@ -1,0 +1,34 @@
+***Cosas para hacer en mi proyecto***
+-Seguir modificacion método registro y registrar de librocontroller
+-Revisar en serviceusuario que si no genero modificaciones en los otros campos de la vista cuando hago una modificación no me los cambie al pedo
+- Agregar botón de volver a todos los html
+- Método modificar es el problema de error en libro, creo que por cuando paso la imagen 
+- Hacer try and catch en todos los métodos de controllers 
+- Revisar si pasar el registro de usuario del MainController al UsuarioController (Hecho con Vid 2 MVC Youtube y Clase 2 THYMELEAFT)
+- Revisar si uso th:if="${exito}!=null" y error en html de form-libro-modif y form-usuario-modif
+- Modificar formulario de form-libro-modif a uno más formal (Clase Thymeleaf min 1:40 muestra el de perro)
+- Modificar formulario de form-usuariomodif (Clase Thymeleaf min 1:40 muestra el de perro, sacar la idea de form perro)
+- Hacer try a método list de Usuario
+- Hacer try a método list de Libro
+- Hacer try a método modificar de Usuario
+- Hacer try a método modificar de Libro
+- Fijarme si hay una forma más segura de modificar un objeto que con la forma que es mandando el input hidden, por si me lo modifican al html desde la web
+- Hacer validaciones pop up con sweetalert2 del proyecto gonzalo y reemplazar el js de validUsuarioModif
+- Cuando haga con sweetalert fijarme como hacer que aparezca la pop up de exito al modificar un usuario o libro y cuando el usuario cierre esa pop up me mande a otra página
+- Pasar en html las referencias de los métodos de mainController a usuario controller (no está definido si pasarlo o no)
+- Hacer tablas con datatable spring
+- Mockup Libreria Pág Principal 
+- Buscar Bootstrap para item anterior
+-------- Hecho
+++ Hacer formulario para modificar libro (igual al formulario de registro)
+++ Hacer formulario para modificar Usuario (igual al formulario de registro)
+++ Crear método buscarPorId en Usuario service
+++ Crear método buscarPorId en Usuario Repo
+++ Hacer método listarTodos en usuarios
+++ ERROR en /form-usuario-modif.html
+****** Testing ******
+- Fijarme si puedo dar de baja a un usuario y volver a darlo de alta
+- Fijarme si cuando volvi a darlo de alta, tiene date de baja = null
+- Fijarme si puedo dar de baja a un libro y volver a darlo de alta
+- 
+- 

@@ -5,19 +5,20 @@ import com.mza.Libreria.entidades.Usuario;
 import com.mza.Libreria.enumeradores.Rol;
 import com.mza.Libreria.excepciones.MiExcepcion;
 import com.mza.Libreria.repositorios.UsuarioRepository;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -56,7 +57,7 @@ public class ServiceUsuario{     //Sin Spring Security
         
         usuarioRepo.save(usuario);
         
-        sNotific.enviarEmail("Bienvenidos a Biblioteca Virtual", "Libreria Web", usuario.getMail());
+        //sNotific.enviarEmail("Bienvenidos a Biblioteca Virtual", "Libreria Web", usuario.getMail()); //en video 2 de mvc la comentamos pq no hemos configurado un servidor de correo todavia
     }
     
     @Transactional
@@ -80,6 +81,19 @@ public class ServiceUsuario{     //Sin Spring Security
          throw new MiExcepcion("No se encontró el usuario ingresado");   
         }  
     }
+    
+    @Transactional(readOnly = true)
+    public Usuario buscarPorId(String id){
+        Usuario u = usuarioRepo.buscarPorId(id);
+        //Manera más corta si manejo la excepcion en controlador
+        return usuarioRepo.buscarPorId(id);
+//        if (u != null) {
+//            return u;
+//        } else {
+//            return null; //throw new MiExcepcion("Este libro no existe."); esto debo ponerlo en el controlador
+//        }
+    }
+    
     
     @Transactional
     public void deshabilitar(String id)throws MiExcepcion{
@@ -127,6 +141,15 @@ public class ServiceUsuario{     //Sin Spring Security
         
     }
     
+    @Transactional(readOnly = true) //Busca todos los usuarios activos e inactivos (para el administrador)
+    public List<Usuario> listarTodos() {
+        return usuarioRepo.findAll();
+    }
+    
+    @Transactional(readOnly = true) //Busca todos los usuarios que esten activos, es distinto a listaActivos de libro porque en libro solo pusimos un boolean activo, acá dos fechas de activo e inactivo
+    public List<Usuario> listaActivos(Date baja) {
+        return usuarioRepo.listaActivos(baja);
+    }
     public void validacion(String nombre,String apellido,String mail,String clave) throws MiExcepcion {
 
         if (nombre == null || nombre.isEmpty()) {
@@ -145,7 +168,7 @@ public class ServiceUsuario{     //Sin Spring Security
             throw new MiExcepcion("Debe indicar la clave");
         }
         if (clave.length() < 8) {
-            throw new MiExcepcion("La clave no puede tener menos de 6 caracteres");
+            throw new MiExcepcion("La clave no puede tener menos de 8 caracteres");
         }
     }
 

@@ -5,11 +5,12 @@ import com.mza.Libreria.servicios.ServiceUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.boot.context.event.ApplicationReadyEvent;
+//import org.springframework.context.event.EventListener;
+//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.web.servlet.ViewResolver;
 
 @SpringBootApplication
 //public class LibreriaWebApplication extends WebSecurityConfigurerAdapter {
@@ -33,10 +34,11 @@ public class LibreriaWebApplication{
 //                .userDetailsService(servUsuario)
 //                .passwordEncoder(new BCryptPasswordEncoder());
 //    }
-// 
-    @EventListener(ApplicationReadyEvent.class)
-    public void sendMail(){
-        servNotif.enviarEmail("Hola Gaspar...","Mensaje para Gaspar","lautapavez@gmail.com");
-    }
-        
+ 
+    
+    //MAIL
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void sendMail(){
+//        servNotif.enviarEmail("Hola Gaspar...","Mensaje para Gaspar","lautapavez@gmail.com");
+//    } 
 }

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Registro</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
+        <!-- Google Fonts-->
         <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../static/css/login-style.css" rel="stylesheet" />
+        <link href="css/login-style.css" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Foto de <a href="https://unsplash.com/@henry_be?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Henry Be</a> en <a href="https://unsplash.com/es/s/fotos/books?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>-->
@@ -54,34 +54,62 @@
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/librosmano.jpg" alt="..." /></div>
+                        <div class="p-5"><img class="img-fluid rounded-circle" src="img/librosmano.jpg" alt="..." /></div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
-                            <form action="" method="POST" id="form">
+                            <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Exito</h5>
+                                    <p class="card-text" th:text="${exito}"></p> 
+                                </div>
+                            </div>
+                            <div th:if="${error != null}" class="card text-white bg-danger mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Error</h5>
+                                    <p class="card-text"th:text="${error}"></p> 
+                                </div>
+                            </div>
+                            <form action="/registrar" method="POST" id="form">  <!-- Cuando yo haga click en registrarme, va a ejecutar una action que es una URL, entonces action le ponemos el nombre de la action que se va a ejecutar en el servidor-->
                                 <div class="form">
-                                    <h2 class="">Registro</h2>
+                                    <h2 class="">Registro</h2> <!-- Profe lo pone al h2 fuera del form -->
+                                    
+                                    <!--<p th:if="${error != null}" th:text="${error}" style="color:red"></p> Forma que lo hace profe MVC vid 2 .Este if va a imprimir o mostrar el contenido de este párrafo si se cumple la condición que ponemos dentro, si en el modelo viene la variable error voy a mostrar este párrafo -->
+                                    
                                     <div class="grupo">
-                                        <input type="text" name="name" id="name" required><span class="barra"></span>
-                                        <label>Nombre</label>
+                                        <input type="text" name="nombre" id="name" th:value="${nombre}" required><span class="barra"></span>
+                                            <label>Nombre</label>
+                                    </div>
+                                     <div class="grupo"> 
+                                        <input type="text" name="apellido" id="apellido" th:value="${apellido}" required><span class="barra"></span>                                      
+                                        <label>Apellido</label>
                                     </div>
                                     <div class="grupo">
-                                        <input type="email" name="email" id="email" required><span class="barra"></span>
+                                        <input type="email" name="mail" id="mail" th:value="${mail}" required><span class="barra"></span>
                                         <label>Email</label>
                                     </div>
                                     <div class="grupo">
-                                        <input type="password" name="password" id="password" required><span class="barra"></span>
+                                        <input type="password" name="clave1" id="clave1" th:value="${clave1}" required><span class="barra"></span>
                                         <label>Contraseña</label>
                                     </div>
                                     <div class="grupo">
-                                        <input type="password" name="password1" id="password1" required><span class="barra"></span>
-                                        <label>Repetir Contraseña</label>
+                                        <input type="password" name="clave2" id="clave2" th:value="${clave2}" required><span class="barra"></span>
+                                            <label>Repetir Contraseña</label>
                                     </div>
                                     <button type="submit">Guardar</button>
+                                    
                                 </div>
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <!--Hecho en clase thymeleaf min 56-->
+        <section class="py-5 text center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-2 col-md-8 mx-auto">
+                    <a th:href="@{/}" class="btn btn-primary btn-xl rounded-pill mt-5">Volver</a>
                 </div>
             </div>
         </section>
@@ -92,7 +120,7 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
+        <script src="js/scripts.js"></script>
     </body>
 </html>
 

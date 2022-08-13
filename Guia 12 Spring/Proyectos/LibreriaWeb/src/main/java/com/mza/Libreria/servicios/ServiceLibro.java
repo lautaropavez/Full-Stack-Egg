@@ -17,8 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author Lautaro Pavez
  */
-// 22 min descanso 
-// En clases quede en min 33 y 30
 //Nota: Cuando creemos el libro vamos a tener que buscar si existen las editoriales, autores y mostrarlos (si quiere para elegir) sino, si no está que lo ingrese directamente 
 //      Dar de baja por autor y editorial desde el baja libro, que llame a un método de service autor dar de baja, autor busca si todos sus libros estan dados de baja se baja sino no,
 //      Y al revés con el alta del libro, primero nos fijamos si está dado de alta ok, sino lo damos de alta.

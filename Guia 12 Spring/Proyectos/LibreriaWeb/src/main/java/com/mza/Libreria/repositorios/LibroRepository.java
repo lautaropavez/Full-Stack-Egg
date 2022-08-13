@@ -25,7 +25,7 @@ public interface LibroRepository  extends JpaRepository<Libro, String>{
     List<Libro> buscaTodo(@Param("buscar") String buscar);
     
     @Query("SELECT l from Libro l WHERE l.alta = true AND l.ejemplaresRestantes > 0")
-    public List<Libro> listaActivos();
+    public List<Libro> listaActivos(); //Revisar porque no tiene parametros
     
 //-------------------------------NO USADOS--------------------------------------   
     
