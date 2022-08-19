@@ -36,12 +36,6 @@ public class MainController {
         return "registro.html";
     }
     
-//    //Método de prueba
-//    @GetMapping("/list-usuario") 
-//    public String listUsuario(){
-//        return "list-usuario.html";
-//    }
-    
     //Esto va a recibir los parámetros, los lleva al service, el service ejecuta su lógica, si hay algún error lo va a imprimir solo y va a volver al registro, y sino hay error va a ir al index
     @PostMapping("/registrar")
     public String registrar(ModelMap modelo,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave1,@RequestParam String clave2){

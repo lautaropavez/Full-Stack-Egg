@@ -19,58 +19,42 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Lautaro Pavez
  */
 
-// Notas: Clase Servicio Mañana muestra CONTROLADOR DE LIBRO
+// Notas: Clase Servicio Mañana muestra CONTROLADOR DE LIBRO y en (Clase 2 Mañana)
 @Controller 
-@RequestMapping("/libro") //localhost:8080/libro (Clase 2 Mañana)
+@RequestMapping("/libro")
 public class LibroController {
 
     @Autowired
     private ServiceLibro servLibro; 
     
-    @GetMapping("/registro") //localhost:8080/libro/registro
+    @GetMapping("/registro") 
     public String formulario(){
-         return "form-libro"; // ya esta creado el form en el archivo form-perro.html
+         return "form-libro";
     }
       
-    //Hacer que envia el mensaje de las validaciones de los servicios con e.getMessage
-    @PostMapping("/registrar") //El post mapping trae la info
-    public String crear(ModelMap modelo,@RequestParam MultipartFile archivo, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String nombreAut,@RequestParam String nombreEdit){ //acá van todos los atributos del metodo crear
+    @PostMapping("/registrar") 
+    public String crear(ModelMap modelo,@RequestParam MultipartFile archivo, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String nombreAut,@RequestParam String nombreEdit){ 
         try{
             servLibro.crearLibro(archivo,titulo,anio,nombreAut,nombreEdit);
-            modelo.put("exito","Registro exitoso"); //en exito le podemos poner cualq cantidad de palabras pq es un String lo que le pasamos, pero siempre deben ser solo 2 parametros
-            return "form-libro"; //retornamos la misma página
-          //Forma profe Clase Thymeleaft 
-//        modelo.put("exito","¡¡Registro exitoso!!");
-//        return "registro.html"; //Si está todo ok retorna el registro y ya pusimos un div con los mensajes de exito cuando ingrese un usuario
+            modelo.put("exito","¡Registro exitoso!"); 
+            return "form-libro"; //retornamos la misma página y ya pusimos un div con los mensajes de exito cuando ingrese un usuario
 //        //Forma profe Videos MVC 2
 //        //modelo.put("titulo","¡¡Bienvenido a Libreria El Ceibo!!");
 //        //modelo.put("descripcion","Tu usuario fue registrado de manera satisfactoria");
 //        //return "exito.html"; //Si esta todo ok retorna la pag principal, en vez de el registro de nuevo
-//        //Forma Lauti hacerlo con una popup
         }catch(MiExcepcion ex){
-            modelo.put("error", ex.getMessage());// Este modelo lo vamos a utilizar para enviar en este caso el mensaje de error en la pantalla.
-            //Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex); //Con esto nos tira el error por consola, lo podemos sacar
-
-//            A modificar por los atributos de libro en vez usuario  
-//            modelo.put("nombre",nombre);
-//            modelo.put("apellido",apellido);
-//            modelo.put("mail",mail);
-//            modelo.put("clave1",clave1);
-//            modelo.put("clave2",clave2);
+            modelo.put("error", ex.getMessage());
+            //Logger.getLogger(LibroController.class.getName()).log(Level.SEVERE, null, ex); //Con esto nos tira el error por consola, lo podemos sacar
+            modelo.put("titulo",titulo);
+            modelo.put("anio",anio);
+            modelo.put("autor",nombreAut);
+            modelo.put("editorial",nombreEdit);
             return "form-libro"; //Si ocurre un error retornamos la misma página
-        }
-        
-        
+        }  
     }
-   
-//    public String registrar(ModelMap modelo,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave1,@RequestParam String clave2){ 
-//    }
+
     
-    
-    
-    
-    
-        //Clase THYMELEAF min 01:03:00
+    //Clase THYMELEAF min 01:03:00
     @GetMapping("/lista") //localhost:8080/libro/lista
     public String lista(ModelMap modelo){
         List<Libro> librosLista = servLibro.listarTodos();
@@ -99,4 +83,26 @@ public class LibroController {
         }
     }
     
+    //Alta y Baja Clase THYMELEAF Tarde min 01:28:00
+    @GetMapping("/baja/{id}")
+    public String baja(@PathVariable String id,ModelMap modelo){
+        try {
+            servLibro.baja(id);
+            return "redirect:/usuario/lista";  
+        } catch (Exception ex) {
+            modelo.put("error", ex.getMessage());
+            return "redirect:/usuario/lista"; 
+        }
+    }
+    
+    @GetMapping("/alta/{id}") 
+    public String alta(@PathVariable String id,ModelMap modelo){
+        try {
+            servLibro.alta(id);
+            return "redirect:/usuario/lista";  
+        } catch (Exception ex) {
+            modelo.put("error", ex.getMessage()); 
+            return "redirect:/usuario/lista"; 
+        }
+    }  
 }

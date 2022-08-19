@@ -60,7 +60,7 @@ public class ServiceUsuario{     //Sin Spring Security
         //sNotific.enviarEmail("Bienvenidos a Biblioteca Virtual", "Libreria Web", usuario.getMail()); //en video 2 de mvc la comentamos pq no hemos configurado un servidor de correo todavia
     }
     
-    @Transactional
+    @Transactional //Hacer lo mismo que en ServiceLibro de verificar de que hayan cambios antes de setear nuevamente
     public void modificar(String id,String nombre,String apellido,String mail,String clave) throws MiExcepcion{
         
         validacion(nombre,apellido,mail,clave);
@@ -101,8 +101,10 @@ public class ServiceUsuario{     //Sin Spring Security
         Optional<Usuario> respuesta = usuarioRepo.findById(id);
         if(respuesta.isPresent()){ 
             Usuario usuario = respuesta.get();
-            usuario.setBaja(new Date());
-            usuarioRepo.save(usuario);
+            if(usuario.getBaja() == null){ //Lo mejoré igual que habilitar
+                usuario.setBaja(new Date());
+                usuarioRepo.save(usuario);
+            }
         }else{
          throw new MiExcepcion("No se encontró el usuario ingresado");   
         }  
@@ -112,13 +114,15 @@ public class ServiceUsuario{     //Sin Spring Security
     public void habilitar(String id)throws MiExcepcion{
         
         Optional<Usuario> respuesta = usuarioRepo.findById(id);
-        if(respuesta.isPresent()){ 
+        if(respuesta.isPresent()){
             Usuario usuario = respuesta.get();
-            usuario.setBaja(null);          
-            usuarioRepo.save(usuario);
+            if(usuario.getBaja() != null){ //Lo mejoré haciendo que si no está de baja no haga nada(si ya está de alta no le ponga el null a baja pq ya es null)
+                usuario.setBaja(null);          
+                usuarioRepo.save(usuario);
+            }
         }else{
          throw new MiExcepcion("No se encontró el usuario ingresado");   
-        }  
+        }
     }
     
     @Transactional
