@@ -61,16 +61,27 @@
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
-                            <form action="" method="POST" id="form">
+                            <form action="/logincheck" method="POST" id="form">
                                 <div class="form">
-                                    <h2 class=" align-content-center">¡Ingresa tus libros te están esperando!</h2>
-                                    
+                                    <h2 class=" align-content-center">¡Ingresa, tus libros te están esperando!</h2>
+                                    <div th:if="${exito}!=null" class="card text-white bg-success">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Exito</h5>
+                                            <p class="card-text" th:text="${exito}"></p>
+                                        </div>
+                                    </div>
+                                    <div th:if="${error != null}" class="card text-white bg-danger">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Error</h5>
+                                            <p class="card-text" th:text="${error}"></p>
+                                        </div>               
+                                    </div>
                                     <div class="grupo">
-                                        <input type="email" name="email" id="email" required><span class="barra"></span>
+                                        <input type="email" name="username" required><span class="barra"></span>
                                         <label >Email</label>
                                     </div>
                                     <div class="grupo">
-                                        <input type="password" name="password" id="password" required><span class="barra"></span>
+                                        <input type="password" name="password" required><span class="barra"></span>
                                         <label >Password</label>
                                     </div>
                                     <button type="submit">Ingresar</button>

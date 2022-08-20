@@ -6,7 +6,7 @@ package spring;
 public class Spring {
 
     public static void main(String[] args) {
-       /*
+        /*
         ========================== Info Complementaria ========================= 
        IMPORTANTE: https://es.stackoverflow.com/questions/73955/cual-es-la-diferencia-entre-spring-jsf-jsp
        @Transactional(readOnly = true) : https://www.arquitecturajava.com/spring-transactional-readonly-y-optimizaciones/ 
@@ -612,18 +612,40 @@ public class Spring {
         Min 6:23 vemos UsuarioService. Por el momento no mandamos la foto ni la lógica del mail
         Min 7 llamamos a Usuario Service
         Min 8 ponemos try and catch en el controlador
-        
-        
-        
+
         ========================= Validar formularios | Programación | Modelo Vista Controlador | V3 =========================
+        
         Min 1:40 Creamos un parámetro ModelMap: Esto va a contener el modelo, recordemos la clase modelo... los modelos en Spring servian para que nosotros insertaramos toda esa información que vamos a mostrar en pantalla que vamos a necesitar en las interfaces de usuario
         Min 2 modelo.put("error", ex);  Este modelo lo vamos a utilizar para enviar en este caso el mensaje de error en la pantalla. Usamos el método put, vamos a elegir un nombre de variable para que la pantalla recupere este valor, vamos a tomar la excepción y vamos a retornar a la pantalla el mensaje vinculado a esa excepción
         Min 8 como Ingresamos las variables nuevamente
         Min 9 Cuando se loguea con exito, lo mandamos a la pag exito 
+        
         ========================= Guardar imagen | Programación | Modelo Vista Controlador | V4 =========================
         
-        =========================  | Programación | Modelo Vista Controlador | V5 =========================
-        =========================  | Programación | Modelo Vista Controlador | V6 =========================
+        Min 0: Le sacamos el th:value="${portada}" en porque no queremos que recargue la imagen si lo agarra el try pq se equivoco, osea que debe ponerla de nuevo
+                    <label>Portada</label> <input type="" name="portada" class="form-control"  placeholder="Portada del libro">
+        Min 2:43 Muestra ServicePerro
+        Min 3-4 Nos muestra tipos de errores que podemos tener con thymeleaf que no se guarda la foto
+        Min 5 vemos que valida las 2 claves que recibimos en service y controlador
+        
+        ========================= Mostrar combo en pantalla | Programación | Modelo Vista Controlador | V5 =========================
+        
+        Min 1 Vemos cómo hacemos el tema de las zonas de los perros para que solo le aparezcan los perros de cierta zona
+              Agregamos algunas zonas
+              Mostrar combo en pantalla, modificamos el html
+        Min 2:45 El dato zonas lo saca del Model. Modificamos en el controller el método Get
+        Min 3:40 Explica como funciona 
+        Min 4:33 Explica como funciona 
+                 Modifica serviceUsuario y controladorUsuario
+
+        ========================= Configurar Spring Security en el login | Programación | Modelo Vista Controlador | V6 =========================
+        
+        Min 1 Creamos ConfiguracionSeguridad y anotamos todo ahí
+        Min 4 Modificamos el HTML
+        Min 7 Modificamos el Controlador
+        Min 8 agregamos la card para error al html
+        Min 9 crea un html de inicio igual al index
+        
         =========================  | Programación | Modelo Vista Controlador | V7 =========================
         =========================  | Programación | Modelo Vista Controlador | V8 =========================
         =========================  | Programación | Modelo Vista Controlador | V9 =========================
@@ -631,7 +653,7 @@ public class Spring {
         =========================  | Programación | Modelo Vista Controlador | V11 =========================
         =========================  | Programación | Modelo Vista Controlador | V12 =========================
 
-       */       
+         */
     }
 
 }

@@ -1,7 +1,11 @@
 package com.mza.Libreria.controladores;
 
+import com.mza.Libreria.entidades.Autor;
+import com.mza.Libreria.entidades.Editorial;
 import com.mza.Libreria.entidades.Libro;
 import com.mza.Libreria.excepciones.MiExcepcion;
+import com.mza.Libreria.servicios.ServiceAutor;
+import com.mza.Libreria.servicios.ServiceEditorial;
 import com.mza.Libreria.servicios.ServiceLibro;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +31,28 @@ public class LibroController {
     @Autowired
     private ServiceLibro servLibro; 
     
+    @Autowired
+    private ServiceAutor servAutor; 
+    
+    @Autowired
+    private ServiceEditorial servEditorial; 
+    
     @GetMapping("/registro") 
-    public String formulario(){
-         return "form-libro";
-    }
+    public String formulario(ModelMap modelo){
+        
+        List<Autor> autores = servAutor.buscaActivos();
+        modelo.addAttribute("autores", autores);
+        
+        List<Editorial> editoriales = servEditorial.buscaActivas();
+        modelo.addAttribute("editoriales", editoriales);
+        
+        return "form-libro";
+    }	
       
     @PostMapping("/registrar") 
-    public String crear(ModelMap modelo,@RequestParam MultipartFile archivo, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String nombreAut,@RequestParam String nombreEdit){ 
+    public String crear(ModelMap modelo,@RequestParam MultipartFile archivo,@RequestParam String titulo,@RequestParam Integer anio, @RequestParam String autor,@RequestParam String editorial){ 
         try{
-            servLibro.crearLibro(archivo,titulo,anio,nombreAut,nombreEdit);
+            servLibro.crearLibro(archivo,titulo,anio,autor,editorial);
             modelo.put("exito","¡Registro exitoso!"); 
             return "form-libro"; //retornamos la misma página y ya pusimos un div con los mensajes de exito cuando ingrese un usuario
 //        //Forma profe Videos MVC 2
@@ -47,8 +64,8 @@ public class LibroController {
             //Logger.getLogger(LibroController.class.getName()).log(Level.SEVERE, null, ex); //Con esto nos tira el error por consola, lo podemos sacar
             modelo.put("titulo",titulo);
             modelo.put("anio",anio);
-            modelo.put("autor",nombreAut);
-            modelo.put("editorial",nombreEdit);
+            modelo.put("autor",autor);
+            modelo.put("editorial",editorial);
             return "form-libro"; //Si ocurre un error retornamos la misma página
         }  
     }

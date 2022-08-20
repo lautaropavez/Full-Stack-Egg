@@ -21,17 +21,17 @@ public class ServicePortada {
     private PortadaRepository portadaRepo;
 
     @Transactional
-    public Portada guardar(MultipartFile archivo) throws MiExcepcion {
+    public Portada guardar(MultipartFile archivo) throws MiExcepcion{
 
-        if (archivo != null && !archivo.isEmpty()) {
-            try {
+        if(archivo != null && !archivo.isEmpty()){
+            try{
                 Portada portada = new Portada();
                 portada.setMime(archivo.getContentType());
                 portada.setNombre(archivo.getName());
                 portada.setContenido(archivo.getBytes());
 
                 return portadaRepo.save(portada);
-            } catch (IOException e) {
+            }catch(IOException e){ // Profe usa Exception
                 System.err.println(e.getMessage());
             }
         }

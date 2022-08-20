@@ -38,9 +38,9 @@ public class ServiceUsuario{     //Sin Spring Security
     private ServiceNotificacion sNotific;
     
     @Transactional
-    public void registrar(String nombre,String apellido,String mail,String clave) throws MiExcepcion{
+    public void registrar(String nombre,String apellido,String mail,String clave, String clave2) throws MiExcepcion{
    
-        validacion(nombre,apellido,mail,clave);
+        validacion(nombre,apellido,mail,clave,clave2);
         
         Usuario usuario = new Usuario();
         usuario.setNombre(nombre);
@@ -61,9 +61,9 @@ public class ServiceUsuario{     //Sin Spring Security
     }
     
     @Transactional //Hacer lo mismo que en ServiceLibro de verificar de que hayan cambios antes de setear nuevamente
-    public void modificar(String id,String nombre,String apellido,String mail,String clave) throws MiExcepcion{
+    public void modificar(String id,String nombre,String apellido,String mail,String clave,String clave2) throws MiExcepcion{
         
-        validacion(nombre,apellido,mail,clave);
+        validacion(nombre,apellido,mail,clave,clave2);
         
         Optional<Usuario> respuesta = usuarioRepo.findById(id); //Este método nos devuelve una clase Optional como respuesta 
         if(respuesta.isPresent()){ //Y nos dice si el resultado está presente, osea si encontró un resultado con este id
@@ -154,7 +154,7 @@ public class ServiceUsuario{     //Sin Spring Security
     public List<Usuario> listaActivos(Date baja) {
         return usuarioRepo.listaActivos(baja);
     }
-    public void validacion(String nombre,String apellido,String mail,String clave) throws MiExcepcion {
+    public void validacion(String nombre,String apellido,String mail,String clave1,String clave2) throws MiExcepcion {
 
         if (nombre == null || nombre.isEmpty()) {
             throw new MiExcepcion("Debe indicar el nombre");
@@ -168,11 +168,15 @@ public class ServiceUsuario{     //Sin Spring Security
         if (mail.contains("@") == false) {
                 throw new MiExcepcion("El correo electrónico es incorrecto");
         }
-        if (clave == null || clave.trim().isEmpty()) {
+        if (clave1 == null || clave1.trim().isEmpty()) {
             throw new MiExcepcion("Debe indicar la clave");
         }
-        if (clave.length() < 8) {
+        if (clave1.length() < 8) {
             throw new MiExcepcion("La clave no puede tener menos de 8 caracteres");
+        }
+        
+        if(!clave1.equals(clave2)) {
+            throw new MiExcepcion("Las claves deben ser iguales");
         }
     }
 

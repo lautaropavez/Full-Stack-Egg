@@ -1,24 +1,20 @@
 ***Cosas para hacer en mi proyecto***
-- ver video de agregar imagen
-- Ver validaciones de libro 
-- Agregar portada a formulario y controller
+- Anular combos saber como hacerlo de manera que a medida que vaya ingresando datos, le vayan apareciendo las posibles opciones
+- Validar que no se carguen libros con el mismo nombre
+- Validar que no pongan numeros en el nombre
+- Ver validaciones de libro
+- Arreglar posible error de libros prestados aparece -1 en la BBDD
 - Ver que iconos dejar y cuales sacar
-- Hacer desde cero registro libro con navbar y footer desde bootstrap sin descargar las plantillas del proyecto
 - Ver tema de color de navbar para cambiarlo distinto a como lo hacemos en el video
-- Seguir modificacion método registro y registrar de librocontroller
 - Poner MiException a baja y alta Usuario
-- Hacer andar registro de libros
+-En thymeleaf se pueden hacer segmentos de la pág. para no repetir código. Para trabajar con fragmentos usar th:replace (en git de acamus está) mas info, https://www.baeldung.com/spring-thymeleaf-fragments
 - Cuando apriete Libreria El Ceibo en nav de la página que me mande a la pág principal
-- Hacer navbar para todas las páginas y footer donde poner el copyright
-- Solucionar ERROR de registro Usuario cuando metes la contraseña 1 y la repetis mal en contraseña 2 que no se guarde y tire error en la pantalla 
 - Revisar en serviceusuario que si no genero modificaciones en los otros campos de la vista cuando hago una modificación no me los cambie al pedo
 - Agregar botón de volver a todos los html
-- Método modificar es el problema de error en libro, creo que por cuando paso la imagen 
 - Hacer try and catch en todos los métodos de controllers 
 - Revisar si pasar el registro de usuario del MainController al UsuarioController (Hecho con Vid 2 MVC Youtube y Clase 2 THYMELEAFT)
-- Revisar si uso th:if="${exito}!=null" y th:if="${error}!=null"en html de form-libro-modif si anda
 - Modificar formulario de form-libro-modif a uno más formal (Clase Thymeleaf min 1:40 muestra el de perro)
-- Modificar formulario de form-usuariomodif (Clase Thymeleaf min 1:40 muestra el de perro, sacar la idea de form perro)
+- Modificar margen de formulario de form-usuariomodif (Clase Thymeleaf min 1:40 muestra el de perro, sacar la idea de form perro)
 - Hacer try a método list de Usuario
 - Hacer try a método list de Libro
 - Hacer try a método modificar de Usuario
@@ -33,8 +29,23 @@
 - Buscar Bootstrap para item anterior
 - Fijarme si hay una forma más segura de modificar un objeto que con la forma que es mandando el input hidden, por si me lo modifican al html desde la web
 - una vez finalizado el proyecto mejorar el footer
+- Modificar icono de página a todas las páginas
 -------- Hecho --------- 
-
+++ Seguir modificacion método registro y registrar de librocontroller
+++ Hacer desde cero registro libro con navbar y footer desde bootstrap sin descargar las plantillas del proyecto
+++ Arreglar exito cuando se agrega un Libro
+++ Ver video de agregar imagen
+++ Modificar formulario de form-usuariomodif (Clase Thymeleaf min 1:40 muestra el de perro, sacar la idea de form perro)
+++ Solucionar ERROR de registro Usuario cuando metes la contraseña 1 y la repetis mal en contraseña 2 que no se guarde y tire error en la pantalla 
+++ Modificar HTML de ingresar Libro para mostrar combo de Lista de Autores, Editoriales como dice el profe.
+++ Modificar el modificar en controller de Usuario
+++ Revisar si uso th:if="${exito}!=null" y th:if="${error}!=null"en html de form-libro-modif si anda
+++ Agregar portada a formulario y controller
+++ Hacer navbar para todas las páginas y footer donde poner el copyright
+++ Crear mi primer Usuario
+++ Crear mi primer Libro
+++ Hacer andar registro de libros
+++ Método modificar es el problema de error en libro, creo que por cuando paso la imagen 
 ++ LibroController: Método de Alta y Baja 
 ++ UsuarioController: Método de Alta y Baja 
 ++ serviceUsuario: Arreglar si está de alta no haga nada el método alta
@@ -51,6 +62,7 @@
 
 ****** Testing ******
 - Fijarme si puedo dar de baja a un libro y volver a darlo de alta(osea si funcionan los métodos controladores)
-- 
+- Crear Libro
+- Crear Libro con Imagen
 ++ Fijarme si puedo dar de baja a un usuario y volver a darlo de alta
 ++ Fijarme si cuando volvi a darlo de alta, tiene date de baja = null

@@ -28,7 +28,10 @@ public class MainController {
     }
     
     @GetMapping("/login")
-    public String login(){
+    public String login(@RequestParam(required = false) String error, ModelMap modelo){
+        if(error != null){
+            modelo.put("error","Nombre de usuario o clave incorrectos");
+        }
         return "login.html";
     }
     @GetMapping("/registro")
@@ -40,7 +43,7 @@ public class MainController {
     @PostMapping("/registrar")
     public String registrar(ModelMap modelo,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave1,@RequestParam String clave2){
         try {
-            servUsuario.registrar(nombre, apellido, mail, clave1);
+            servUsuario.registrar(nombre,apellido,mail,clave1,clave2);
             
         } catch (MiExcepcion ex) {
             modelo.put("error", ex.getMessage()); // Este modelo lo vamos a utilizar para enviar en este caso el mensaje de error en la pantalla.

@@ -5,13 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="formulario de libro" content="" >
         <meta name="author" content="Lautaro Pavez"> 
-      
         <title>Registro Libro</title>      
         <link th:href="@{https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap}" rel="stylesheet">
-        <link th:href="@{/css/styleFormModif.css}" type="text/css" rel="stylesheet"> 
         <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
         <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link th:href="@{/css/sidebar.css}" rel="stylesheet">
+        <link th:href="@{/css/sidebar.css}" rel="stylesheet"> 
     </head>
     <body id="body">
         <header>
@@ -117,24 +115,22 @@
     <main>
         <h1>Registro Libro</h1><br>   
         <div class="container m-5">
-                <div th:if="${exito}!=null" class="card text-white bg-succes mb-3">
+                <div th:if="${exito}!=null" class="card text-white bg-success">
                     <div class="card-body">
                         <h5 class="card-title">Exito</h5>
                         <p class="card-text" th:text="${exito}"></p>
                     </div>
                 </div>
-                <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                <div th:if="${error}!= null" class="card text-white bg-danger">
                     <div class="card-body">
                         <h5 class="card-title">Error</h5>
                         <p class="card-text" th:text="${error}"></p>
                     </div>               
                 </div>
         </div>
-        <!--<p th:if="${error != null}" th:text="${error}" style="color:red"></p> Forma que lo hace profe MVC vid 2 .Este if va a imprimir o mostrar el contenido de este párrafo si se cumple la condición que ponemos dentro, si en el modelo viene la variable error voy a mostrar este párrafo -->    
-        <form th:action="@{/libro/registro}" method="POST">
-            <input type="hidden" th:value= "${id}" name= "id">
+            <form th:action="@{/libro/registrar}" method="POST" enctype="multipart/form-data" class="m-3">
                 <div class="form-group">
-                    <label>Portada</label> <input th:value="${portada}" type="" name="portada" class="form-control"  placeholder="Portada del libro">
+                    <label>Portada</label> <input type="file" name="archivo" class="form-control"  placeholder="Portada del libro">
                 </div>
                 <div class="form-group">
                     <label>Titulo</label> <input th:value="${titulo}" type="text" name="titulo" class="form-control"  placeholder="Titulo del libro">
@@ -142,11 +138,25 @@
                 <div class="form-group">
                     <label>Año</label> <input th:value="${anio}" type="number" name="anio" class="form-control"  placeholder="Año del libro">
                 </div>
+                <!-- Combo Autores -->
                 <div class="form-group">
-                    <label>Autor</label> <input th:value="${autor}" type="text" name="autor" class="form-control"  placeholder="Nombre del autor">
+                    <label>Autores</label>
+                    <select class="form-control" name="idAutor">    
+                        <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}"  ></option>
+                    </select>
+                </div>
+                 <div class="form-group">
+                    <label>Agregar autor</label> <input th:value="${autor}" type="text" name="autor" class="form-control"  placeholder="Nombre del autor">
+                </div>
+                <!-- Combo Editoriales -->
+                <div class="form-group">
+                    <label>Editoriales</label> 
+                    <select class="form-control" name="idEditorial">    
+                        <option th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}" ></option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label>Editorial</label> <input th:value="${editorial}" type="text" name="editorial" class="form-control"  placeholder="Nombre de la editorial">
+                    <label>Agregar editorial</label> <input th:value="${editorial}" type="text" name="editorial" class="form-control"  placeholder="Nombre de la editorial">
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-3">Guardar</button>

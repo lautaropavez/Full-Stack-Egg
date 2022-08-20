@@ -76,9 +76,9 @@ public class UsuarioController {
     }
     
     @PostMapping("/modificar/{id}") 
-    public String modificar(ModelMap modelo,@PathVariable String id,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave)throws Exception{
+    public String modificar(ModelMap modelo,@PathVariable String id,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave,@RequestParam String clave2)throws Exception{
         try{
-            servUsuario.modificar(id, nombre, apellido, mail, clave);
+            servUsuario.modificar(id,nombre,apellido,mail,clave,clave2);
             modelo.put("exito","Modificación exitosa"); 
             return lista(modelo); //nos devuelve a la página de inicio
             //return "list-usuario"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
