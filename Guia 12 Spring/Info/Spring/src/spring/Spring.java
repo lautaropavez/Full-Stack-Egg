@@ -493,10 +493,57 @@ public class Spring {
         Min 1:29 IMPORTANTE métodos de alta y baja Controladores y service
         Min 1:30 En la BD nunca debemos eliminar registros
         
-        ======================= Consulta - Tarde 09-11 =========================
+        ======================= Consulta - Tarde 09-11 (Profe Cristian) =========================
+        
+        Min 3 La seguridad la vemos al final, igual que el envío de mails es algo complementario
+        Min 4 Sebastian Arbona en videos se equivoca en crear los Controladores en la parte de testeos
+        Min 12 Cuando nos aparece WhiteLabel error buscamos line y vemos donde tenemos el error
+        Min 14 Netbeans tira generalmente problemas en el html, ver si es importante o no es depende el caso
+        Min 17:30 Duda IMPORTANTE de RELACIONES: la mejor forma de plantear una relación en este ejercicio. En Libro pone ManyToOne a Autor y en Autor no pone nada (aplicarlo en proyecto), porque un libro si o si tiene que tener una editorial y un autor
+                  y la parte de autor, un autor tiene muchos libros, puede estar asociado a muchos libros, pero no es necesario en este caso, si vos querés los libros de determinado autor los podés buscar a través de libro, te ahorras el paso de crear una lista en Autor.
+                  Recomendación generar la relación solo desde el lado de libro 
+        Min 22 ERROR compañero
+               Recomedación profe: Antes de crear un libro obligar al Usuario que cree editoriales y que cree Autores (profe)
+        Min 26 Acamus: Se habia planteado que cuando se muestre un libro nos muestre una lista desplegable de los autores, si no está la que yo quiero crearle encima uno nuevo, para esto deberiamos crear un botón que nos dirija a crear Autor y lo mismo con Editorial y una vez que lo crees vas a poder verlo en las opciones
+               Profe: Mostrarle las opciones y si no lo encuentra que lo cree con un botón para agregar un autor o editorial nuevo
+        Min 29:30 Profe nos muestra lo que hizo: - Hace página de libros, de autores y de editoriales
+        Min 30:30 - Muestra tabla de lista-libro
+                  - Muestra crear Libro(IMPORTANTE: Profe le pone primero en el dropdown seleccionar autor, para que no seleccione ninguno por defecto)
+        Min 32 IMPORTANTE Debate sobre como hacer creación Autor
+               Acamus:  Cuando estás creando libro creas un Autor en un constructor vacío, buscas el nombre, devuelve el nombre y te da ese autor y listo. Igualas el autor que creaste con ese que buscas. podrias tener un botón que sea crear nuevo autor dentro del formulario crear Libro
+        En definitiva para crear Autor o Editorial, se puede de dos formas: 1) Mostrar dropdown + un botón para agregar un Autor si este no existe en las opciones, que deberiamos hacer una validacion en el html o nose donde de que si no ingreso nada en el dropdown pero en el input de agregar es distinto a nulo,
+                                                                               Osea que agrego un nuevo autor, entonces que setee ese
+                                                                            2) Poner dropdown más botón de agregar un Autor que nos derive a otra página de agregar Autor y ahi agregarlo, lo malo es que deberiamos volver a crear libro y es una paja
+        Min 34 Compañero muestra su página Lista libro su tabla
+               Muestra su ERROR que no le deja mostrar los libros que tiene, le muestra un String re largo y lo soluciona a medias, poniendole un toString en autor y editorial 
+        Min 36 Muestra su Libro Controller  
+        Min 37 Muestra su Libro Servicio y su entidad Libro, entidad Autor
+        Min 39 IMPORTANTE: Más adelante nosotros vamos a utilizar una dependencia que te genera los constructores, get y sets, con anotaciones asi no los tenemos que anotar nosotros
+        Min 42 Cuando vos pones el RequestParam implicitamente vos le decís que estás esperando un dato, por lo que si vos no le envias ese dato se genera un error 400 pq la solicitud que le estás enviando no se corresponde con lo que espera tu método del controlador, entonces lo que debemos hacer es:
+               1) En nuestros inputs poner required simple pero no efectivo
+               2) Colocar en cada RequestParam entre paréntesis(required = false) osea que si viene vacío no se rompa. No recomendado en este caso
+        Min 45 Cuál es el objetivo de poner required = false? Depende del caso, pq vos podés usar el mismo controlador para muchas cosas
+        Min 48 ERROR compañero,problema: puso GeneratedValue(generator = "uuid") en el id pero le puso que sea Integer y para que se autogenere de esta forma tiene que ser un String.
+               Solución: Si quiere seguir haciendolo con Integer en GeneratedValue debe ser "id", así GeneratedValue("id") o sino modificar el id de Integer a String
+        Min 49 Muestra su entidad Usuario, entidad Producto
+        Min 53 Oompañero muestra su crear Libro con dropdowns + botón Agregar autor y lo mismo en editorial
+        Min 54 Muestra Autor Controller y Autor servicio(crearAutor)
+               Explicación de @Transactional
+        Min 55 le pone a @Transactional(readOnly = true)
+        Min 55 Muestra Autor Repository
+        
+        
+        
+        
+               
+        
+                                                
+        
         
         
         ======================= Consulta - Tarde 11-11 =========================
+        
+        
         
        ###########################################################################################################################################################################################
        ##########################################################################  Sección Videos Egg ############################################################################################
@@ -647,6 +694,9 @@ public class Spring {
         Min 9 crea un html de inicio igual al index
         
         =========================  | Programación | Modelo Vista Controlador | V7 =========================
+        
+        
+        
         =========================  | Programación | Modelo Vista Controlador | V8 =========================
         =========================  | Programación | Modelo Vista Controlador | V9 =========================
         =========================  | Programación | Modelo Vista Controlador | V10 =========================
