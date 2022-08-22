@@ -524,26 +524,49 @@ public class Spring {
                2) Colocar en cada RequestParam entre paréntesis(required = false) osea que si viene vacío no se rompa. No recomendado en este caso
         Min 45 Cuál es el objetivo de poner required = false? Depende del caso, pq vos podés usar el mismo controlador para muchas cosas
         Min 48 ERROR compañero,problema: puso GeneratedValue(generator = "uuid") en el id pero le puso que sea Integer y para que se autogenere de esta forma tiene que ser un String.
-               Solución: Si quiere seguir haciendolo con Integer en GeneratedValue debe ser "id", así GeneratedValue("id") o sino modificar el id de Integer a String
+               Solución:(Mejor explicado min 7 clase 11-11) Si quiere seguir haciendolo con Integer en GeneratedValue debe ser "id", así GeneratedValue("id") o sino modificar el id de Integer a String
         Min 49 Muestra su entidad Usuario, entidad Producto
         Min 53 Oompañero muestra su crear Libro con dropdowns + botón Agregar autor y lo mismo en editorial
         Min 54 Muestra Autor Controller y Autor servicio(crearAutor)
                Explicación de @Transactional
         Min 55 le pone a @Transactional(readOnly = true)
         Min 55 Muestra Autor Repository
+
+        ======================= Consulta - Tarde 11-11 (Profe Cristian) =========================
+        
+        Min 0 ERROR compañera: vemos Libro servicio
+        Min 2 borra findall y findbyid del repositorio pq son métodos que te da Spring por defecto
+        Min 3 compa tiene findByNombre con un Optional en su repo
+        Min 7 lo mismo que compa de clase anterior, puso GeneratedValue(generator = "uuid") y necesita poner GeneratedValue(strategy = GenerationType.IDENTITY) que se pone cuando tu id es un Integer o Long(cuando es cualquier tipo de numero y NO String)
+        Min 9 Los métodos de las interfaces por defecto son públicos, por lo que es redundante si lo ponemos
+              Los métodos de las interfaces no llevan public, sólo llevan lo que devuelven y el nombre nada más
+        Min 14 compañero muestra su Controller Autor (métodos alta baja lista)
+        Min 18 compañero muestra su Controller Autor completo
+        Min 19 compañero muestra su HTML Autor la parte del formulario
+        Min 20 ERROR compañero
+        Min 31 solución ERROR: era que en el html le faltaba una / a la dirección que el ponía --> "@{/autor/blabla}" 
+                               Y tambien no le puso el atributo name al input por lo que no lo enviaba
+        Min 33-40 ERROR Netbeans instalación con Mac creo, solución agrego una linea de código y tenía mal el maven aplicado
+        Min 41 ERROR compañero en Repo
+        Min 45 IDES que se pueden usar en vez de Netbeans, Eclipse o Intellige
+        Min 46 compañero muestra sus páginas HTML registrar/cargar/crear Libro, Autor y Editorial
+        Min 47 ERROR compañero en HTML, solución: tenia mal puesta la ruta en el HTML
+        Min 48 Como debuggear/hacer debugg en Netbeans: doble click en la línea que queremos debuggear hasta quue esté con cuadrado rojo, vamos al nombre de proyecto, click derecho y ponemos Debug, 
+               Luego cuando llegue a ese punto, vamos apretando F7 para ir avanzando
+        Min 49 Netbeans es más fácil para lo que aprendemos, IntelliJ es más complicado y consume más recursos
+        Min 50 Donde se va viendo el Debuggeo? En realidad lo que nosotros usamos es para ver las variables
+        Min 53 Recomendable crear para cada Entidad un Controlador para segmentar
+        Min 59 " SELECT a FROM Autor a.alta = :true " está mal porque los dos puntos se ponen cuando vos le envias una variable unicamente, por lo que deberia ser "... = true " sin ":"
+        
+        ======================= Spring Security - Mañana(Profe Cristian) =========================
         
         
         
-        
-               
-        
-                                                
-        
-        
-        
-        ======================= Consulta - Tarde 11-11 =========================
-        
-        
+        ======================= Spring Security - Tarde (Profe Cristian) =========================
+        ======================= Consulta - Tarde 23-11 (Profe Cristian) =========================
+        ======================= Consulta - Tarde 24-11 (Profe Cristian) =========================
+        ======================= Consulta - Tarde 25-11 (Profe Cristian) =========================
+
         
        ###########################################################################################################################################################################################
        ##########################################################################  Sección Videos Egg ############################################################################################

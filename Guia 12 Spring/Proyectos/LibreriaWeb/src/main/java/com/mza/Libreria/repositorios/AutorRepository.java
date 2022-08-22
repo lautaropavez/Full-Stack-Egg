@@ -15,28 +15,28 @@ import org.springframework.stereotype.Repository;
 public interface AutorRepository extends JpaRepository<Autor, String>{
  
     @Query("SELECT a FROM Autor a WHERE a.id = :id")
-    public Autor buscarPorId(@Param("id")String id);
+    Autor buscarPorId(@Param("id")String id);
     
     @Query("SELECT a FROM Autor a WHERE a.nombre = :nombre")
-    public Autor buscarPorNombre(@Param("nombre")String nombre);
+    Autor buscarPorNombre(@Param("nombre")String nombre);
 
     @Query("SELECT a FROM Autor a WHERE a.alta = true")
-    public List<Autor> buscaActivos();
+    List<Autor> buscaActivos();
     
     //-------------------------------NO USADOS--------------------------------------   
 
     //Nose si lo voy a usar
     @Query("SELECT a FROM Autor a WHERE a.nombre = :nombre")
-    public List<Autor> listarPorNombre(@Param("nombre")String nombre);
+    List<Autor> listarPorNombre(@Param("nombre")String nombre);
     
     /*
         @Query("SELECT p FROM Persona p WHERE p.dni = :dni")
-        public Persona buscarPorDNI(@Param("dni")Long dni);
+        Persona buscarPorDNI(@Param("dni")Long dni);
 
         @Query("SELECT a FROM Autor a WHERE a.nombre LIKE %?1%")
-        public List<Autor> buscaPorNombre(@Param("nombre") String nombre);
+        List<Autor> buscaPorNombre(@Param("nombre") String nombre);
 
         @Query ("SELECT a FROM Autor a")
-        public List<Autor> buscaAutor();
+        List<Autor> buscaAutor();
     */
 }

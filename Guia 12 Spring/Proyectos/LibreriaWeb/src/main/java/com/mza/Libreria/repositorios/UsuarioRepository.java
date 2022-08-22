@@ -17,20 +17,20 @@ import org.springframework.stereotype.Repository;
 public interface UsuarioRepository extends JpaRepository<Usuario, String>{
     
     @Query("SELECT u FROM Usuario u WHERE u.mail = :mail")
-    public Usuario buscarPorMail(@Param("mail") String mail);
+    Usuario buscarPorMail(@Param("mail") String mail);
 
     @Query("SELECT u FROM Usuario u WHERE u.mail = :mail")
-    public Optional<Usuario> validaMail(@Param("mail") String mail);
+    Optional<Usuario> validaMail(@Param("mail") String mail);
     
     @Query("SELECT u FROM Usuario u WHERE u.id = :id")
-    public Usuario buscarPorId(@Param("id")String id);
+    Usuario buscarPorId(@Param("id")String id);
     
     @Query("SELECT a FROM Usuario a WHERE a.cantPrestamos = :cantPrestamos ")
-    public List<Usuario> buscaPrestamos(@Param("cantPrestamos") Integer cantPrestamos);
+    List<Usuario> buscaPrestamos(@Param("cantPrestamos") Integer cantPrestamos);
     
     @Query("SELECT a FROM Usuario a WHERE a.baja = NULL")
-    public List<Usuario> listaActivos(@Param("baja") Date baja); //fijarme si funciona así
+    List<Usuario> listaActivos(@Param("baja") Date baja); //fijarme si funciona así
 
     //@Query("SELECT a FROM Usuario a WHERE a.baja = null")
-    //public List<Usuario> buscaActivos();
+    //List<Usuario> buscaActivos();
 }
