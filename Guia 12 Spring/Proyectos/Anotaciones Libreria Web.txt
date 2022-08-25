@@ -1,9 +1,26 @@
 ***Cosas para hacer en mi proyecto***
-- Anular combos saber como hacerlo de manera que a medida que vaya ingresando datos, le vayan apareciendo las posibles opciones
-- Validar que no se carguen libros con el mismo nombre
+- Primero Ver MVC de Imagen:
+			    - Solucionar problema de imagen que no carga, puede ser porque se guarda como  BLOB, nose, hasta ahora está bloqueado en service modificar 
+			    - Agregar a Modificar Libro el ISBN, cant prestados, Imagen, etc.
+			    - Hacer validacion para el ISBN que no pueda tener más de ... y menos de ...
+- libro-list Modificar -> Imagen
+- libro-list Modificar -> modificar
+- Agregar eliminar usuario en Controller usuario
+- Agregar eliminar libro en Controller libro
+- Darle uso a buscar en libro-list y usuario-list
+- Hacer fragments 
+- Agregar fragments 
+- Testear fragments
+- Decidir si quiero borrar libros o no y agregarlo a la list libro
+- Agregar a libro-list: navbar, footer, sidebar y modificaciones hechas por Acamus
+- Hacer que el titulo de los libros y nombre de usuarios se guarden en Mayusculas
+- Validar que no se puedan crear libros que ya tengan ese nombre indiferentemente de si están en mayusculas o minpusuculas
+- Lo mismo con usuarios con mismo mail
+- Borrar desde BBDD libros repetidos
+- Dejar combos saber como hacerlo de manera que a medida que vaya ingresando datos, le vayan apareciendo las posibles opciones(posible solución clase 11 11)
 - Validar que no pongan numeros en el nombre
 - Ver validaciones de libro
-- Arreglar posible error de libros prestados aparece -1 en la BBDD
+- Arreglar posibilidad error de libros prestados aparece -1 en la BBDD
 - Ver que iconos dejar y cuales sacar
 - Ver tema de color de navbar para cambiarlo distinto a como lo hacemos en el video
 - Poner MiException a baja y alta Usuario
@@ -30,7 +47,12 @@
 - Fijarme si hay una forma más segura de modificar un objeto que con la forma que es mandando el input hidden, por si me lo modifican al html desde la web
 - una vez finalizado el proyecto mejorar el footer
 - Modificar icono de página a todas las páginas
+- Hacer creación de pdf
 -------- Hecho --------- 
+++ Rehacer modificar libro
+++ Rehacer usuario lista
+++ Rehacer libro-list
+++ libro-list Modificar Alta/Baja 
 ++ Seguir modificacion método registro y registrar de librocontroller
 ++ Hacer desde cero registro libro con navbar y footer desde bootstrap sin descargar las plantillas del proyecto
 ++ Arreglar exito cuando se agrega un Libro
@@ -46,6 +68,7 @@
 ++ Crear mi primer Libro
 ++ Hacer andar registro de libros
 ++ Método modificar es el problema de error en libro, creo que por cuando paso la imagen 
+++ LibroController: Arreglar Método de Alta y Baja 
 ++ LibroController: Método de Alta y Baja 
 ++ UsuarioController: Método de Alta y Baja 
 ++ serviceUsuario: Arreglar si está de alta no haga nada el método alta
@@ -59,7 +82,7 @@
 
 --------  Anotaciones -------- 
 - En login,index y registro no pongo position index porque no me anda, pero igualmente no lo necesito
-
+- Acamus usa un iterator
 ****** Testing ******
 - Fijarme si puedo dar de baja a un libro y volver a darlo de alta(osea si funcionan los métodos controladores)
 - Crear Libro

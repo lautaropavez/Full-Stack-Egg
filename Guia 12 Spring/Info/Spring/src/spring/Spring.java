@@ -24,44 +24,14 @@ public class Spring {
         @RequestParam vs @PathVariable : -  https://es.stackoverflow.com/questions/380131/cual-es-basicamente-la-diferencia-entre-la-anotacion-requestparam-y-pathvari#:~:text=Mi%20recomendaci%C3%B3n%20es%20que%20uses,un%20recurso%20o%20entidad%20%C3%BAnica.
                                          -  https://www.iteramos.com/pregunta/48857/requestparam-vs-pathvariable
         Info de consultas a la Base de datos avanzadas: el que dice 137 --> https://stackoverflow.com/questions/21456494/spring-jpa-query-with-like 
-        Posible solución para problema con el mail(Búsqueda->application properties email spring boot): (MODIFICACIÓN APPLICATION PROPERTIES) https://www.geeksforgeeks.org/spring-boot-sending-email-via-smtp/
-                                                                                                        https://howtodoinjava.com/spring-core/send-email-with-spring-javamailsenderimpl-example/
-                                                                                                        https://stackoverflow.com/questions/24776669/failed-to-load-applicationcontext-from-unit-test-filenotfound
         endpoints: buscar info
         API restful: buscar info(@RequestParam vs @PathVariable- link de stack)
         scope: buscar info(sale en el html de thymeleaf)
         Documentación thymeleaf
         Enum repasar
         BUSCAR INFO (claseServiceUsuario) --> ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-                        HttpSession session = attr.getRequest().getSession(true);
-        CONTROLADOR DE ERRORES EJ: https://stackoverflow.com/questions/31134333/this-application-has-no-explicit-mapping-for-error
-        
-        
-        Info sobre problemas con css styles: - https://github.com/apache/netbeans/blob/master/ide/css.lib/src/org/netbeans/modules/css/lib/nbparser/CssParser.java
-                                             - https://stackoverflow.com/questions/10022796/why-am-i-getting-this-error-premature-end-of-file
-                                             - https://stackoverflow.com/questions/23453551/how-do-i-get-rid-of-these-errors-that-netbeans-is-reporting-on-my-preprocessed-c
-                                             - https://itecnote.com/tecnote/css-how-to-get-rid-of-these-errors-that-netbeans-is-reporting-on-the-preprocessed-css/
-                                             - https://community.bmc.com/s/article/Remedy-AR-System-Server-Remedy-Web-Service-is-not-getting-loaded-in-Developer-Studio
-                                             - https://www.youtube.com/watch?v=qxw3lqWmFUE (Como poner bootstrap en Netbeans)
-                                             - ERROR QUE ME SALIA: Filter out the "Premature end of file " CSS Parsing errors.
-        PROBLEMA PRINCIPAL localhost/:106 Refused to apply style from 'http://localhost:8080/static/css/style.css' because its MIME type ('application/json') is not a supported stylesheet MIME type, and strict MIME checking is enabled.                                     
-                                             - https://stackoverflow.com/questions/3027891/how-to-get-rid-of-library-references-issue-in-netbeans-java?rq=1
-                   IMPORTANTE PARA  PROBLEMA - https://community.magento.com/t5/Magento-2-x-Programming/How-to-fix-its-MIME-type-text-html-is-not-a-supported-stylesheet/td-p/128970
-                   IMPORTANTE PARA  PROBLEMA - https://developerf1.com/how-to/solving-stylesheet-not-loaded-because-of-mime-type
-             IMPORTANTE VIDEO PARA  PROBLEMA - https://www.youtube.com/watch?v=G6TegxmaI9o Integrar Correctamente Plantilla Bootstrap en Proyecto SpringBoot con Thymeleaf
-                                      (HECHO)- https://github.com/froala/angular-froala/issues/170
-                                      (HECHO)- https://exerror.com/mime-type-text-html-is-not-a-supported-stylesheet-mime-type-and-strict-mime-checking-is-enabled/ 
-                                      (HECHO)- https://stackoverflow.com/questions/48248832/stylesheet-not-loaded-because-of-mime-type
-                                       (MIME)- https://github.com/h5bp/server-configs-nginx/blob/main/mime.types   
-                                 (IMPORTANTE)- https://stackoverflow.com/questions/477816/what-is-the-correct-json-content-type
-                          (IMPORTANTE)(HECHO)- https://stackoverflow.com/questions/60306334/spring-serves-static-content-as-application-json-no-matter-what
-                                 (SIN HACER) - https://www.faqcode4u.com/faq/352660/bootstrap-not-working-with-spring-boot
-                                 (SIN HACER) - https://stackoverflow.com/questions/58505262/thymeleaf-with-spring-boot-and-bootstrap-dont-work-in-page-with-pathvariable
-                                 (SIN HACER) - https://stackoverflow.com/questions/51390127/bootstrap-not-working-with-spring-boot
-                                 (SIN HACER) - https://stackoverflow.com/questions/49263433/refused-to-apply-style-because-its-mime-type-application-json-is-not-a-suppo
-                                      (HECHO)- https://stackoverflow.com/questions/21203402/css-not-loading-in-spring-boot
-                                      (HECHO)- https://stackoverflow.com/questions/31947707/why-will-netbeans-not-run-my-css-file
-                                      (HECHO)- https://github.com/jaylindquist/spring-boot-service-and-static EJEMPLO
+                        HttpSession session = attr.getRequest().getSession(true);        
+
                   POSIBLE RECURSO DE ESTUDIO - http://www.profesor-p.com/2-spring/
         DOCUMENTACIÓN: 
                                              - https://docs.spring.io/spring-restdocs/docs/current/reference/html5/
@@ -69,31 +39,13 @@ public class Spring {
                                              - https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#web
                                              - https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-http2
         
-        
-        BUSQUEDAS:
-                                             - https://www.google.com/search?q=my+netbeans+dont+read+bootstrap&oq=my+netbeans+dont+read+boots&aqs=chrome.1.69i57j33i10i160l3.11457j0j7&sourceid=chrome&ie=UTF-8
-                                             - https://www.google.com/search?q=how+to+change+content+type+of+file&oq=how+to+ch&aqs=chrome.1.69i57j69i59j46i512j0i512l2j69i60l2j69i61.4035j0j7&sourceid=chrome&ie=UTF-8
-                                             - https://www.google.com/search?q=Content-Type%3A+application%2Fjson&sxsrf=ALiCzsbe5gvUI5m0IJFGnl7Aa7wx4Sg-iw%3A1659366622247&ei=3uznYozPDvGJ1sQP_cWhgAc&ved=0ahUKEwiMtsiw9qX5AhXxhJUCHf1iCHAQ4dUDCA4&uact=5&oq=Content-Type%3A+application%2Fjson&gs_lcp=Cgdnd3Mtd2l6EAMyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEdKBAhBGABKBAhGGABQygNYygNgwQVoAHADeACAAQCIAQCSAQCYAQCgAQHIAQjAAQE&sclient=gws-wiz
-     IMPORTANTE BUSQUEDA QUE NO LLEGUE A VER - https://www.google.com/search?q=spring+boot+changed+style+css+class+to+application%2Fjson&oq=spring+boot+changed+style+css+class+to+application%2F&aqs=chrome.1.69i57j33i10i160l4j33i22i29i30.31131j0j7&sourceid=chrome&ie=UTF-8
-        Info sobre problemas con el mail(Solucionado): - https://stackoverflow.com/questions/51274765/how-to-have-javamailsender-not-fail-the-application-context-loading-on-a-wrong-m
-                                          - https://medium.com/karibu-blog/c%C3%B3mo-enviar-un-mail-con-spring-boot-f86c2f7af678
-                                          - https://www.geeksforgeeks.org/spring-boot-sending-email-via-smtp/
-       
-        Recursos con los que hago el email sender: https://www.youtube.com/watch?v=kyL0m9y1n0A Send Email from Spring Boot Application (sin imagen y con imagen)
-                                                   https://www.youtube.com/watch?v=ugIUObNHZdo Send Email Using Spring Boot | Gmail SMTP | Java Mail Sender
-                                                   https://www.youtube.com/watch?v=XV92kJ8tmmA (Todavía no lo he visto)
-                                                   https://www.youtube.com/watch?v=QwQuro7ekvc  Java Tutorial - Complete User Login and Registration Backend + Email Verification
-        
-        Spring security: - https://stackoverflow.com/questions/72381114/spring-security-upgrading-the-deprecated-websecurityconfigureradapter-in-spring
-                         - https://pharos.sh/codificacion-de-contrasena-con-spring-security/
-                         - https://foroayuda.es/la-propiedad-security-basic-enabled-esta-obsoleta-la-configuracion-automatica-de-seguridad-ya-no-se-puede-personalizar/
         Dato: RESTful API is an architectural style for an application program interface (API) that uses HTTP requests to access and use data. That data can be used to GET, PUT, POST and DELETE data types, which refers to the reading, updating, creating and deleting of operations concerning resources.
         
         Curso de Spring Boot 9hs, Spring DATA JPA, Spring Security: https://www.youtube.com/watch?v=zvR-Oif_nxg
         Curso de Spring Boot Aplication CRUD: https://www.youtube.com/watch?v=TW5PD_TJMXo
         Crear una API REST desde cero con Spring Boot https://www.youtube.com/watch?v=jO-o3qQZDuU
         Introducción a Spring MVC + Thymeleaf usando Spring Boot  https://www.youtube.com/watch?v=bVM6MX-dGJI
-        7.-Desarrollo web con Spring: Petición POST a través de formulario https://www.youtube.com/watch?v=rTDKYXZc178
+        7.-Desarrollo Web con Spring: Petición POST a través de formulario https://www.youtube.com/watch?v=rTDKYXZc178
         Curso PHP MYSQL SWEETALERT Y BOOTSTRAP: https://www.youtube.com/watch?v=nWKREPF8xyk
         Desarrollar Api Rest con Java Spring Boot https://www.youtube.com/watch?v=vTu2HQrXtyw
         Conceptos básicos: Spring framework, Spring MVC y Spring Boot  https://www.youtube.com/watch?v=cTozN8W6FGo
@@ -708,7 +660,7 @@ public class Spring {
         Min 4:33 Explica como funciona 
                  Modifica serviceUsuario y controladorUsuario
 
-        ========================= Configurar Spring Security en el login | Programación | Modelo Vista Controlador | V6 =========================
+        ========================= Configurar Spring Security en el login | Programación | Modelo Vista Controlador | V6 ==================================
         
         Min 1 Creamos ConfiguracionSeguridad y anotamos todo ahí
         Min 4 Modificamos el HTML
@@ -716,17 +668,82 @@ public class Spring {
         Min 8 agregamos la card para error al html
         Min 9 crea un html de inicio igual al index
         
-        =========================  | Programación | Modelo Vista Controlador | V7 =========================
+        ========================== Agregar seguridad a los accesos a la aplicación | Programación | Modelo Vista Controlador | V7 =========================
         
         
         
-        =========================  | Programación | Modelo Vista Controlador | V8 =========================
-        =========================  | Programación | Modelo Vista Controlador | V9 =========================
-        =========================  | Programación | Modelo Vista Controlador | V10 =========================
-        =========================  | Programación | Modelo Vista Controlador | V11 =========================
-        =========================  | Programación | Modelo Vista Controlador | V12 =========================
+        ========================= Recuperar y utilizar información de la sesión | Programación | Modelo Vista Controlador | V8 ============================
+        ========================= Registración de Usuario Completa | Programación | Modelo Vista Controlador | V9 =========================================
+        ========================= Securización | Programación | Modelo Vista Controlador | V10 ============================================================
+        ========================= Controlador para devolver una imagen | Programación | Modelo Vista Controlador | V11 ====================================
+        ========================= Desarrollo del Modulo de Mascotas 1 | Programación | Modelo Vista Controlador | V12 =====================================
+        ========================= Desarrollo del Modulo de Mascotas 2 | Programación | Modelo Vista Controlador | V12 =====================================
 
-         */
+        
+        ====================================================================================================
+        ====================================================================================================
+        ====================================================================================================
+        ====================================================================================================
+        ====================================   ERRORES   ===================================================
+        ====================================================================================================
+        ====================================================================================================
+        
+        ERROR MultipartFile cuando quiero enviar un objeto en modificar libro: Current request is not a multipart request org.springframework.web.multipart.MultipartException: Current request is not a multipart request at
+                                                          Posibles soluciones: - https://www.youtube.com/watch?v=m1O3mPgm2Jg
+                                                                               - https://www.digitalocean.com/community/tutorials/how-to-use-the-mysql-blob-data-type-to-store-images-with-php-on-ubuntu-18-04-es
+                                                                               - https://stackoverflow.com/questions/42013087/multipartexception-current-request-is-not-a-multipart-request
+        
+        
+        
+        Recursos con los que hago el email sender: https://www.youtube.com/watch?v=kyL0m9y1n0A Send Email from Spring Boot Application (sin imagen y con imagen)
+                                                   https://www.youtube.com/watch?v=ugIUObNHZdo Send Email Using Spring Boot | Gmail SMTP | Java Mail Sender
+                                                   https://www.youtube.com/watch?v=XV92kJ8tmmA (Todavía no lo he visto)
+                                                   https://www.youtube.com/watch?v=QwQuro7ekvc  Java Tutorial - Complete User Login and Registration Backend + Email Verification
+        
+        Spring security: - https://stackoverflow.com/questions/72381114/spring-security-upgrading-the-deprecated-websecurityconfigureradapter-in-spring
+                         - https://pharos.sh/codificacion-de-contrasena-con-spring-security/
+                         - https://foroayuda.es/la-propiedad-security-basic-enabled-esta-obsoleta-la-configuracion-automatica-de-seguridad-ya-no-se-puede-personalizar/
+        
+        Info sobre problemas con css styles: - https://github.com/apache/netbeans/blob/master/ide/css.lib/src/org/netbeans/modules/css/lib/nbparser/CssParser.java
+                                             - https://stackoverflow.com/questions/10022796/why-am-i-getting-this-error-premature-end-of-file
+                                             - https://stackoverflow.com/questions/23453551/how-do-i-get-rid-of-these-errors-that-netbeans-is-reporting-on-my-preprocessed-c
+                                             - https://itecnote.com/tecnote/css-how-to-get-rid-of-these-errors-that-netbeans-is-reporting-on-the-preprocessed-css/
+                                             - https://community.bmc.com/s/article/Remedy-AR-System-Server-Remedy-Web-Service-is-not-getting-loaded-in-Developer-Studio
+                                             - https://www.youtube.com/watch?v=qxw3lqWmFUE (Como poner bootstrap en Netbeans)
+                                             - ERROR QUE ME SALIA: Filter out the "Premature end of file " CSS Parsing errors.
+        PROBLEMA PRINCIPAL localhost/:106 Refused to apply style from 'http://localhost:8080/static/css/style.css' because its MIME type ('application/json') is not a supported stylesheet MIME type, and strict MIME checking is enabled.                                     
+                                             - https://stackoverflow.com/questions/3027891/how-to-get-rid-of-library-references-issue-in-netbeans-java?rq=1
+                   IMPORTANTE PARA  PROBLEMA - https://community.magento.com/t5/Magento-2-x-Programming/How-to-fix-its-MIME-type-text-html-is-not-a-supported-stylesheet/td-p/128970
+                   IMPORTANTE PARA  PROBLEMA - https://developerf1.com/how-to/solving-stylesheet-not-loaded-because-of-mime-type
+             IMPORTANTE VIDEO PARA  PROBLEMA - https://www.youtube.com/watch?v=G6TegxmaI9o Integrar Correctamente Plantilla Bootstrap en Proyecto SpringBoot con Thymeleaf
+                                      (HECHO)- https://github.com/froala/angular-froala/issues/170
+                                      (HECHO)- https://exerror.com/mime-type-text-html-is-not-a-supported-stylesheet-mime-type-and-strict-mime-checking-is-enabled/ 
+                                      (HECHO)- https://stackoverflow.com/questions/48248832/stylesheet-not-loaded-because-of-mime-type
+                                       (MIME)- https://github.com/h5bp/server-configs-nginx/blob/main/mime.types   
+                                 (IMPORTANTE)- https://stackoverflow.com/questions/477816/what-is-the-correct-json-content-type
+                          (IMPORTANTE)(HECHO)- https://stackoverflow.com/questions/60306334/spring-serves-static-content-as-application-json-no-matter-what
+                                 (SIN HACER) - https://www.faqcode4u.com/faq/352660/bootstrap-not-working-with-spring-boot
+                                 (SIN HACER) - https://stackoverflow.com/questions/58505262/thymeleaf-with-spring-boot-and-bootstrap-dont-work-in-page-with-pathvariable
+                                 (SIN HACER) - https://stackoverflow.com/questions/51390127/bootstrap-not-working-with-spring-boot
+                                 (SIN HACER) - https://stackoverflow.com/questions/49263433/refused-to-apply-style-because-its-mime-type-application-json-is-not-a-suppo
+                                      (HECHO)- https://stackoverflow.com/questions/21203402/css-not-loading-in-spring-boot
+                                      (HECHO)- https://stackoverflow.com/questions/31947707/why-will-netbeans-not-run-my-css-file
+                                      (HECHO)- https://github.com/jaylindquist/spring-boot-service-and-static EJEMPLO
+        Posible solución para problema con el mail(Búsqueda->application properties email spring boot): (MODIFICACIÓN APPLICATION PROPERTIES) https://www.geeksforgeeks.org/spring-boot-sending-email-via-smtp/
+                                                                                                        https://howtodoinjava.com/spring-core/send-email-with-spring-javamailsenderimpl-example/
+                                                                                                        https://stackoverflow.com/questions/24776669/failed-to-load-applicationcontext-from-unit-test-filenotfound
+        CONTROLADOR DE ERRORES EJ: https://stackoverflow.com/questions/31134333/this-application-has-no-explicit-mapping-for-error
+        BUSQUEDAS:
+                                             - https://www.google.com/search?q=my+netbeans+dont+read+bootstrap&oq=my+netbeans+dont+read+boots&aqs=chrome.1.69i57j33i10i160l3.11457j0j7&sourceid=chrome&ie=UTF-8
+                                             - https://www.google.com/search?q=how+to+change+content+type+of+file&oq=how+to+ch&aqs=chrome.1.69i57j69i59j46i512j0i512l2j69i60l2j69i61.4035j0j7&sourceid=chrome&ie=UTF-8
+                                             - https://www.google.com/search?q=Content-Type%3A+application%2Fjson&sxsrf=ALiCzsbe5gvUI5m0IJFGnl7Aa7wx4Sg-iw%3A1659366622247&ei=3uznYozPDvGJ1sQP_cWhgAc&ved=0ahUKEwiMtsiw9qX5AhXxhJUCHf1iCHAQ4dUDCA4&uact=5&oq=Content-Type%3A+application%2Fjson&gs_lcp=Cgdnd3Mtd2l6EAMyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEcyBAgAEEdKBAhBGABKBAhGGABQygNYygNgwQVoAHADeACAAQCIAQCSAQCYAQCgAQHIAQjAAQE&sclient=gws-wiz
+        IMPORTANTE BUSQUEDA QUE NO LLEGUE A VER - https://www.google.com/search?q=spring+boot+changed+style+css+class+to+application%2Fjson&oq=spring+boot+changed+style+css+class+to+application%2F&aqs=chrome.1.69i57j33i10i160l4j33i22i29i30.31131j0j7&sourceid=chrome&ie=UTF-8
+        Info sobre problemas con el mail(Solucionado): - https://stackoverflow.com/questions/51274765/how-to-have-javamailsender-not-fail-the-application-context-loading-on-a-wrong-m
+                                          - https://medium.com/karibu-blog/c%C3%B3mo-enviar-un-mail-con-spring-boot-f86c2f7af678
+                                          - https://www.geeksforgeeks.org/spring-boot-sending-email-via-smtp/
+       
+        
+        */
     }
 
 }

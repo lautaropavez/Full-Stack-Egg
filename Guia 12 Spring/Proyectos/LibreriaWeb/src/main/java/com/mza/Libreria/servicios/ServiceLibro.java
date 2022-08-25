@@ -121,14 +121,15 @@ public class ServiceLibro {
                 }
                 libro.setEditorial(editorial);
             }
-            
-            String idPortada = null;
-            if (libro.getPortada().getId() != null) {
-                idPortada = libro.getPortada().getId();
+            if(archivo != null){
+                String idPortada = null;
+                //if (libro.getPortada().getId() != null || (!libro.getPortada().getId().isEmpty())) {
+                if (libro.getPortada().getId() != null){
+                    idPortada = libro.getPortada().getId();
+                }
+                Portada portada = sPortada.actualizar(idPortada, archivo);
+                libro.setPortada(portada);
             }
-            Portada portada = sPortada.actualizar(idPortada, archivo);
-            libro.setPortada(portada);
-                
             libroRepo.save(libro);
         } else {
             throw new MiExcepcion("No se encontró a este libro en la base de datos"); //Ver si lo dejo o lo pongo en el controlador al throw

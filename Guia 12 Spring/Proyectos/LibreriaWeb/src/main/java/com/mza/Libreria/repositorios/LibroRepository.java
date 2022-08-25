@@ -15,17 +15,17 @@ import org.springframework.stereotype.Repository;
 public interface LibroRepository  extends JpaRepository<Libro, String>{
 
     @Query("SELECT l FROM Libro l WHERE l.id = :id")
-    public Libro buscarPorId(@Param("id")String id);
-    
+    Libro buscarPorId(@Param("id")String id);
+
     // con esta query se obtiene contenido parecido a, LIKE %?1% remplaza a LIKE :variable
     @Query("SELECT p from Libro p WHERE p.titulo LIKE %?1% or p.autor.nombre LIKE %?1% or p.editorial.nombre LIKE %?1% AND p.alta = true")
-    public List<Libro> buscaTodoActivos(@Param("buscar") String buscar);
+    List<Libro> buscaTodoActivos(@Param("buscar") String buscar);
 
     @Query("SELECT p from Libro p WHERE p.titulo LIKE %?1% or p.autor.nombre LIKE %?1% or p.editorial.nombre LIKE %?1%")
     List<Libro> buscaTodo(@Param("buscar") String buscar);
     
     @Query("SELECT l from Libro l WHERE l.alta = true AND l.ejemplaresRestantes > 0")
-    public List<Libro> listaActivos(); //Revisar porque no tiene parametros
+    List<Libro> listaActivos(); //Revisar porque no tiene parametros
     
 //-------------------------------NO USADOS--------------------------------------   
     

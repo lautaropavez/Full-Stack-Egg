@@ -40,7 +40,7 @@
                 </div>               
             </div>
         </div>
-    <form th:action="@{/libro/modificar/__${libro.id}__}" method="POST" id="form">
+    <form th:action="@{/libro/modificar/__${libro.id}__}" method="POST" id="form" enctype="multipart/form-data">
         <div class="form">
             <h1>Modificación</h1>
             <input type="hidden" th:value= "${id}" name= "id">

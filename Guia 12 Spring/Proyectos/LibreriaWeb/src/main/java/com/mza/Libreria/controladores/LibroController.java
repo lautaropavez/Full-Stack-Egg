@@ -84,19 +84,27 @@ public class LibroController {
     @GetMapping("/modificar/{id}") //localhost:8080/libro/modificar
     public String modificar(@PathVariable String id,ModelMap modelo){
         modelo.put("libro",servLibro.buscarPorId(id));
-        return "form-libro-modificar"; // ya esta creado el form en el archivo form-perro.html (de la clase)
+        return "form-libro-modif1"; // ya esta creado el form en el archivo form-perro.html (de la clase)
     }
     
-    @PostMapping("/modificar/{id}") 
-    public String modificar(ModelMap modelo,@PathVariable String id,@RequestParam MultipartFile archivo, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String nombreAut,@RequestParam String nombreEdit)throws Exception{
+    @PostMapping("/modificar/{id}") //,@RequestParam MultipartFile archivo
+    public String modificar(ModelMap modelo,@PathVariable String id, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String nombreAut,@RequestParam String nombreEdit)throws Exception{
         try{
-            servLibro.modificarLibro(archivo,id,titulo,anio,nombreAut,nombreEdit);
+            servLibro.modificarLibro(null,id,titulo,anio,nombreAut,nombreEdit);
             //modelo.put("exito","Modificación exitosa"); 
             //return "list-libro"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
-            return "/";
-        }catch(Exception e){
-            modelo.put("error","Falto algún dato"); 
-            return "form-libro-modif"; 
+            return "list-libro";
+        }catch(MiExcepcion ex){
+            modelo.put("error",ex.getMessage());
+            modelo.put("id",id);
+           // modelo.put("archivo",archivo);
+            modelo.put("titulo",titulo);
+            modelo.put("anio",anio);
+            modelo.put("nombreAut",nombreAut);
+            modelo.put("nombreEdit",nombreEdit);
+            return "redirect:/libro/lista"; 
+            //return "form-libro-modif1";
+            //return "redirect:/libro/modificar/{id}";  
         }
     }
     
@@ -105,10 +113,10 @@ public class LibroController {
     public String baja(@PathVariable String id,ModelMap modelo){
         try {
             servLibro.baja(id);
-            return "redirect:/usuario/lista";  
+            return "redirect:/libro/lista";  
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
-            return "redirect:/usuario/lista"; 
+            return "redirect:/libro/lista"; 
         }
     }
     
@@ -116,10 +124,10 @@ public class LibroController {
     public String alta(@PathVariable String id,ModelMap modelo){
         try {
             servLibro.alta(id);
-            return "redirect:/usuario/lista";  
+            return "redirect:/libro/lista";  
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage()); 
-            return "redirect:/usuario/lista"; 
+            return "redirect:/libro/lista"; 
         }
     }  
 }
