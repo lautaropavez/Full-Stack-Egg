@@ -50,6 +50,7 @@ public class Spring {
         Desarrollar Api Rest con Java Spring Boot https://www.youtube.com/watch?v=vTu2HQrXtyw
         Conceptos básicos: Spring framework, Spring MVC y Spring Boot  https://www.youtube.com/watch?v=cTozN8W6FGo
         Inicio de sesión y registro de usuarios con Spring Security + Thymeleaf + MySQL y Bootstrap https://www.youtube.com/watch?v=0wTsLRxS3gA&t=6s
+        
         ========================== Charla Informativa =========================== 
         
         Para usar Spring tenemos 2 opciones: 1)Podemos usar STS que es como el propio id de Spring o 2) Un Pluggin en Netbeans 
@@ -670,12 +671,18 @@ public class Spring {
         
         ========================== Agregar seguridad a los accesos a la aplicación | Programación | Modelo Vista Controlador | V7 =========================
         
-        
+
         
         ========================= Recuperar y utilizar información de la sesión | Programación | Modelo Vista Controlador | V8 ============================
         ========================= Registración de Usuario Completa | Programación | Modelo Vista Controlador | V9 =========================================
         ========================= Securización | Programación | Modelo Vista Controlador | V10 ============================================================
         ========================= Controlador para devolver una imagen | Programación | Modelo Vista Controlador | V11 ====================================
+        
+        Min 17:30-19:43 muestra métodos en clase MultimediaService que no conozco, creo que para devolver imagen también
+        Min 20 Hay veces que no conviene por una cuestión de cache y navegador, que no conviene que las imagenes usen el id como parámetro sino pasarlo como una ruta completa y distinta para cada usuario, 
+               sobre todo para las búsquedas, para Google que no guarda las imagenes por parámetros sino que las URLs completas o también para hacer URLS amigables
+               Entonces le decimos que el id que necesitamos en el método del controlador lo va a sacar de lo que venga por la URL con path variable
+        
         ========================= Desarrollo del Modulo de Mascotas 1 | Programación | Modelo Vista Controlador | V12 =====================================
         ========================= Desarrollo del Modulo de Mascotas 2 | Programación | Modelo Vista Controlador | V12 =====================================
 

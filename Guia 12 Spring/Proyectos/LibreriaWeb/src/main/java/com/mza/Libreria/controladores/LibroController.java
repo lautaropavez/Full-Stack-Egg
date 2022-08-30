@@ -78,6 +78,14 @@ public class LibroController {
         modelo.addAttribute("libros",librosLista); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
          return "list-libro"; // 
     }
+        
+    //IN PROCESS
+    @GetMapping("/biblioteca") 
+    public String biblioteca(ModelMap modelo){
+       // List<Libro> librosLista = servLibro.listarTodos();
+      //  modelo.addAttribute("libros",librosLista); 
+       return "biblioteca"; // 
+    }
     
     //CREAR TRY AND CATCH
     //Clase THYMELEAF min 01:02:00
@@ -129,5 +137,5 @@ public class LibroController {
             modelo.put("error", ex.getMessage()); 
             return "redirect:/libro/lista"; 
         }
-    }  
+    }
 }

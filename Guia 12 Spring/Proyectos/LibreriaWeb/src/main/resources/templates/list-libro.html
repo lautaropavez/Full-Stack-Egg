@@ -84,23 +84,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                      <!-- En esta linea declaro un Iterator que recorre la lista libros. 
-                        Si quiero que solo se muestren segun el tributo alta debo agregar la linea  th:if="${p.alta} == TRUE" -->
+                      <!-- Si quiero que solo se muestren segun el tributo alta debo agregar la linea  th:if="${p.alta} == TRUE" -->
                         <tr  th:each="libro : ${libros}">
                             <td th:text="${libro.id}"></td>
                             <td th:text="${libro.titulo}"></td>
-                            <td> <img class="bd-placeholder-img card-img-top" th:src="${libro.portada}" style="width: auto; height: 60px;"> </td>
+                            <!-- Forma con RequestParam-->
+                       <!-- <td> <img th:if="${libro.portada} != null" class="bd-placeholder-img card-img-top" th:src="${'/portada/libro?id=' + libro.id}" style="width: auto; height: 60px;"> </td> -->
+                            <!-- Forma con PathVariable-->
+                            <td> <img th:if="${libro.portada} != null" class="bd-placeholder-img card-img-top" th:src="${'/portada/libro/' + libro.id}" style="width: auto; height: 70px;"> </td> 
                             <td th:text="${libro.autor} == null ? 'sin registro' : ${libro.autor.nombre}"></td>
-                            <td th:text="${libro.editorial} == null ? 'sin registro' : ${libro.editorial.nombre}"></td>
+                            <td th:text="${libro.editorial} == null ? 'sin registro' : ${libro.editorial.nombre}"></td> 
                             <td th:text="${libro.nroejemplares}"></td>
                             <td th:text="${libro.ejemplaresPrestados}"></td>
                             <td th:text="${libro.ejemplaresRestantes}"></td>
                             <td th:text="${libro.isbn}"></td> 
                             <td th:text="${libro.anio}"></td>
-
-                            <!--  == true ? 'Activo' : 'Baja'   Con esa instruccion consulto si el campo alta es true cambia 
-                              por Activo sino cambia por Baja -->
-                            <!-- <td sec:authorize="hasRole('ADMIN')" th:text="${p.alta} == true ? 'Activo' : 'Baja' "></td> -->
                             <td>
                               <span th:if="${libro.alta}" style="color: chartreuse;"><p>Activo</p></span>
                               <span th:unless="${libro.alta}" style="color:rgb(231, 67, 17)"><p>Baja</p></span>

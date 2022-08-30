@@ -149,14 +149,15 @@ public class ServiceLibro {
     }
 
     @Transactional(readOnly = true)
-    public Libro findbyId(String id){
+    public Libro findbyId(String id) throws MiExcepcion{
         Libro l = libroRepo.buscarPorId(id);
         //Manera más corta si manejo la excepcion en controlador
         //return libroRepo.buscarPorId(id);
         if (l != null) {
             return l;
         } else {
-            return null; //throw new MiExcepcion("Este libro no existe."); esto debo ponerlo en el controlador
+            throw new MiExcepcion("Este libro no existe."); //esto debo ponerlo en el controlador
+            //return null; 
         }
     }
 
@@ -181,7 +182,7 @@ public class ServiceLibro {
     }
 
     @Transactional
-    public Libro alta(String id) {
+    public Libro alta(String id) throws MiExcepcion {
         //Libro entidad = libroRepo.getOne(id);
         Libro entidad = findbyId(id);
         entidad.setAlta(true);
@@ -189,7 +190,7 @@ public class ServiceLibro {
     }
     
     @Transactional // En Pograma v2 de profe fiorde les pone WebException.class en el rollback, investigar
-    public Libro baja(String id) {
+    public Libro baja(String id) throws MiExcepcion {
         //Libro entidad = libroRepo.getOne(id); //Hacemos uso de getOne para traerlo por id
         Libro entidad = findbyId(id);
         entidad.setAlta(false);
