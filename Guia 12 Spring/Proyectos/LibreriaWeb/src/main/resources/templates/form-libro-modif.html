@@ -2,96 +2,130 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="formulario de modificacion libro " content="" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Lautaro Pavez">
-
-    <title>Modificar Libro</title> 
-    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/styleFormModif.css}" type="text/css" rel="stylesheet">
-    <!--
-    Video de proyecto: https://www.youtube.com/watch?v=85_MoUvTJZE 
-    Video de proyecto parte js: https://www.youtube.com/watch?v=36S19D6kZkc&t=214s (min 7:48 importante) 
-    Video de Otro proyecto formulario con validaciones: https://www.youtube.com/watch?v=Blw1Sf0ws6E
-    Video de proyecto parte del email: 
- 
-    min 8 usa flexbox
-    box shadow = sombra a la caja 
-    triggers : son disparadores de eventos como el hover por ej. Los imputs por defecto tienen el trigger focus(es cuando hacemos click en el input y se remarca la casilla)
-    INVESTIGAR: trigger css animation with javascript
-    min 7:48 Usamos expresiones regulares con JS(que son patrones donde podemos encontrar ciertas caracteristicas, ej: si hay símbolos, números)
-    Documentación de expresiones regulares: https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_Expressions
-                                            https://www.w3resource.com/javascript/form/email-validation.php
-    -->
+    <!-- Sidebar icons -->
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap 5 -->
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Sidebar css -->
+    <link th:href="@{/css/sidebar.css}" rel="stylesheet">
+    <title>Modificación de Usuario</title>
 </head>
-<body>
-    <!--Chequear si las uso al exito y error-->
-    <div class="container m-5">
-            <div th:if="${exito}!=null" class="card text-white bg-succes mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Exito</h5>
-                    <p class="card-text" th:text="${exito}"></p>
+
+<body id="body">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="/img/ceibo.svg" alt="" width="30" height="24"
+                        class="d-inline-block align-text-top">
+                    EL CEIBO
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li> -->
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light right_header" type="submit" id="buscador">Buscar</button>
+                    </form>
                 </div>
             </div>
-            <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Error</h5>
-                    <p class="card-text" th:text="${error}"></p>
-                </div>               
-            </div>
-        </div>
-    <form th:action="@{/libro/modificar/__${libro.id}__}" method="POST" id="form" enctype="multipart/form-data">
-        <div class="form">
-            <h1>Modificación</h1>
+        </nav>
+    </header>
+    <div th:replace="/fragments/sidebar :: div"></div>
+    <main>
+        <h1>Modificación Libro</h1><br>   
+        <div class="container m-5">
+                <div th:if="${exito}!=null" class="card text-white bg-succes mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Exito</h5>
+                        <p class="card-text" th:text="${exito}"></p>
+                    </div>
+                </div>
+                <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Error</h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>               
+                </div>
+        </div> 
+          <!--    enctype="multipart/form-data" -->
+        <form th:action="@{/libro/modificar/__${libro.id}__}" method="POST" id="form" >
+
             <input type="hidden" th:value= "${id}" name= "id">
-
-            <div class="grupo">
-                <input th:value="${libro.titulo}" type="text" name="titulo" placeholder="Titulo del libro" required><span class="barra"></span>
-                <label for="">Titulo</label>
+                <div class="form-group">
+                    <label>Titulo</label> <input th:value="${libro.titulo}" type="text" name="titulo" class="form-control"  placeholder="Titulo del libro">
+                </div>
+                <div class="form-group">
+                    <label>Año</label> <input th:value="${libro.anio}" type="number" name="anio" class="form-control"  placeholder="Año del libro">
+               </div>
+                <!-- <div class="form-group">
+                    <label>ISBN</label> <input type="password" name="clave2" class="form-control"  placeholder=" ISBN ">   
+                </div>
+                <div class="form-group">   --> <!--th:value="${libro.portada}" 
+                 <label>Archivo</label> <input type="file" name="archivo" class="form-control"  placeholder="Imagen de portada">                          
+                </div>--> 
+                <div class="form-group">
+                    <label>Autor</label> <input th:value="${libro.autor.nombre}" type="text" name="nombreAut" class="form-control"  placeholder="Nombre del autor">
+                        
+                </div>
+                <div class="form-group">
+                    <label>Editorial</label> <input th:value="${libro.editorial.nombre}" type="text" name="nombreEdit" class="form-control"  placeholder="Nombre de la editorial">
+                        
+                </div> 
+                <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+                <p class="warnings" id="warnings"></p>      
+        </form>
+	<section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
+                </div>
             </div>
-            <div class="grupo">
-                <input th:value="${libro.anio}" type="text" name="anio" placeholder="Año del libro" required><span class="barra"></span>
-                <label for="">Año</label>
-            </div>
-            <div class="grupo">
-                <input th:value="${libro.archivo}" type="text" name="archivo" placeholder="Imagen de portada" required><span class="barra"></span>
-                <label for="">Archivo</label>
-            </div>
-            <div class="grupo">
-                <input th:value="${libro.nombreAut}" type="text" name="nombreAut" placeholder="Nombre del autor" required><span class="barra"></span>
-                <label for="">Autor</label>
-            </div>
-            <div class="grupo">
-                <input th:value="${libro.nombreEdit}" type="text" name="nombreEdit" placeholder="Nombre de la editorial" required><span class="barra"></span>
-                <label for="">Editorial</label>
-            </div>
-            <button type="submit">Guardar</button>
-            <p class="warnings" id="warnings"></p>
+	</section>
+    </main>
+    <!-- Footer-->
+    <footer class="footer bg-dark text-center text-white footer">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            Copyright © 2022 El Ceibo
         </div>
-    </form>
-    <script src="js/main.js"></script>
+    <!-- Copyright -->
+    </footer>
+    <!-- Bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
+    <!-- Sidebar js -->
+    <script src="/js/sidebar.js"></script>
 </body>
+
 </html>
-
-
-<!--
-
-</head>
-    <body>
-        <form th:action="@/libro/registro" method="POST">
-          <div class="form-group">
-            <label>Titulo</label> <input type="text" class="form-control" name="titulo" placeholder="Titulo del libro">
-          </div>
-          <div>
-            <label>Año</label> <input type="number" class="form-control" name="año" placeholder="Año del libro">
-          </div>
-          <div>
-            <label>Autor</label> <input type="text" class="form-control" name="autor" placeholder="Nombre del autor">
-          </div>
-          <div>
-            <label>Editorial</label> <input type="text" class="form-control" name="editorial" placeholder="Nombre de la editorial">
-          </div>  
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form 
-    </body>
-</html>-->

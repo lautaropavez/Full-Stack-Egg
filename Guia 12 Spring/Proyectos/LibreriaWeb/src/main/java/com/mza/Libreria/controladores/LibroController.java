@@ -84,7 +84,7 @@ public class LibroController {
     public String biblioteca(ModelMap modelo){
        // List<Libro> librosLista = servLibro.listarTodos();
       //  modelo.addAttribute("libros",librosLista); 
-       return "biblioteca"; // 
+       return "/fragments/nada"; // 
     }
     
     //CREAR TRY AND CATCH
@@ -92,7 +92,7 @@ public class LibroController {
     @GetMapping("/modificar/{id}") //localhost:8080/libro/modificar
     public String modificar(@PathVariable String id,ModelMap modelo){
         modelo.put("libro",servLibro.buscarPorId(id));
-        return "form-libro-modif1"; // ya esta creado el form en el archivo form-perro.html (de la clase)
+        return "form-libro-modif"; // ya esta creado el form en el archivo form-perro.html (de la clase)
     }
     
     @PostMapping("/modificar/{id}") //,@RequestParam MultipartFile archivo
