@@ -694,6 +694,10 @@ public class Spring {
         ====================================   ERRORES   ===================================================
         ====================================================================================================
         ====================================================================================================
+        th:replace -->Tenia un problema para poner a cada vista html el titulo distinto en el header que es igual para todos
+        Lo solucione con esto: https://stackoverflow.com/questions/31451830/head-and-title-in-thymeleaf
+        Y también en la misma página me sale otra manera de hacerlo si quiero agregar algun css u otra cosa que no esté en ese header, seria agarrando todo con un div y meterlo, dejando el header intacto pero a la vez trayendo las cosas con el div
+        Posible más información https://www.baeldung.com/spring-thymeleaf-fragments
         
         ERROR MultipartFile cuando quiero enviar un objeto en modificar libro: Current request is not a multipart request org.springframework.web.multipart.MultipartException: Current request is not a multipart request at
                                                           Posibles soluciones: - https://www.youtube.com/watch?v=m1O3mPgm2Jg
