@@ -201,9 +201,11 @@ public class ServiceLibro {
     public void eliminarLibro(String id) throws Exception {
         Libro l = libroRepo.buscarPorId(id);
         if (l != null) {
-            throw new Exception("No se encontró a este libro en la base de datos");
+            l.setAutor(null);
+            l.setEditorial(null);
+            libroRepo.deleteById(id); 
         } else {
-            libroRepo.deleteById(id);
+            throw new Exception("No se encontró a este libro en la base de datos");
         }
     }
 

@@ -32,25 +32,17 @@ public interface LibroRepository  extends JpaRepository<Libro, String>{
     //No lo usamos porque usamos el que busca los que esten activos y con ejemplares
 //    @Query("SELECT l from Libro l WHERE a.activo = true ")
 //    public List<Libro> buscarActivos(@Param("activo")boolean activo); 
-        
-//    @Query("SELECT l FROM Libro l WHERE l.isbn = :isbn")
-//    public Libro buscarPorISBN(@Param("isbn")Long isbn);
-    
+
     //Porque usamos el metodo buscaTodo y ese nos busca por titulo,editorial y autor a la vez
     @Query("SELECT l FROM Libro l WHERE l.titulo = :titulo")
-    public Libro buscarPorTitulo(@Param("titulo")String titulo);
+    Libro buscarPorTitulo(@Param("titulo")String titulo);
     
     @Query("SELECT l FROM Libro l WHERE l.anio = :anio")
-    public List<Libro> buscarPorAnio(@Param("anio")Integer anio);
+    List<Libro> buscarPorAnio(@Param("anio")Integer anio);
     
     @Query("SELECT l FROM Libro l WHERE l.editorial.nombre = :nombre")
-    public List<Libro> listarPorEditorial(@Param("nombre")String editorial);
+    List<Libro> listarPorEditorial(@Param("nombre")String editorial);
     
     @Query("SELECT l FROM Libro l WHERE l.autor.nombre = :nombre")
-    public List<Libro> listarPorAutor(@Param("nombre")String autor);
-    
-    //@Query("SELECT i FROM Libro i WHERE i.isbn = :isbn")
-    //Optional<Libro> validaISBN(@Param("isbn") String isbn);
-    //No creamos métodos eliminar porque Spring ya nos tiene métodos precreados que eliminan por id
-
+    List<Libro> listarPorAutor(@Param("nombre")String autor);
 }

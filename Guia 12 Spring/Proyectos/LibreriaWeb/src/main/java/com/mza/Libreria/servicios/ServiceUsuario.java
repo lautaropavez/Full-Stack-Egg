@@ -141,8 +141,13 @@ public class ServiceUsuario{     //Sin Spring Security
     }
     
     @Transactional
-    public void eliminar(String id){
-        
+    public void eliminar(String id)throws Exception{
+        Usuario u = usuarioRepo.buscarPorId(id);
+        if (u != null) {
+            usuarioRepo.deleteById(id);
+        } else {
+            throw new Exception("No se encontró a este usuario en la base de datos");
+        }
     }
     
     @Transactional(readOnly = true) //Busca todos los usuarios activos e inactivos (para el administrador)

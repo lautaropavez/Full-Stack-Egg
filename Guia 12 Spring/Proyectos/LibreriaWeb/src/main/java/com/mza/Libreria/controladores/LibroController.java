@@ -138,4 +138,15 @@ public class LibroController {
             return "redirect:/libro/lista"; 
         }
     }
+    
+    @GetMapping("/eliminar/{id}") //PATHVARIABLE
+    public String eliminar(@PathVariable String id,ModelMap modelo) throws Exception{
+        try {
+            servLibro.eliminarLibro(id);
+            return "redirect:/libro/lista";  
+        }catch(MiExcepcion ex) {
+            modelo.put("error", ex.getMessage()); //La profe no lo puso pero fijarme si anda
+            return "redirect:/libro/lista"; 
+        }
+    }   
 }

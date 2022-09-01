@@ -8,6 +8,8 @@ public class Spring {
     public static void main(String[] args) {
         /*
         ========================== Info Complementaria ========================= 
+        En proyecto si hay un libro con una relación por ejemplo de autor antes de eliminar el libro para que no elimine el autor, debo poner los autores y editoriales = a null para que no se rompa 
+        En proyectos NO creamos métodos eliminar porque Spring ya nos tiene métodos precreados que eliminan por id
        IMPORTANTE: https://es.stackoverflow.com/questions/73955/cual-es-la-diferencia-entre-spring-jsf-jsp
        @Transactional(readOnly = true) : https://www.arquitecturajava.com/spring-transactional-readonly-y-optimizaciones/ 
                                          https://stackoverflow.com/questions/1614139/spring-transactional-read-only-propagation

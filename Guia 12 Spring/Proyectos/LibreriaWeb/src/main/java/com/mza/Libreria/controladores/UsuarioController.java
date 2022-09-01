@@ -77,4 +77,15 @@ public class UsuarioController {
         //  return "redirect:/"; Profe pone este return 
         }
     }
+    
+    @GetMapping("/eliminar/{id}") //PATHVARIABLE
+    public String eliminar(@PathVariable String id,ModelMap modelo) throws Exception{
+        try {
+            servUsuario.eliminar(id);
+            return "redirect:/usuario/lista";  
+        }catch(MiExcepcion ex) {
+            modelo.put("error", ex.getMessage()); //La profe no lo puso pero fijarme si anda
+            return "redirect:/usuario/lista"; 
+        }
+    }   
 }
