@@ -232,8 +232,7 @@ public class ServiceLibro {
         if (titulo == null || titulo.isEmpty()) {
             throw new MiExcepcion("Debe indicar el título");
         }
-       
-        if (anio == null || anio < 0 || anio > 2100) {
+        if (anio == null || anio < 0 || anio > 2080) {
             throw new MiExcepcion("Debe indicar el año");
         }
         if (idAutor == null || idAutor.trim().isEmpty()) {
