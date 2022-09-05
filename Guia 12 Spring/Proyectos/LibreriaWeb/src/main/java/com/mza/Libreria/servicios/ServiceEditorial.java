@@ -23,12 +23,12 @@ public class ServiceEditorial {
     
     @Transactional
     public void crearEditorial(String nombre) throws MiExcepcion {
-        
+        validacion(nombre);
         Editorial editorial = new Editorial();
         editorial.setNombre(nombre.toUpperCase());
         editorial.setAlta(Boolean.TRUE);
 
-        editorialRepo.save(editorial); // Esto es igual en JPA al --> daolibro.guardarLibro(lib);
+        editorialRepo.save(editorial); 
     }
     
     @Transactional(readOnly = true)
@@ -60,6 +60,17 @@ public class ServiceEditorial {
             throw new Exception("No se encontró a esta Editorial en la base de datos");
         } else {
             editorialRepo.deleteById(id);
+        }
+    }
+    
+    public void validacion(String nombreEdit) throws MiExcepcion{
+        if (nombreEdit == null || nombreEdit.trim().isEmpty()){
+            throw new MiExcepcion("Debe indicar el nombre de la Editorial");
+        }
+        
+        Editorial editorial = editorialRepo.buscarPorNombre(nombreEdit);
+        if(editorial.getNombre().equals(nombreEdit.toUpperCase())){
+            throw new MiExcepcion("La editorial ya existe");
         }
     }
     

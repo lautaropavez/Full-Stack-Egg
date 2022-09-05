@@ -24,12 +24,12 @@ public class ServiceAutor {
     
     @Transactional
     public void crearAutor(String nombre) throws MiExcepcion {
-        
+        validacion(nombre);
         Autor autor = new Autor();
         autor.setNombre(nombre.toUpperCase());
         autor.setAlta(Boolean.TRUE);
 
-        autorRepo.save(autor); // Esto es igual en JPA al --> daolibro.guardarLibro(lib);
+        autorRepo.save(autor); 
     }
        
     @Transactional(readOnly = true)
@@ -62,8 +62,19 @@ public class ServiceAutor {
         } else {
             autorRepo.deleteById(id);
         }
+    } 
+    
+    public void validacion(String nombreAut) throws MiExcepcion {
+        if (nombreAut == null || nombreAut.trim().isEmpty()) {
+            throw new MiExcepcion("Debe indicar el nombre del Autor");
+        }
+        
+        Autor autor = autorRepo.buscarPorNombre(nombreAut);
+        if(autor.getNombre().equals(nombreAut.toUpperCase())){
+            throw new MiExcepcion("El autor ya existe");
+        }
     }
-
+    
     //------------------------------- NO USADOS --------------------------------
     
 //    @Transactional

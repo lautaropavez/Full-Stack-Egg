@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
  */
 //Nota: Cuando creemos el libro vamos a tener que buscar si existen las editoriales, autores y mostrarlos (si quiere para elegir) sino, si no está que lo ingrese directamente 
 //      Dar de baja por autor y editorial desde el baja libro, que llame a un método de service autor dar de baja, autor busca si todos sus libros estan dados de baja se baja sino no,
-//      Y al revés con el alta del libro, primero nos fijamos si está dado de alta ok, sino lo damos de alta.
 //      Tema editorial es distinto ahí podriamos darlo de alta aparte en su método en service editorial pero sin establecer relación, chequear bien esta idea
 @Service
 public class ServiceLibro {
@@ -37,9 +36,10 @@ public class ServiceLibro {
     private ServicePortada sPortada;
 
     @Transactional
-    public void crearLibro(MultipartFile archivo, String titulo, Integer anio, String nombreAut, String nombreEdit) throws MiExcepcion {
+    public void crearLibro(MultipartFile archivo, String titulo, Integer anio, String idAutor, String idEditorial) throws MiExcepcion {
 
-        validacion(titulo, anio, nombreAut, nombreEdit);
+        validacion(titulo, anio, idAutor, idEditorial);
+        
         Libro lib = new Libro();
         //Magia para obtener los ejemplares
         int ejemplares = (int) (Math.random() * 999 + 1);
@@ -52,26 +52,33 @@ public class ServiceLibro {
         lib.setEjemplaresPrestados(prestados);
         lib.setEjemplaresRestantes(ejemplares - prestados);
         lib.setIsbn((long) (int) (Math.random() * 999999 + 1));
+        
+        Autor autor = sAutor.buscarporId(idAutor);
+        lib.setAutor(autor);
+        
+        Editorial editorial = sEditorial.buscarporId(idEditorial);
+        lib.setEditorial(editorial);
+        
         //Lo busca, si existe, lo setea y sino existe, lo crea y lo setea, por lo que en los dos casos lo setea, asi que le sacamos el "else".(Hice lo mismo en modificar autor)
-        Autor autor = sAutor.buscarPorNombre(nombreAut.toUpperCase());
-        if (autor == null) { 
-            sAutor.crearAutor(nombreAut);
-            Autor newautor = sAutor.buscarPorNombre(nombreAut.toUpperCase());
-            lib.setAutor(newautor);
-            //Autor autornuevo = sAutor.buscarporNombre(nombreAut.toUpperCase());
-            //Aib.setAutor(lib.getAutor());
-            //Aib.setAutor(sAutor.buscarporId(lib.getAutor().getId()));
-        }else{
-            lib.setAutor(autor);
-        }
-        Editorial editorial = sEditorial.buscarporNombre(nombreEdit.toUpperCase());
-        if (editorial == null) {
-            sEditorial.crearEditorial(nombreEdit);
-            Editorial neweditorial = sEditorial.buscarporNombre(nombreEdit.toUpperCase());
-            lib.setEditorial(neweditorial);
-        }else{
-            lib.setEditorial(editorial);
-        }    
+//        Autor autor = sAutor.buscarPorNombre(nombreAut.toUpperCase());
+//        if (autor == null) { 
+//            sAutor.crearAutor(nombreAut);
+//            Autor newautor = sAutor.buscarPorNombre(nombreAut.toUpperCase());
+//            lib.setAutor(newautor);
+//            //Autor autornuevo = sAutor.buscarporNombre(nombreAut.toUpperCase());
+//            //Aib.setAutor(lib.getAutor());
+//            //Aib.setAutor(sAutor.buscarporId(lib.getAutor().getId()));
+//        }else{
+//            lib.setAutor(autor);
+//        }
+//        Editorial editorial = sEditorial.buscarporNombre(nombreEdit.toUpperCase());
+//        if (editorial == null) {
+//            sEditorial.crearEditorial(nombreEdit);
+//            Editorial neweditorial = sEditorial.buscarporNombre(nombreEdit.toUpperCase());
+//            lib.setEditorial(neweditorial);
+//        }else{
+//            lib.setEditorial(editorial);
+//        }    
         Portada portada = sPortada.guardar(archivo); //En el caso de que yo no mande un archivo adjunto, no hay problema pq está contemplado y el método guardar me va a devolver null entonces el usuario va a quedar sin foto.
         lib.setPortada(portada);
         
@@ -220,20 +227,26 @@ public class ServiceLibro {
     }
 
     //Servicios Spring - Tarde: Min 11:30 muestra método de validación que tiene ella en su clase
-    public void validacion(String titulo, Integer anio, String nombreAut, String nombreEdit) throws MiExcepcion {
-
+    public void validacion(String titulo, Integer anio, String idAutor, String idEditorial) throws MiExcepcion {
+        
         if (titulo == null || titulo.isEmpty()) {
             throw new MiExcepcion("Debe indicar el título");
         }
+       
         if (anio == null || anio < 0 || anio > 2100) {
             throw new MiExcepcion("Debe indicar el año");
         }
-        if (nombreAut == null || nombreAut.trim().isEmpty()) {
-            throw new MiExcepcion("Debe indicar el nombre del Autor");
+        if (idAutor == null || idAutor.trim().isEmpty()) {
+            throw new MiExcepcion("Debe indicar el Autor");
         }
-        if (nombreEdit == null || nombreEdit.trim().isEmpty()) {
-            throw new MiExcepcion("Debe indicar el nombre de la Editorial");
+        if (idEditorial == null || idAutor.trim().isEmpty()) {
+            throw new MiExcepcion("Debe indicar la Editorial");
         }
+        
+        Libro l = libroRepo.buscarPorTitulo(titulo);
+        if(l != null && l.getAutor().getId().equals(idAutor)){
+            throw new MiExcepcion(" Este Libro ya existe");
+        }    
     }
 
 //    //Otra manera mandando el objeto y retornandolo

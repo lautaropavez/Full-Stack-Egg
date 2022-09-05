@@ -81,7 +81,6 @@
                                   <a th:if="${libro.alta} == true" class="mx-2" th:href="@{/libro/baja/__${libro.id}__}"><i class="fas fa-arrow-circle-down" style="color:rgb(231, 67, 17)"></i></a> 
                                   <a th:if="${libro.alta} == false" class="mx-2" th:href="@{/libro/alta/__${libro.id}__}"><i class="fas fa-arrow-circle-up" style="color:rgb(57, 204, 37)"></i></a> 
                                   <a th:href="@{/libro/eliminar/__${libro.id}__}"  class="mx-2" title="Eliminar"><i class="fas fa-trash-alt" style="color: cornflowerblue;"></i></a>
-
                                 </td>
                             </tr>
                         </tbody>

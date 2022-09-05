@@ -8,6 +8,15 @@ public class Spring {
     public static void main(String[] args) {
         /*
         ========================== Info Complementaria ========================= 
+        DOCUMENTACIÓN DE THYMELEAF (INFO IMPORTANTE): Acá podemos ver como se hace un formulario trabajando con el objeto entero y no solo con atributos  http://acodigo.blogspot.com/2017/04/spring-mvc-validar-formularios.html
+                                                      http://acodigo.blogspot.com/2017/04/spring-mvc-validar-formularios.html
+        + INFO DE THYMELEAF: https://frontbackend.com/thymeleaf/working-with-forms-in-thymeleaf (VALIDACIONES CON THYMELEAF)
+                             th:field : se utiliza para vincular entradas con propiedades en el bean de respaldo de formulario,
+                             th:errors - atributo que contiene errores de validación de formulario,
+                             th:errorclass : clase CSS que se agregará a una entrada de formulario si un campo específico tiene errores de validación,
+                             th:object : un atributo que contiene un objeto de comando (objeto de bean de formulario principal) que es una representación de formulario en el lado del backend.
+        En proyecto cuando me salga un error 500(error interno) debuguear para solucionarlo.
+        En proyecto le saque del pom las modificaciones para el mail para que no me hagan pishing
         En proyecto si hay un libro con una relación por ejemplo de autor antes de eliminar el libro para que no elimine el autor, debo poner los autores y editoriales = a null para que no se rompa 
         En proyectos NO creamos métodos eliminar porque Spring ya nos tiene métodos precreados que eliminan por id
        IMPORTANTE: https://es.stackoverflow.com/questions/73955/cual-es-la-diferencia-entre-spring-jsf-jsp
@@ -459,7 +468,7 @@ public class Spring {
                   Recomendación generar la relación solo desde el lado de libro 
         Min 22 ERROR compañero
                Recomedación profe: Antes de crear un libro obligar al Usuario que cree editoriales y que cree Autores (profe)
-        Min 26 Acamus: Se habia planteado que cuando se muestre un libro nos muestre una lista desplegable de los autores, si no está la que yo quiero crearle encima uno nuevo, para esto deberiamos crear un botón que nos dirija a crear Autor y lo mismo con Editorial y una vez que lo crees vas a poder verlo en las opciones
+        Min 26 Acamus: Se habia planteado que cuando se muestre un libro nos muestre una lista desplegable de los autores, si no está la que yo quiero, crearle encima uno nuevo, para esto deberiamos crear un botón que nos dirija a crear Autor y lo mismo con Editorial y una vez que lo crees vas a poder verlo en las opciones
                Profe: Mostrarle las opciones y si no lo encuentra que lo cree con un botón para agregar un autor o editorial nuevo
         Min 29:30 Profe nos muestra lo que hizo: - Hace página de libros, de autores y de editoriales
         Min 30:30 - Muestra tabla de lista-libro

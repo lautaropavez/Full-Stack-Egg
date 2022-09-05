@@ -46,27 +46,33 @@ public class LibroController {
         List<Editorial> editoriales = servEditorial.buscaActivas();
         modelo.addAttribute("editoriales", editoriales);
         
-        return "form-libro";
+        return "nuevoLibro";
     }	
       
     @PostMapping("/registrar") 
-    public String crear(ModelMap modelo,@RequestParam MultipartFile archivo,@RequestParam String titulo,@RequestParam Integer anio, @RequestParam String autor,@RequestParam String editorial){ 
+    public String crear(ModelMap modelo,@RequestParam MultipartFile archivo,@RequestParam String titulo,@RequestParam Integer anio, @RequestParam String idAutor,@RequestParam String idEditorial){ 
         try{
-            servLibro.crearLibro(archivo,titulo,anio,autor,editorial);
-            modelo.put("exito","¡Registro exitoso!"); 
-            return "form-libro"; //retornamos la misma página y ya pusimos un div con los mensajes de exito cuando ingrese un usuario
-//        //Forma profe Videos MVC 2
-//        //modelo.put("titulo","¡¡Bienvenido a Libreria El Ceibo!!");
-//        //modelo.put("descripcion","Tu usuario fue registrado de manera satisfactoria");
-//        //return "exito.html"; //Si esta todo ok retorna la pag principal, en vez de el registro de nuevo
+           servLibro.crearLibro(archivo,titulo,anio,idAutor,idEditorial);
+           modelo.put("exito","¡Registro exitoso!");    
+           //return "redirect:/libro/lista";
+           List<Autor> autores = servAutor.buscaActivos();
+           modelo.addAttribute("autores", autores);
+        
+           List<Editorial> editoriales = servEditorial.buscaActivas();
+           modelo.addAttribute("editoriales", editoriales);
+           return "nuevoLibro"; 
+          //Forma profe Videos MVC 2
+          //modelo.put("titulo","¡¡Bienvenido a Libreria El Ceibo!!");
+          //modelo.put("descripcion","Tu usuario fue registrado de manera satisfactoria");
+          //return "exito.html"; //Si esta todo ok retorna la pag principal, en vez de el registro de nuevo
         }catch(MiExcepcion ex){
             modelo.put("error", ex.getMessage());
             //Logger.getLogger(LibroController.class.getName()).log(Level.SEVERE, null, ex); //Con esto nos tira el error por consola, lo podemos sacar
             modelo.put("titulo",titulo);
             modelo.put("anio",anio);
-            modelo.put("autor",autor);
-            modelo.put("editorial",editorial);
-            return "form-libro"; //Si ocurre un error retornamos la misma página
+            modelo.put("autor",idAutor);
+            modelo.put("editorial",idEditorial);
+            return "nuevoLibro"; 
         }  
     }
 
@@ -111,7 +117,7 @@ public class LibroController {
             modelo.put("nombreAut",nombreAut);
             modelo.put("nombreEdit",nombreEdit);
             return "redirect:/libro/lista"; 
-            //return "form-libro-modif1";
+            //return "form-libro-modif";
             //return "redirect:/libro/modificar/{id}";  
         }
     }
