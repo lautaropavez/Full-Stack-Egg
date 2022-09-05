@@ -24,33 +24,25 @@
         <div class="container-fluid m-3">
             <div class="card mt-2">
                 <div class="card-header d-flex bg-dark text-white-50">
-                  <h1>Lista de Libros Registrados</h1>
+                  <h1>Lista de Editoriales Registradas</h1>
                 </div>
                 <div class="card-body">
-                    <form class="row g-3" th:action="@{/libro/lista}" method="get">
+                    <form class="row g-3" th:action="@{/editorial/lista}" method="get">
                         <div class="col">
                             <input type="text" style="width: 100%;" name="buscar" placeholder="Buscar...">
                         </div>
                         <div class="col-3">
                           <!-- se pueden ocultar botones segun el rol con sec:authorize="hasRole('ADMIN')" -->
                           <button type="submit" class="btn btn-dark mb-3 p-2"><i class="fas fa-search"></i> Buscar</button>
-                          <a th:href="@{/libro/registro}" class="btn btn-primary mb-3 p-2">NUEVO LIBRO</a>
-                          <a th:href="@{/libro/lista/?format=pdf}" class="btn btn-info mb-3 p-2"><i class="far fa-file-alt"></i> PDF</a>
+                          <a th:href="@{/editorial/registroEditorial}" class="btn btn-primary mb-3 p-2">NUEVA EDITORIAL</a>
+                          <a th:href="@{/editorial/lista/?format=pdf}" class="btn btn-info mb-3 p-2"><i class="far fa-file-alt"></i> PDF</a>
                         </div>
                     </form>
                     <table class="table table-dark table-striped">
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Titulo</th>
-                                <th>Portada</th>
-                                <th>Autor</th>
-                                <th>Editorial</th>
-                                <th>Ejemplares</th>
-                                <th>Prestados</th>
-                                <th>Disponibles</th>
-                                <th>ISBN</th>
-                                <th>Año</th>
+                                <th>Nombre</th>
                                 <!-- con sec:authorize="hasRole('ADMIN')" podria ocultar columnas segun el rol -->
                                 <th>Estado</th>
                                 <th>Administracion</th>
@@ -58,33 +50,23 @@
                         </thead>
                         <tbody>
                           <!-- Si quiero que solo se muestren segun el tributo alta debo agregar la linea  th:if="${p.alta} == TRUE" -->
-                            <tr  th:each="libro : ${libros}">
-                                <td th:text="${libro.id}"></td>
-                                <td th:text="${libro.titulo}"></td>
-                                <!-- Forma con RequestParam-->
-                           <!-- <td> <img th:if="${libro.portada} != null" class="bd-placeholder-img card-img-top" th:src="${'/portada/libro?id=' + libro.id}" style="width: auto; height: 60px;"> </td> -->
+                            <tr  th:each="editorial : ${editoriales}">
+                                <td th:text="${editorial.id}"></td>
+                                <td th:text="${editorial.nombre}"></td>
                                 <!-- Forma con PathVariable-->
-                                <td> <img th:if="${libro.portada} != null" class="bd-placeholder-img card-img-top" th:src="${'/portada/libro/' + libro.id}" style="width: auto; height: 70px;"> </td> 
-                                <td th:text="${libro.autor} == null ? 'sin registro' : ${libro.autor.nombre}"></td>
-                                <td th:text="${libro.editorial} == null ? 'sin registro' : ${libro.editorial.nombre}"></td> 
-                                <td th:text="${libro.nroejemplares}"></td>
-                                <td th:text="${libro.ejemplaresPrestados}"></td>
-                                <td th:text="${libro.ejemplaresRestantes}"></td>
-                                <td th:text="${libro.isbn}"></td> 
-                                <td th:text="${libro.anio}"></td>
                                 <td>
-                                  <span th:if="${libro.alta}" style="color: chartreuse;"><p>Activo</p></span>
-                                  <span th:unless="${libro.alta}" style="color:rgb(231, 67, 17)"><p>Baja</p></span>
+                                  <span th:if="${editorial.alta}" style="color: chartreuse;"><p>Activo</p></span>
+                                  <span th:unless="${editorial.alta}" style="color:rgb(231, 67, 17)"><p>Baja</p></span>
                                 </td>
                                 <td>
-                                  <a class="mx-2" th:href="@{/libro/modificar/__${libro.id}__}"><i class="fas fa-edit" style="color: cornflowerblue;"></i></a>
-                                  <a th:if="${libro.alta} == true" class="mx-2" th:href="@{/libro/baja/__${libro.id}__}"><i class="fas fa-arrow-circle-down" style="color:rgb(231, 67, 17)"></i></a> 
-                                  <a th:if="${libro.alta} == false" class="mx-2" th:href="@{/libro/alta/__${libro.id}__}"><i class="fas fa-arrow-circle-up" style="color:rgb(57, 204, 37)"></i></a> 
-                                  <a th:href="@{/libro/eliminar/__${libro.id}__}"  class="mx-2" title="Eliminar"><i class="fas fa-trash-alt" style="color: cornflowerblue;"></i></a>
+                                  <a class="mx-2" th:href="@{/editorial/modificar/__${editorial.id}__}"><i class="fas fa-edit" style="color: cornflowerblue;"></i></a>
+                                  <a th:if="${editorial.alta} == true" class="mx-2" th:href="@{/editorial/baja/__${editorial.id}__}"><i class="fas fa-arrow-circle-down" style="color:rgb(231, 67, 17)"></i></a> 
+                                  <a th:if="${editorial.alta} == false" class="mx-2" th:href="@{/editorial/alta/__${editorial.id}__}"><i class="fas fa-arrow-circle-up" style="color:rgb(57, 204, 37)"></i></a> 
+                                  <a th:href="@{/editorial/eliminar/__${editorial.id}__}"  class="mx-2" title="Eliminar"><i class="fas fa-trash-alt" style="color: cornflowerblue;"></i></a>
                                 </td>
                             </tr>
                         </tbody>
-                        <p th:if="${libros.isEmpty}">No hay libros para mostrar</p>
+                        <p th:if="${editoriales.isEmpty}">No hay editoriales para mostrar</p>
                     </table>
                 </div>
             </div>

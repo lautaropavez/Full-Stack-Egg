@@ -98,7 +98,7 @@ public class LibroController {
     @GetMapping("/modificar/{id}") //localhost:8080/libro/modificar
     public String modificar(@PathVariable String id,ModelMap modelo){
         modelo.put("libro",servLibro.buscarPorId(id));
-        return "form-libro-modif"; // ya esta creado el form en el archivo form-perro.html (de la clase)
+        return "modif-Libro"; // ya esta creado el form en el archivo form-perro.html (de la clase)
     }
     
     @PostMapping("/modificar/{id}") //,@RequestParam MultipartFile archivo
@@ -116,8 +116,8 @@ public class LibroController {
             modelo.put("anio",anio);
             modelo.put("nombreAut",nombreAut);
             modelo.put("nombreEdit",nombreEdit);
-            return "redirect:/libro/lista"; 
-            //return "form-libro-modif";
+            //return "redirect:/libro/lista"; 
+            return "modif-Libro";
             //return "redirect:/libro/modificar/{id}";  
         }
     }

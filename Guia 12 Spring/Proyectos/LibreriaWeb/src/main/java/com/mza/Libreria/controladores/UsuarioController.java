@@ -35,7 +35,7 @@ public class UsuarioController {
     @GetMapping("/modificar/{id}") //PATHVARIABLE
     public String modificar(@PathVariable String id,ModelMap modelo){ //Acá recibo un id que viene por URL --> /modificar/${id} y ese id es el que uso para buscar el usuario y mostrarlo, lo enviamos tambien por url 
         modelo.put("usuario",servUsuario.buscarPorId(id));
-        return "form-usuario-modif"; 
+        return "modif-Usuario"; 
     }
     
     @PostMapping("/modificar/{id}") 
@@ -48,7 +48,7 @@ public class UsuarioController {
             
         }catch(Exception e){
             modelo.put("error","Falto algún dato"); 
-            return "form-usuario-modif"; 
+            return "modif-Usuario"; 
         }
     }
     

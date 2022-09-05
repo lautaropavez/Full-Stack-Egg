@@ -241,7 +241,6 @@ public class ServiceLibro {
         if (idEditorial == null || idAutor.trim().isEmpty()) {
             throw new MiExcepcion("Debe indicar la Editorial");
         }
-        
         Libro l = libroRepo.buscarPorTitulo(titulo);
         if(l != null && l.getAutor().getId().equals(idAutor)){
             throw new MiExcepcion(" Este Libro ya existe");
