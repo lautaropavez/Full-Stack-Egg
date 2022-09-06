@@ -2,6 +2,7 @@ package com.mza.Libreria.controladores;
 import com.mza.Libreria.entidades.Autor;
 import com.mza.Libreria.excepciones.MiExcepcion;
 import com.mza.Libreria.servicios.ServiceAutor;
+import com.mza.Libreria.servicios.ServiceLibro;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class AutorController {
     @Autowired
     private ServiceAutor servAutor;
     
+    @Autowired
+    private ServiceLibro servLibro;
+    
     @GetMapping("/registroAutor")
     public String formulario() {
         return "nuevoAutor";
@@ -32,9 +36,9 @@ public class AutorController {
     public String crear(ModelMap modelo, @RequestParam String nombreAutor) {
         try {
             servAutor.crearAutor(nombreAutor);
-            //modelo.put("exito", "¡Has creado un nuevo Autor!"); Al poner el redirect no se carga
-            return "redirect:/libro/registro";
-          //return "nuevoLibro";
+            modelo.put("exito", "¡Has creado un nuevo Autor!"); //Al poner el redirect no se carga
+            //return "redirect:/libro/registro";
+            return "nuevoLibro";
         } catch (MiExcepcion ex) {
             modelo.put("error", ex.getMessage());
             //Logger.getLogger(LibroController.class.getName()).log(Level.SEVERE, null, ex); //Con esto nos tira el error por consola, lo podemos sacar
@@ -49,64 +53,39 @@ public class AutorController {
         modelo.addAttribute("autores",autoresLista); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
          return "list-autor"; // 
     }
+     
     
-    //CREAR TRY AND CATCH
-    //Clase THYMELEAF min 01:02:00
-    @GetMapping("/modificar/{id}") 
-    public String modificar(@PathVariable String id,ModelMap modelo){
-        modelo.put("autor",servAutor.buscarporId(id));
-        return "modif-Autor"; 
+    @GetMapping("/alta/{id}") 
+    public String alta(@PathVariable String id,ModelMap modelo){
+        try {
+            servLibro.altaxAutor(id);
+            return "redirect:/autor/lista";  
+        } catch (MiExcepcion ex) {
+            modelo.put("error", ex.getMessage()); 
+            return "redirect:/autor/lista"; 
+        }
     }
     
-//    @PostMapping("/modificar/{id}") 
-//    public String modificar(ModelMap modelo,@PathVariable String id, @RequestParam String nombre)throws Exception{
-//        try{
-//            
-////            servAutor.modificarAutor(id,nombre);
-//            //modelo.put("exito","Modificación exitosa"); 
-//            return "list-libro"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
-//        }catch(MiExcepcion ex){
-//            modelo.put("error",ex.getMessage());
-//            modelo.put("id",id);
-//            modelo.put("nombre",nombre);
-//            //return "redirect:/autor/lista"; 
-//            return "modif-Autor";
-//            //return "redirect:/autor/modificar/{id}";  
-//        }
-//    }
-    
-    //Alta y Baja Clase THYMELEAF Tarde min 01:28:00
-//    @GetMapping("/baja/{id}")
-//    public String baja(@PathVariable String id,ModelMap modelo){
-//        try {
-//            servAutor.baja(id);
-//            return "redirect:/libro/lista";  
-//        } catch (Exception ex) {
-//            modelo.put("error", ex.getMessage());
-//            return "redirect:/libro/lista"; 
-//        }
-//    }
-//    
-//    @GetMapping("/alta/{id}") 
-//    public String alta(@PathVariable String id,ModelMap modelo){
-//        try {
-//            servAutor.alta(id);
-//            return "redirect:/libro/lista";  
-//        } catch (Exception ex) {
-//            modelo.put("error", ex.getMessage()); 
-//            return "redirect:/libro/lista"; 
-//        }
-//    }
-//    
-//    @GetMapping("/eliminar/{id}") //PATHVARIABLE
-//    public String eliminar(@PathVariable String id,ModelMap modelo) throws Exception{
-//        try {
-//            servAutor.eliminarLibro(id);
-//            return "redirect:/libro/lista";  
-//        }catch(MiExcepcion ex) {
-//            modelo.put("error", ex.getMessage()); //La profe no lo puso pero fijarme si anda
-//            return "redirect:/libro/lista"; 
-//        }
-//    }   
+    @GetMapping("/baja/{id}")
+    public String baja(@PathVariable String id,ModelMap modelo){
+        try {
+            servLibro.bajaxAutor(id);
+            return "redirect:/autor/lista";  
+        } catch (MiExcepcion ex) {
+            modelo.put("error", ex.getMessage());
+            return "redirect:/autor/lista"; 
+        }
+    }
+
+    @GetMapping("/eliminar/{id}") //PATHVARIABLE
+    public String eliminar(@PathVariable String id,ModelMap modelo) throws Exception{
+        try {
+            servLibro.eliminarAutor(id);
+            return "redirect:/autor/lista";  
+        }catch(MiExcepcion ex) {
+            modelo.put("error", ex.getMessage()); //La profe no lo puso pero fijarme si anda
+            return "redirect:/autor/lista"; 
+        }
+    }   
     
 }

@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Lautaro Pavez
  */
-//Todo ok, falta ver tema de baja y alta
 //No tengo metodo modificar porque se modifica solo en el libro
 
 @Service
@@ -53,26 +52,16 @@ public class ServiceEditorial {
         return editorialRepo.buscaActivas(); 
     }
     
-    @Transactional 
-    public void eliminarEditorial(String id) throws Exception {
-        Editorial e = editorialRepo.buscarPorId(id);
-        if (e != null) {
-            throw new Exception("No se encontró a esta Editorial en la base de datos");
-        } else {
-            editorialRepo.deleteById(id);
-        }
-    }
-    
     public void validacion(String nombreEdit) throws MiExcepcion{
         if (nombreEdit == null || nombreEdit.trim().isEmpty()){
             throw new MiExcepcion("Debe indicar el nombre de la Editorial");
         }
         
-        Editorial editorial = editorialRepo.buscarPorNombre(nombreEdit);
-        if(editorial.getNombre().equals(nombreEdit.toUpperCase())){
+        Editorial editorial = editorialRepo.buscarPorNombre(nombreEdit.toUpperCase());
+        if(editorial != null){
             throw new MiExcepcion("La editorial ya existe");
         }
-    }
+    } 
     
 //    ---------------------------------- NO USADOS --------------------------------
     

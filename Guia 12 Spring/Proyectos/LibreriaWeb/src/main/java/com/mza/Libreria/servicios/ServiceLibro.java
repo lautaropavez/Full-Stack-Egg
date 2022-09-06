@@ -5,6 +5,8 @@ import com.mza.Libreria.entidades.Editorial;
 import com.mza.Libreria.entidades.Libro;
 import com.mza.Libreria.entidades.Portada;
 import com.mza.Libreria.excepciones.MiExcepcion;
+import com.mza.Libreria.repositorios.AutorRepository;
+import com.mza.Libreria.repositorios.EditorialRepository;
 import com.mza.Libreria.repositorios.LibroRepository;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +28,12 @@ public class ServiceLibro {
     @Autowired
     private LibroRepository libroRepo;
 
+    @Autowired
+    private AutorRepository autorRepo;
+
+    @Autowired
+    private EditorialRepository editorialRepo;
+    
     @Autowired
     private ServiceAutor sAutor;
 
@@ -188,6 +196,16 @@ public class ServiceLibro {
         return libroRepo.buscaTodoActivos(buscar);
     }
 
+    @Transactional(readOnly = true) 
+    public List<Libro> listaporEditorial(String nombre) {
+        return libroRepo.listarPorEditorial(nombre);
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Libro> listaporAutor(String nombre) {
+        return libroRepo.listarPorAutor(nombre);
+    }
+    
     @Transactional
     public Libro alta(String id) throws MiExcepcion {
         //Libro entidad = libroRepo.getOne(id);
@@ -204,6 +222,50 @@ public class ServiceLibro {
         return libroRepo.save(entidad);
     }
     
+    @Transactional //Damos de alta al autor y todos sus libros
+    public Autor altaxAutor(String idAutor) throws MiExcepcion {
+        Autor autor = sAutor.buscarporId(idAutor);
+        List<Libro> librosxAutor = listaporAutor(autor.getNombre());
+        for (Libro libro : librosxAutor) {
+            alta(libro.getId());
+        }
+        autor.setAlta(true);
+        return autorRepo.save(autor);
+    }
+    
+    @Transactional //Damos de baja al autor y todos sus libros
+    public Autor bajaxAutor(String idAutor) throws MiExcepcion {
+        Autor autor = sAutor.buscarporId(idAutor);
+        List<Libro> librosxAutor = listaporAutor(autor.getNombre());
+        for (Libro libro : librosxAutor) {
+            baja(libro.getId());
+        }
+        autor.setAlta(false);
+        return autorRepo.save(autor);
+    }
+    
+    @Transactional //Damos de alta al autor todos sus libros
+    public Editorial altaxEditorial(String idAutor) throws MiExcepcion {
+        Editorial editorial = sEditorial.buscarporId(idAutor);
+        List<Libro> librosxEdit = listaporAutor(editorial.getNombre());
+        for (Libro libro : librosxEdit) {
+            alta(libro.getId());
+        }
+        editorial.setAlta(true);
+        return editorialRepo.save(editorial);
+    }
+    
+    @Transactional //Damos de baja todos los libros con dicho autor
+    public Editorial bajaxEditorial(String idAutor) throws MiExcepcion {
+        Editorial editorial = sEditorial.buscarporId(idAutor);
+        List<Libro> librosxEdit = listaporEditorial(editorial.getNombre());
+        for (Libro libro : librosxEdit) {
+            baja(libro.getId());
+        }
+        editorial.setAlta(false);
+        return editorialRepo.save(editorial);
+    }
+    
     @Transactional // Clase servicio tarde min 37
     public void eliminarLibro(String id) throws Exception {
         Libro l = libroRepo.buscarPorId(id);
@@ -215,17 +277,30 @@ public class ServiceLibro {
             throw new Exception("No se encontró a este libro en la base de datos");
         }
     }
-
-    @Transactional
-    public void eliminarLibro(Libro libro) throws Exception {
-        Libro l = libroRepo.buscarPorId(libro.getId());
-        if (l != null) {
-            throw new Exception("No se encontró a este libro en la base de datos");
+    
+    @Transactional 
+    public void eliminarAutor(String id) throws Exception {
+        Autor a = autorRepo.buscarPorId(id);
+        if (a != null) {
+            autorRepo.deleteById(id);
         } else {
-            libroRepo.deleteById(libro.getId());
+            throw new Exception("No se encontró a este Autor en la base de datos");
         }
-    }
-
+    } 
+    @Transactional 
+    public void eliminarEditorial(String id) throws Exception {
+        Editorial e = editorialRepo.buscarPorId(id);
+        List<Libro> librosxEdit = listaporEditorial(e.getNombre());
+        if (librosxEdit != null) {
+            throw new Exception("No se puede eliminar esta Editorial porque tiene libros a su nombre, primero deberas eliminar los libros");
+        }
+        if (e != null) {
+            editorialRepo.deleteById(id);
+        } else {
+            throw new Exception("No se encontró a esta Editorial en la base de datos");
+        }
+    }    
+    
     //Servicios Spring - Tarde: Min 11:30 muestra método de validación que tiene ella en su clase
     public void validacion(String titulo, Integer anio, String idAutor, String idEditorial) throws MiExcepcion {
         
@@ -247,6 +322,16 @@ public class ServiceLibro {
         }    
     }
 
+    //No utilizado
+    @Transactional
+    public void eliminarLibro(Libro libro) throws Exception {
+        Libro l = libroRepo.buscarPorId(libro.getId());
+        if (l != null) {
+            libroRepo.deleteById(libro.getId());
+        } else {
+            throw new Exception("No se encontró a este libro en la base de datos");
+        }
+    }
 //    //Otra manera mandando el objeto y retornandolo
 //    @Transactional
 //    public Libro modificarLibro(Libro editado) throws MiExcepcion{

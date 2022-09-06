@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mza.Libreria.excepciones.MiExcepcion;
 import com.mza.Libreria.servicios.ServiceEditorial;
+import com.mza.Libreria.servicios.ServiceLibro;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -24,24 +25,27 @@ public class EditorialController {
     @Autowired
     private ServiceEditorial servEditorial; 
     
+    @Autowired
+    private ServiceLibro servLibro; 
+    
     @GetMapping("/registroEditorial")
     public String formulario() {
         return "nuevaEditorial";
     }
 
     @PostMapping("/registrarEditorial") 
-    public String crear(ModelMap modelo,@RequestParam String nombreEditorial){ 
+    public String crear(ModelMap modelo,@RequestParam String nombre){ 
         try{
-            servEditorial.crearEditorial(nombreEditorial);
-            //modelo.put("exito","¡Has creado una nueva Editorial!"); 
-            return "redirect:/libro/registro";
+            servEditorial.crearEditorial(nombre);
+            modelo.put("exito","¡Has creado una nueva Editorial!"); 
+            //return "redirect:/libro/registro";
+            return "nuevaEditorial";
         }catch(MiExcepcion ex){
             modelo.put("error", ex.getMessage());
-            modelo.put("nombreEditorial",nombreEditorial);
+            modelo.put("nombre",nombre);
             return "nuevaEditorial"; 
         }  
     }
-    
      
     @GetMapping("/lista")
     public String lista(ModelMap modelo){
@@ -50,63 +54,37 @@ public class EditorialController {
          return "list-editorial"; // 
     }
     
-    //CREAR TRY AND CATCH
-    //Clase THYMELEAF min 01:02:00
-    @GetMapping("/modificar/{id}") 
-    public String modificar(@PathVariable String id,ModelMap modelo){
-        modelo.put("editorial",servEditorial.buscarporId(id));
-        return "modif-Editorial"; 
+    @GetMapping("/alta/{id}") 
+    public String alta(@PathVariable String id,ModelMap modelo){
+        try {
+            servLibro.altaxEditorial(id);
+            return "redirect:/editorial/lista";  
+        } catch (Exception ex) {
+            modelo.put("error", ex.getMessage()); 
+            return "redirect:/editorial/lista"; 
+        }
     }
     
-//    @PostMapping("/modificar/{id}")
-//    public String modificar(ModelMap modelo,@PathVariable String id, @RequestParam String nombre)throws Exception{
-//        try{
-////            servEditorial.modificarEditorial(id,nombre);
-//            //modelo.put("exito","Modificación exitosa"); 
-//            //return "list-editorial"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
-//            return "list-editorial";
-//        }catch(MiExcepcion ex){
-//            modelo.put("error",ex.getMessage());
-//            modelo.put("id",id);
-//            modelo.put("nombre",nombre);
-//            //return "redirect:/libro/lista"; 
-//            return "modif-Editorial";
-//            //return "redirect:/editorial/modificar/{id}";  
-//        }
-//    }
+    @GetMapping("/baja/{id}")
+    public String baja(@PathVariable String id,ModelMap modelo){
+        try {
+            servLibro.bajaxEditorial(id);
+            return "redirect:/editorial/lista";  
+        } catch (Exception ex) {
+            modelo.put("error", ex.getMessage());
+            return "redirect:/editorial/lista"; 
+        }
+    }
     
-    //Alta y Baja Clase THYMELEAF Tarde min 01:28:00
-//    @GetMapping("/baja/{id}")
-//    public String baja(@PathVariable String id,ModelMap modelo){
-//        try {
-//            servAutor.baja(id);
-//            return "redirect:/libro/lista";  
-//        } catch (Exception ex) {
-//            modelo.put("error", ex.getMessage());
-//            return "redirect:/libro/lista"; 
-//        }
-//    }
-//    
-//    @GetMapping("/alta/{id}") 
-//    public String alta(@PathVariable String id,ModelMap modelo){
-//        try {
-//            servAutor.alta(id);
-//            return "redirect:/libro/lista";  
-//        } catch (Exception ex) {
-//            modelo.put("error", ex.getMessage()); 
-//            return "redirect:/libro/lista"; 
-//        }
-//    }
-//    
-//    @GetMapping("/eliminar/{id}") //PATHVARIABLE
-//    public String eliminar(@PathVariable String id,ModelMap modelo) throws Exception{
-//        try {
-//            servAutor.eliminarLibro(id);
-//            return "redirect:/libro/lista";  
-//        }catch(MiExcepcion ex) {
-//            modelo.put("error", ex.getMessage()); //La profe no lo puso pero fijarme si anda
-//            return "redirect:/libro/lista"; 
-//        }
-//    }   
+    @GetMapping("/eliminar/{id}") //PATHVARIABLE
+    public String eliminar(@PathVariable String id,ModelMap modelo) throws Exception{
+        try {
+            servLibro.eliminarEditorial(id);
+            return "redirect:/editorial/lista";  
+        }catch(MiExcepcion ex) {
+            modelo.put("error", ex.getMessage()); 
+            return "redirect:/editorial/lista"; 
+        }
+    }   
     
 }

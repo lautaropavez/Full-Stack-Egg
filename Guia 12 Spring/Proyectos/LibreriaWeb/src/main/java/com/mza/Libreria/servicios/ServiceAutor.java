@@ -13,15 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Lautaro Pavez
  */
-//Todo ok, falta ver tema de baja y alta, chequeado tambien con clase de acamus.
 //No tengo metodo modificar porque se modifica solo en el libro
-
 @Service
 public class ServiceAutor {
 
     @Autowired
     private AutorRepository autorRepo;
-    
+        
     @Transactional
     public void crearAutor(String nombre) throws MiExcepcion {
         validacion(nombre);
@@ -54,23 +52,13 @@ public class ServiceAutor {
         return autorRepo.buscaActivos(); 
     }
     
-    @Transactional // Clase servicio tarde min 37
-    public void eliminarAutor(String id) throws Exception {
-        Autor a = autorRepo.buscarPorId(id);
-        if (a != null) {
-            throw new Exception("No se encontró a este Autor en la base de datos");
-        } else {
-            autorRepo.deleteById(id);
-        }
-    } 
-    
     public void validacion(String nombreAut) throws MiExcepcion {
         if (nombreAut == null || nombreAut.trim().isEmpty()) {
             throw new MiExcepcion("Debe indicar el nombre del Autor");
         }
         
-        Autor autor = autorRepo.buscarPorNombre(nombreAut);
-        if(autor.getNombre().equals(nombreAut.toUpperCase())){
+        Autor autor = autorRepo.buscarPorNombre(nombreAut.toUpperCase());
+        if(autor != null){
             throw new MiExcepcion("El autor ya existe");
         }
     }
@@ -92,16 +80,5 @@ public class ServiceAutor {
     @Transactional(readOnly = true)
     public List<Autor> listarPorAutor(String nombre) {
         return autorRepo.listarPorNombre(nombre);
-    }
-
-    //Nose si lo usaré
-    @Transactional
-    public void eliminarAutor(Autor libro) throws Exception {
-        Autor a = autorRepo.buscarPorId(libro.getId());
-        if (a != null) {
-            throw new Exception("No se encontró a este libro en la base de datos");
-        } else {
-            autorRepo.deleteById(libro.getId());
-        }
     }
 }
