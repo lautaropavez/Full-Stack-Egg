@@ -19,9 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author Lautaro Pavez
  */
-//Nota: Cuando creemos el libro vamos a tener que buscar si existen las editoriales, autores y mostrarlos (si quiere para elegir) sino, si no está que lo ingrese directamente 
-//      Dar de baja por autor y editorial desde el baja libro, que llame a un método de service autor dar de baja, autor busca si todos sus libros estan dados de baja se baja sino no,
-//      Tema editorial es distinto ahí podriamos darlo de alta aparte en su método en service editorial pero sin establecer relación, chequear bien esta idea
 @Service
 public class ServiceLibro {
 
@@ -101,6 +98,15 @@ public class ServiceLibro {
 
         Libro libro = libroRepo.buscarPorId(id);
         if (libro != null) {
+            if(archivo != null){
+                String idPortada = null;
+                //if (libro.getPortada().getId() != null || (!libro.getPortada().getId().isEmpty())) {
+                if (libro.getPortada().getId() != null){
+                    idPortada = libro.getPortada().getId();
+                }
+                Portada portada = sPortada.actualizar(idPortada, archivo);
+                libro.setPortada(portada);
+            }
             //Verifico que exista algun cambio entre los dos objetos
             if (libro.getTitulo().equalsIgnoreCase(titulo)
                     && libro.getAnio().equals(anio)
@@ -136,15 +142,7 @@ public class ServiceLibro {
                 }
                 libro.setEditorial(editorial);
             }
-            if(archivo != null){
-                String idPortada = null;
-                //if (libro.getPortada().getId() != null || (!libro.getPortada().getId().isEmpty())) {
-                if (libro.getPortada().getId() != null){
-                    idPortada = libro.getPortada().getId();
-                }
-                Portada portada = sPortada.actualizar(idPortada, archivo);
-                libro.setPortada(portada);
-            }
+            
             libroRepo.save(libro);
         } else {
             throw new MiExcepcion("No se encontró a este libro en la base de datos"); //Ver si lo dejo o lo pongo en el controlador al throw

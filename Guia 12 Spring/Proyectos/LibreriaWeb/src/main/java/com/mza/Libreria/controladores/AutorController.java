@@ -38,7 +38,7 @@ public class AutorController {
             servAutor.crearAutor(nombreAutor);
             modelo.put("exito", "¡Has creado un nuevo Autor!"); //Al poner el redirect no se carga
             //return "redirect:/libro/registro";
-            return "nuevoLibro";
+            return "nuevoAutor";
         } catch (MiExcepcion ex) {
             modelo.put("error", ex.getMessage());
             //Logger.getLogger(LibroController.class.getName()).log(Level.SEVERE, null, ex); //Con esto nos tira el error por consola, lo podemos sacar
