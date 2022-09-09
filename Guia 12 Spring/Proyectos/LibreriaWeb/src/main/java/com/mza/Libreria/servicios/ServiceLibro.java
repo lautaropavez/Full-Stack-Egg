@@ -98,22 +98,17 @@ public class ServiceLibro {
 
         Libro libro = libroRepo.buscarPorId(id);
         if (libro != null) {
-            if(archivo != null){
+            if(archivo != null){ // Si el archivo no es nulo, osea si existe
                 String idPortada = null;
-                //if (libro.getPortada().getId() != null || (!libro.getPortada().getId().isEmpty())) {
-                if (libro.getPortada().getId() != null){
+                if (libro.getPortada() != null){ // Si existe el id
+                    
                     idPortada = libro.getPortada().getId();
-                }
-                Portada portada = sPortada.actualizar(idPortada, archivo);
-                libro.setPortada(portada);
-            }
-            //Verifico que exista algun cambio entre los dos objetos
-            if (libro.getTitulo().equalsIgnoreCase(titulo)
-                    && libro.getAnio().equals(anio)
-                    && libro.getAutor().getNombre().equalsIgnoreCase(newNombreAutor)
-                    && libro.getEditorial().getNombre().equalsIgnoreCase(newNombreEditorial)) {
-
-                throw new MiExcepcion("No existen cambios para editar"); //Ver si puedo sacar el throw y poner un sout 
+                    Portada portada = sPortada.actualizar(idPortada, archivo);
+                    libro.setPortada(portada);
+                }else{
+                    Portada portada = sPortada.guardar(archivo);
+                    libro.setPortada(portada);
+                }    
             }
             if (!libro.getTitulo().equalsIgnoreCase(titulo)) {
                 libro.setTitulo(titulo.toUpperCase());
@@ -145,7 +140,7 @@ public class ServiceLibro {
             
             libroRepo.save(libro);
         } else {
-            throw new MiExcepcion("No se encontró a este libro en la base de datos"); //Ver si lo dejo o lo pongo en el controlador al throw
+            throw new MiExcepcion("No se encontró a este libro en la base de datos"); 
         }
     }
     

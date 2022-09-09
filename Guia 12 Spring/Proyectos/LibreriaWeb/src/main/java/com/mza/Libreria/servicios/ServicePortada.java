@@ -40,6 +40,7 @@ public class ServicePortada {
     
     @Transactional
     public Portada actualizar(String idPortada,MultipartFile archivo)throws MiExcepcion{ 
+        
         if (archivo != null && !archivo.isEmpty()) {
             try {
                 Portada portada = new Portada();
@@ -59,6 +60,6 @@ public class ServicePortada {
                 System.err.println(e.getMessage());
             }
         }
-    return null;
+        return null;
     }
 }

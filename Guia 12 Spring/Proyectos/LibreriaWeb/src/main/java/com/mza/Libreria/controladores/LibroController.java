@@ -78,11 +78,11 @@ public class LibroController {
 
     
     //Clase THYMELEAF min 01:03:00
-    @GetMapping("/lista") //localhost:8080/libro/lista
+    @GetMapping("/lista")
     public String lista(ModelMap modelo){
         List<Libro> librosLista = servLibro.listarTodos();
         modelo.addAttribute("libros",librosLista); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
-         return "list-libro"; // 
+         return "list-libro"; 
     }
         
     //IN PROCESS
@@ -90,24 +90,26 @@ public class LibroController {
     public String biblioteca(ModelMap modelo){
        // List<Libro> librosLista = servLibro.listarTodos();
       //  modelo.addAttribute("libros",librosLista); 
-       return "/fragments/nada"; // 
+       return "/fragments/nada"; 
     }
     
     //CREAR TRY AND CATCH
     //Clase THYMELEAF min 01:02:00
-    @GetMapping("/modificar/{id}") //localhost:8080/libro/modificar
+    @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id,ModelMap modelo){
         modelo.put("libro",servLibro.buscarPorId(id));
         return "modif-Libro"; // ya esta creado el form en el archivo form-perro.html (de la clase)
     }
     
-    @PostMapping("/modificar/{id}") //,@RequestParam MultipartFile archivo
-    public String modificar(ModelMap modelo,@PathVariable String id, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String nombreAut,@RequestParam String nombreEdit)throws Exception{
+    @PostMapping("/modificar/{id}")
+    public String modificar(ModelMap modelo,@RequestParam MultipartFile archivo,@PathVariable String id, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String nombreAut,@RequestParam String nombreEdit)throws Exception{
         try{
-            servLibro.modificarLibro(null,id,titulo,anio,nombreAut,nombreEdit);
+            servLibro.modificarLibro(archivo,id,titulo,anio,nombreAut,nombreEdit);
             //modelo.put("exito","Modificación exitosa"); 
             //return "list-libro"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
-            return "list-libro";
+//            return "modif-Libro";
+            return "redirect:/libro/lista"; 
+            //return "/libro/lista";
         }catch(MiExcepcion ex){
             modelo.put("error",ex.getMessage());
             modelo.put("id",id);
