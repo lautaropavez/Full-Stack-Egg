@@ -51,7 +51,10 @@
                                 <!-- Forma con RequestParam-->
                                 <!-- <td> <img th:if="${libro.portada} != null" class="bd-placeholder-img card-img-top" th:src="${'/portada/libro?id=' + libro.id}" style="width: auto; height: 60px;"> </td> -->
                                 <!-- Forma con PathVariable-->
-                                <td> <img th:if="${libro.portada} != null" class="bd-placeholder-img card-img-top" th:src="${'/portada/libro/' + libro.id}" style="width: auto; height: 70px;"> </td> 
+                                <td>
+                                    <!-- <img th:if="${libro.portada} == null" class="bd-placeholder-img card-img-top" th:src="${/img/noimage.jpg}"  style="width: auto; height: 70px;"> -->
+                                    <img th:if="${libro.portada} != null" class="bd-placeholder-img card-img-top" th:src="${'/portada/libro/' + libro.id}" style="width: auto; height: 70px;"> 
+                                </td> 
                                 <td th:text="${libro.autor} == null ? 'sin registro' : ${libro.autor.nombre}"></td>
                                 <td th:text="${libro.editorial} == null ? 'sin registro' : ${libro.editorial.nombre}"></td> 
                                 <td th:text="${libro.nroejemplares}"></td>

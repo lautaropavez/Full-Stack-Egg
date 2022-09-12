@@ -30,13 +30,13 @@ public class ServiceLibro {
 
     @Autowired
     private EditorialRepository editorialRepo;
-    
+
     @Autowired
     private ServiceAutor sAutor;
 
     @Autowired
     private ServiceEditorial sEditorial;
-    
+
     @Autowired
     private ServicePortada sPortada;
 
@@ -44,6 +44,11 @@ public class ServiceLibro {
     public void crearLibro(MultipartFile archivo, String titulo, Integer anio, String idAutor, String idEditorial) throws MiExcepcion {
 
         validacion(titulo, anio, idAutor, idEditorial);
+        //L
+        Libro l = libroRepo.buscarPorTitulo(titulo);
+        if (l != null && l.getAutor().getId().equals(idAutor)) {
+            throw new MiExcepcion(" Este Libro ya existe");
+        }
         
         Libro lib = new Libro();
         //Magia para obtener los ejemplares
@@ -57,58 +62,36 @@ public class ServiceLibro {
         lib.setEjemplaresPrestados(prestados);
         lib.setEjemplaresRestantes(ejemplares - prestados);
         lib.setIsbn((long) (int) (Math.random() * 999999 + 1));
-        
+
         Autor autor = sAutor.buscarporId(idAutor);
         lib.setAutor(autor);
-        
+
         Editorial editorial = sEditorial.buscarporId(idEditorial);
         lib.setEditorial(editorial);
         
-        //Lo busca, si existe, lo setea y sino existe, lo crea y lo setea, por lo que en los dos casos lo setea, asi que le sacamos el "else".(Hice lo mismo en modificar autor)
-//        Autor autor = sAutor.buscarPorNombre(nombreAut.toUpperCase());
-//        if (autor == null) { 
-//            sAutor.crearAutor(nombreAut);
-//            Autor newautor = sAutor.buscarPorNombre(nombreAut.toUpperCase());
-//            lib.setAutor(newautor);
-//            //Autor autornuevo = sAutor.buscarporNombre(nombreAut.toUpperCase());
-//            //Aib.setAutor(lib.getAutor());
-//            //Aib.setAutor(sAutor.buscarporId(lib.getAutor().getId()));
-//        }else{
-//            lib.setAutor(autor);
-//        }
-//        Editorial editorial = sEditorial.buscarporNombre(nombreEdit.toUpperCase());
-//        if (editorial == null) {
-//            sEditorial.crearEditorial(nombreEdit);
-//            Editorial neweditorial = sEditorial.buscarporNombre(nombreEdit.toUpperCase());
-//            lib.setEditorial(neweditorial);
-//        }else{
-//            lib.setEditorial(editorial);
-//        }    
         Portada portada = sPortada.guardar(archivo); //En el caso de que yo no mande un archivo adjunto, no hay problema pq está contemplado y el método guardar me va a devolver null entonces el usuario va a quedar sin foto.
         lib.setPortada(portada);
-        
+
         libroRepo.save(lib);        // Esto es igual al --> daolibro.guardarLibro(lib);
     }
 
     //Pasar los throws al controllator y ver si solo se puede editar todo desde el libro o hace falta llamar a los métodos de los otros servicios
-    @Transactional 
-    public void modificarLibro(MultipartFile archivo, String id, String titulo, Integer anio, String newNombreAutor, String newNombreEditorial) throws MiExcepcion {
+    @Transactional
+    public void modificarLibro(MultipartFile archivo, String id, String titulo, Integer anio, String idAutor, String idEditorial) throws MiExcepcion {
 
-        validacion(titulo, anio, newNombreAutor, newNombreEditorial);
+        validacion(titulo, anio, idAutor, idEditorial);
 
         Libro libro = libroRepo.buscarPorId(id);
         if (libro != null) {
-            if(archivo != null){ // Si el archivo no es nulo, osea si existe
-                String idPortada = null;
-                if (libro.getPortada() != null){ // Si existe el id
-                    
-                    idPortada = libro.getPortada().getId();
+            if (archivo != null) { // Si el archivo no es nulo, osea si existe
+                if (libro.getPortada() != null) { // Si existe el id
+                    String idPortada = libro.getPortada().getId();
                     Portada portada = sPortada.actualizar(idPortada, archivo);
                     libro.setPortada(portada);
-                }else{
+                } else {
                     Portada portada = sPortada.guardar(archivo);
                     libro.setPortada(portada);
-                }    
+                }
             }
             if (!libro.getTitulo().equalsIgnoreCase(titulo)) {
                 libro.setTitulo(titulo.toUpperCase());
@@ -116,34 +99,21 @@ public class ServiceLibro {
             if (!libro.getAnio().equals(anio)) {
                 libro.setAnio(anio);
             }
-            if (!libro.getAutor().getNombre().equalsIgnoreCase(newNombreAutor)) {
-                //libro.setAutor(sAutor.modificarAutor(newNombreAutor));
-                Autor autor = sAutor.buscarPorNombre(newNombreAutor.toUpperCase());
-                if (autor == null) { 
-                   sAutor.crearAutor(newNombreAutor);
-                   Autor newautor = sAutor.buscarPorNombre(newNombreAutor.toUpperCase());
-                   libro.setAutor(newautor);
-                }else{
-                    libro.setAutor(autor);
-                }
+            if (!libro.getAutor().getId().equals(idAutor)) { // Si los id son distintos, modifico el autor
+                Autor autor = sAutor.buscarporId(idAutor);
+                libro.setAutor(autor);
             }
-            if (!libro.getEditorial().getNombre().equalsIgnoreCase(newNombreEditorial)) {
-                //libro.setEditorial(sEditorial.modificarEditorial(newNombreEditorial));
-                Editorial editorial = sEditorial.buscarporNombre(newNombreEditorial.toUpperCase());
-                if (editorial == null) {
-                    sEditorial.crearEditorial(newNombreEditorial);
-                    Editorial neweditorial = sEditorial.buscarporNombre(newNombreEditorial.toUpperCase());
-                    libro.setEditorial(neweditorial);
-                }
+            if (!libro.getEditorial().getId().equals(idEditorial)) { // Si los id son distintos, modifico la editorial
+                Editorial editorial = sEditorial.buscarporId(idEditorial);
                 libro.setEditorial(editorial);
             }
-            
+
             libroRepo.save(libro);
         } else {
-            throw new MiExcepcion("No se encontró a este libro en la base de datos"); 
+            throw new MiExcepcion("No se encontró a este libro en la base de datos");
         }
     }
-    
+
     //2 Formas de buscar por Id
     @Transactional(readOnly = true)
     public Libro buscarPorId(String id) {
@@ -157,7 +127,7 @@ public class ServiceLibro {
     }
 
     @Transactional(readOnly = true)
-    public Libro findbyId(String id) throws MiExcepcion{
+    public Libro findbyId(String id) throws MiExcepcion {
         Libro l = libroRepo.buscarPorId(id);
         //Manera más corta si manejo la excepcion en controlador
         //return libroRepo.buscarPorId(id);
@@ -173,12 +143,12 @@ public class ServiceLibro {
     public List<Libro> listarTodos() {
         return libroRepo.findAll();
     }
-    
+
     @Transactional(readOnly = true) //Busca todos los libros que esten activos y tengan ejemplares > 0
     public List<Libro> listaActivos() {
         return libroRepo.listaActivos();
     }
-    
+
     @Transactional(readOnly = true) //Busca todo, la variable buscar nos va a buscar ya sea libros editoriales o autores
     public List<Libro> listaBuscada(String buscar) {
         return libroRepo.buscaTodo(buscar);
@@ -189,16 +159,16 @@ public class ServiceLibro {
         return libroRepo.buscaTodoActivos(buscar);
     }
 
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Libro> listaporEditorial(String nombre) {
         return libroRepo.listarPorEditorial(nombre);
     }
-    
+
     @Transactional(readOnly = true)
     public List<Libro> listaporAutor(String nombre) {
         return libroRepo.listarPorAutor(nombre);
     }
-    
+
     @Transactional
     public Libro alta(String id) throws MiExcepcion {
         //Libro entidad = libroRepo.getOne(id);
@@ -206,7 +176,7 @@ public class ServiceLibro {
         entidad.setAlta(true);
         return libroRepo.save(entidad);
     }
-    
+
     @Transactional // En Pograma v2 de profe fiorde les pone WebException.class en el rollback, investigar
     public Libro baja(String id) throws MiExcepcion {
         //Libro entidad = libroRepo.getOne(id); //Hacemos uso de getOne para traerlo por id
@@ -214,7 +184,7 @@ public class ServiceLibro {
         entidad.setAlta(false);
         return libroRepo.save(entidad);
     }
-    
+
     @Transactional //Damos de alta al autor y todos sus libros
     public Autor altaxAutor(String idAutor) throws MiExcepcion {
         Autor autor = sAutor.buscarporId(idAutor);
@@ -225,7 +195,7 @@ public class ServiceLibro {
         autor.setAlta(true);
         return autorRepo.save(autor);
     }
-    
+
     @Transactional //Damos de baja al autor y todos sus libros
     public Autor bajaxAutor(String idAutor) throws MiExcepcion {
         Autor autor = sAutor.buscarporId(idAutor);
@@ -236,7 +206,7 @@ public class ServiceLibro {
         autor.setAlta(false);
         return autorRepo.save(autor);
     }
-    
+
     @Transactional //Damos de alta al autor todos sus libros
     public Editorial altaxEditorial(String idAutor) throws MiExcepcion {
         Editorial editorial = sEditorial.buscarporId(idAutor);
@@ -247,7 +217,7 @@ public class ServiceLibro {
         editorial.setAlta(true);
         return editorialRepo.save(editorial);
     }
-    
+
     @Transactional //Damos de baja todos los libros con dicho autor
     public Editorial bajaxEditorial(String idAutor) throws MiExcepcion {
         Editorial editorial = sEditorial.buscarporId(idAutor);
@@ -258,20 +228,20 @@ public class ServiceLibro {
         editorial.setAlta(false);
         return editorialRepo.save(editorial);
     }
-    
+
     @Transactional // Clase servicio tarde min 37
     public void eliminarLibro(String id) throws Exception {
         Libro l = libroRepo.buscarPorId(id);
         if (l != null) {
             l.setAutor(null);
             l.setEditorial(null);
-            libroRepo.deleteById(id); 
+            libroRepo.deleteById(id);
         } else {
             throw new Exception("No se encontró a este libro en la base de datos");
         }
     }
-    
-    @Transactional 
+
+    @Transactional
     public void eliminarAutor(String id) throws Exception {
         Autor a = autorRepo.buscarPorId(id);
         if (a != null) {
@@ -279,8 +249,9 @@ public class ServiceLibro {
         } else {
             throw new Exception("No se encontró a este Autor en la base de datos");
         }
-    } 
-    @Transactional 
+    }
+
+    @Transactional
     public void eliminarEditorial(String id) throws Exception {
         Editorial e = editorialRepo.buscarPorId(id);
         List<Libro> librosxEdit = listaporEditorial(e.getNombre());
@@ -292,11 +263,11 @@ public class ServiceLibro {
         } else {
             throw new Exception("No se encontró a esta Editorial en la base de datos");
         }
-    }    
-    
+    }
+
     //Servicios Spring - Tarde: Min 11:30 muestra método de validación que tiene ella en su clase
     public void validacion(String titulo, Integer anio, String idAutor, String idEditorial) throws MiExcepcion {
-        
+
         if (titulo == null || titulo.isEmpty()) {
             throw new MiExcepcion("Debe indicar el título");
         }
@@ -309,10 +280,6 @@ public class ServiceLibro {
         if (idEditorial == null || idAutor.trim().isEmpty()) {
             throw new MiExcepcion("Debe indicar la Editorial");
         }
-        Libro l = libroRepo.buscarPorTitulo(titulo);
-        if(l != null && l.getAutor().getId().equals(idAutor)){
-            throw new MiExcepcion(" Este Libro ya existe");
-        }    
     }
 
     //No utilizado

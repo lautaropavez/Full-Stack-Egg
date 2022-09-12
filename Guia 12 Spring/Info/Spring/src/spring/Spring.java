@@ -698,11 +698,53 @@ public class Spring {
         ========================= Desarrollo del Modulo de Mascotas 2 | Programación | Modelo Vista Controlador | V12 =====================================
 
         
+        =========================================== DOCUMENTACIÓN DE THYMELEAF =========================================================
+        
+        3.2)
+            th:utext (“unescaped text”)
+            Poner fechas
+            ${...} Este es un valor de expresión variable y contiene una expresión en un lenguaje llamado OGNL (Object-Graph Navigation Language / Lenguaje de navegación de gráficos de objetos) que se ejecutará en el mapa de variables de contexto.
+        
+        4) Standard Expression Syntax
+        
+            # Simple expressions:
+                Variable Expressions: ${...}
+                Selection Variable Expressions: *{...}
+                Message Expressions: #{...}
+                Link URL Expressions: @{...}
+            # Literals
+                Text literals: 'one text', 'Another one!',…
+                Number literals: 0, 34, 3.0, 12.3,…
+                Boolean literals: true, false
+                Null literal: null
+                Literal tokens: one, sometext, main,…
+            # Text operations:
+                String concatenation: +
+                Literal substitutions: |The name is ${name}|
+            # Arithmetic operations:
+                Binary operators: +, -, *, /, %
+                Minus sign (unary operator): -
+            # Boolean operations:
+                Binary operators: and, or
+                Boolean negation (unary operator): !, not
+            # Comparisons and equality:
+                Comparators: >, <, >=, <= (gt, lt, ge, le)
+                Equality operators: ==, != (eq, ne)
+            # Conditional operators:
+                If-then: (if) ? (then)
+                If-then-else: (if) ? (then) : (else)
+                Default: (value) ?: (defaultvalue)
+        
+        4.3) Messages
+            Variable expressions not only can be written in ${...} expressions, but also in *{...} ones.
+         
         ====================================================================================================
         ====================================================================================================
         ====================================================================================================
         ====================================================================================================
         ====================================   ERRORES   ===================================================
+        ====================================================================================================
+        ====================================================================================================
         ====================================================================================================
         ====================================================================================================
         th:replace -->Tenia un problema para poner a cada vista html el titulo distinto en el header que es igual para todos

@@ -52,6 +52,12 @@ public class ServiceEditorial {
         return editorialRepo.buscaActivas(); 
     }
     
+    //Busca todas las editoriales activas por orden alfabético
+    @Transactional(readOnly = true)
+    public List<Editorial> buscaActivasxOrdenAlf() {
+        return editorialRepo.buscaActivasxOrdenAlf(); 
+    }
+    
     public void validacion(String nombreEdit) throws MiExcepcion{
         if (nombreEdit == null || nombreEdit.trim().isEmpty()){
             throw new MiExcepcion("Debe indicar el nombre de la Editorial");

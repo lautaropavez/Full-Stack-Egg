@@ -33,6 +33,10 @@ public interface LibroRepository  extends JpaRepository<Libro, String>{
     @Query("SELECT l FROM Libro l WHERE l.autor.nombre = :nombre")
     List<Libro> listarPorAutor(@Param("nombre")String autor);
     
+// Data sacada de ejercicio 3 de sql para crear lista por nombre ascendente y luego por autor    
+////    SELECT nombre,precio 
+////	FROM producto 
+////    Order by nombre asc, precio desc;
 //-------------------------------NO USADOS--------------------------------------   
     
     //No lo usamos porque usamos el que busca los que esten activos y con ejemplares

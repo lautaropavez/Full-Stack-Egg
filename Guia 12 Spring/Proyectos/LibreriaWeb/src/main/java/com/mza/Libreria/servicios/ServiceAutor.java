@@ -52,6 +52,12 @@ public class ServiceAutor {
         return autorRepo.buscaActivos(); 
     }
     
+    //Busca todos los autores activos por orden alfabético
+    @Transactional(readOnly = true)
+    public List<Autor> buscaActivosxOrdenAlf() {
+        return autorRepo.buscaActivosxOrdenAlf(); 
+    }
+    
     public void validacion(String nombreAut) throws MiExcepcion {
         if (nombreAut == null || nombreAut.trim().isEmpty()) {
             throw new MiExcepcion("Debe indicar el nombre del Autor");

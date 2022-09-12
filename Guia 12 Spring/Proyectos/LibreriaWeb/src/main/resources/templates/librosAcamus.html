@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es-AR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="/fragments/head :: head (pageTitle='Libreria El Ceibo - Lista de Libros')"></head>
+    <body id="body">
+        <!-- Header -->
+        <header>
+            <nav th:replace="/fragments/nav :: nav"></nav>
+            <form th:action="@{/libros/vista}" method="get">
+                <div class="text-center justify-content-center">
+                    <input type="text" style="width: 70%;" name="buscar" placeholder="Buscar...">
+                        <button type="submit" class="btn btn-info mb-3 mt-3 p-2">Buscar</button>
+                </div>
+            </form>
+            <div th:replace="/fragments/message :: div"></div>
+        </header>
+        <div th:replace="/fragments/sidebar :: div"></div>
+        <!-- Galeria de Libros -->
+        <div class="libros-container">
+            <div class="galeria-item" th:each="libro : ${libros}">
+                <div th:replace="/fragments/librocardAcamus :: div"></div>
+            </div>
+        </div>
+        <!-- Footer-->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+        <<!-- Bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- Sidebar js -->
+        <script src="/js/sidebar.js"></script>
+    </body>
+</html>

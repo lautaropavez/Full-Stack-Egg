@@ -40,10 +40,10 @@ public class LibroController {
     @GetMapping("/registro") 
     public String formulario(ModelMap modelo){
         
-        List<Autor> autores = servAutor.buscaActivos();
+        List<Autor> autores = servAutor.buscaActivosxOrdenAlf();
         modelo.addAttribute("autores", autores);
         
-        List<Editorial> editoriales = servEditorial.buscaActivas();
+        List<Editorial> editoriales = servEditorial.buscaActivasxOrdenAlf();
         modelo.addAttribute("editoriales", editoriales);
         
         return "nuevoLibro";
@@ -88,39 +88,53 @@ public class LibroController {
     //IN PROCESS
     @GetMapping("/biblioteca") 
     public String biblioteca(ModelMap modelo){
-       // List<Libro> librosLista = servLibro.listarTodos();
-      //  modelo.addAttribute("libros",librosLista); 
-       return "/fragments/nada"; 
+       List<Libro> librosLista = servLibro.listarTodos();
+       modelo.addAttribute("libros",librosLista); 
+       return "libros"; 
+    }
+    
+    
+    @GetMapping("/libro/{id}") 
+    public String libro(@PathVariable String id,ModelMap modelo){
+//       List<Libro> librosLista = servLibro.listarTodos();
+//       modelo.addAttribute("libros",librosLista); 
+       modelo.put("libro",servLibro.buscarPorId(id));
+       return "libro"; 
     }
     
     //CREAR TRY AND CATCH
     //Clase THYMELEAF min 01:02:00
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id,ModelMap modelo){
+        List<Autor> autores = servAutor.buscaActivosxOrdenAlf();
+        modelo.addAttribute("autores", autores);
+        
+        List<Editorial> editoriales = servEditorial.buscaActivasxOrdenAlf();
+        modelo.addAttribute("editoriales", editoriales);
+        
         modelo.put("libro",servLibro.buscarPorId(id));
         return "modif-Libro"; // ya esta creado el form en el archivo form-perro.html (de la clase)
     }
     
     @PostMapping("/modificar/{id}")
-    public String modificar(ModelMap modelo,@RequestParam MultipartFile archivo,@PathVariable String id, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String nombreAut,@RequestParam String nombreEdit)throws Exception{
+    public String modificar(ModelMap modelo,@RequestParam MultipartFile archivo,@PathVariable String id, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String idAutor,@RequestParam String idEditorial)throws Exception{
         try{
-            servLibro.modificarLibro(archivo,id,titulo,anio,nombreAut,nombreEdit);
+            servLibro.modificarLibro(archivo,id,titulo,anio,idAutor,idEditorial);
             //modelo.put("exito","Modificación exitosa"); 
+            //return "modif-Libro";
             //return "list-libro"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
-//            return "modif-Libro";
             return "redirect:/libro/lista"; 
-            //return "/libro/lista";
         }catch(MiExcepcion ex){
             modelo.put("error",ex.getMessage());
             modelo.put("id",id);
            // modelo.put("archivo",archivo);
             modelo.put("titulo",titulo);
             modelo.put("anio",anio);
-            modelo.put("nombreAut",nombreAut);
-            modelo.put("nombreEdit",nombreEdit);
+            modelo.put("autor",idAutor);
+            modelo.put("editorial",idEditorial);
             //return "redirect:/libro/lista"; 
-            return "modif-Libro";
-            //return "redirect:/libro/modificar/{id}";  
+            //return "libro/modificar/{id}";
+            return "redirect:/libro/modificar/{id}";  
         }
     }
     
@@ -156,5 +170,33 @@ public class LibroController {
             modelo.put("error", ex.getMessage()); //La profe no lo puso pero fijarme si anda
             return "redirect:/libro/lista"; 
         }
-    }   
+    }
+    
+    /**
+     * Get para llenar con una lista el modelo y poder recorrer y mostrar para renderizar una lista en la vista
+     * se sirve de dos métodos para crear la lista en caso de que el parámetro buscar exista o no, como esta
+     * lista es accesible a los usuarios trae solo los libros activos y que posean ejemplares restantes
+     * @param modelo ModelMap
+     * @param session HttpSession
+     * @param buscar String
+     * @return libros.html
+     * @throws MiExcepcion e
+     */
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
+    @GetMapping("/vista")
+    public String libro(ModelMap modelo, @RequestParam(required = false) String buscar) throws MiExcepcion {
+        //si el parametro "buscar" NO es nulo, agrega al modelo una lista de libros buscados activos
+        if (buscar != null) {
+            modelo.addAttribute("libros", servLibro.listaBuscadaActivos(buscar));
+
+        } else //si no viene parametro de busqueda, agrega al modelo una lista con todos los libros activos
+        {
+            modelo.addAttribute("libros", servLibro.listaActivos());
+        }
+        return "librosAcamus";
+    }
+    
+    
+    
+    
 }
