@@ -61,6 +61,20 @@ public class Spring {
         Desarrollar Api Rest con Java Spring Boot https://www.youtube.com/watch?v=vTu2HQrXtyw
         Conceptos básicos: Spring framework, Spring MVC y Spring Boot  https://www.youtube.com/watch?v=cTozN8W6FGo
         Inicio de sesión y registro de usuarios con Spring Security + Thymeleaf + MySQL y Bootstrap https://www.youtube.com/watch?v=0wTsLRxS3gA&t=6s
+        QUERYS:(Acá también vemos que descargar para paginar a traves de Paginable)
+                https://www.bezkoder.com/spring-jpa-query/
+                https://www.baeldung.com/spring-data-jpa-query
+                https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#dependencies
+        VALIDACIÓN - VALIDATION : https://www.baeldung.com/spring-boot-bean-validation
+                                  https://www.baeldung.com/javax-validation
+                                  https://www.youtube.com/watch?v=0jJsrD6SmUw
+        
+        Video de creación Pryecto desde cero(+ importante crea Buscador que filtra lo que hay en la lista):  https://www.youtube.com/watch?v=Lq7ueg1z4WA
+            Min 42:30 : ModelAndView 
+            Min 49 : LIKE %?1% : Esto es para indicarle que voy a buscar al producto por su nombre
+            Min 52 spring.jpa.properties.hibernate.format_sql=true : Esto es para que me muestre como hace la llamada en idioma sql en la consola
+            Min 55 crea formulario
+        
         
         ========================== Charla Informativa =========================== 
         
@@ -747,7 +761,11 @@ public class Spring {
         ====================================================================================================
         ====================================================================================================
         ====================================================================================================
-        th:replace -->Tenia un problema para poner a cada vista html el titulo distinto en el header que es igual para todos
+        ERROR cuando pongo un año mas grande que un integer, voy a tener que usar expresiones regulares más info acá https://stackoverflow.com/questions/72376431/java-lang-numberformatexception-for-input-string-5-3
+        
+        
+        
+        th:replace --> Tenia un problema para poner a cada vista html el titulo distinto en el header que es igual para todos
         Lo solucione con esto: https://stackoverflow.com/questions/31451830/head-and-title-in-thymeleaf
         Y también en la misma página me sale otra manera de hacerlo si quiero agregar algun css u otra cosa que no esté en ese header, seria agarrando todo con un div y meterlo, dejando el header intacto pero a la vez trayendo las cosas con el div
         Posible más información https://www.baeldung.com/spring-thymeleaf-fragments

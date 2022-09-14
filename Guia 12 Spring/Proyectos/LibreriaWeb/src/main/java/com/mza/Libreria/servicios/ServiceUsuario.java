@@ -155,10 +155,16 @@ public class ServiceUsuario{     //Sin Spring Security
         return usuarioRepo.findAll();
     }
     
+    @Transactional(readOnly = true) //Busca todos los usuarios por orden alfabético por nombre, apellido y luego id
+    public List<Usuario> listarTodosPorNombre() {
+        return usuarioRepo.findAllOrderByNombre();
+    } 
+            
     @Transactional(readOnly = true) //Busca todos los usuarios que esten activos, es distinto a listaActivos de libro porque en libro solo pusimos un boolean activo, acá dos fechas de activo e inactivo
     public List<Usuario> listaActivos(Date baja) {
         return usuarioRepo.listaActivos(baja);
     }
+    
     public void validacion(String nombre,String apellido,String mail,String clave1,String clave2) throws MiExcepcion {
 
         if (nombre == null || nombre.isEmpty()) {

@@ -30,6 +30,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String>{
     
     @Query("SELECT a FROM Usuario a WHERE a.baja = NULL")
     List<Usuario> listaActivos(@Param("baja") Date baja); //fijarme si funciona así
+    
+    @Query("SELECT a FROM Usuario a ORDER BY a.nombre ASC, a.apellido ASC, a.id ASC, a.mail ASC")
+    List<Usuario> findAllOrderByNombre();
 
     //@Query("SELECT a FROM Usuario a WHERE a.baja = null")
     //List<Usuario> buscaActivos();

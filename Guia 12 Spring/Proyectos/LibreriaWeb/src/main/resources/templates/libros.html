@@ -18,13 +18,16 @@
                 </div>
             </div>
         </header>
-        <!-- Ver donde acomodarlo-->
-        <form th:action="@{/libros/vista}" method="get">
-                <div class="text-center justify-content-center">
-                    <input type="text" style="width: 70%;" name="buscar" placeholder="Buscar...">
-                        <button type="submit" class="btn btn-info mb-3 mt-3 p-2">Buscar</button>
-                </div>
-        </form>
+        <!-- form youtube -->
+        <form th:action="@{/libro/biblioteca}" method="get" class="row g-3">
+            <div class="col-10">
+                <input type="text" style="width: 100%;" name="buscar" class="m-4 form-control" placeholder="Buscar">
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-info m-4">Buscar</button>
+            </div>    
+        </form>  
+          
         <div th:replace="/fragments/message :: div"></div>
         <div th:replace="/fragments/sidebar :: div"></div>
         <!-- Contenido -->
@@ -34,8 +37,9 @@
                     <div th:each="libro : ${libros}">
                         <div th:replace="/fragments/librocard :: div"></div>
                     </div>
+                    <h3 th:if="${libros.isEmpty}"><b>No hay libros para mostrar<b></h3>
                 </div>
-            </div>
+            </div>  
         </section>
         <!-- Footer-->
         <footer th:replace="/fragments/footer :: footer"></footer>

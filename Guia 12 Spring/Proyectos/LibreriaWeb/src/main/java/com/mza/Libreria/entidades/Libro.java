@@ -26,7 +26,7 @@ public class Libro {
     @Column(unique = true)
     private Long isbn;
     
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String titulo;
     
     private Integer anio;

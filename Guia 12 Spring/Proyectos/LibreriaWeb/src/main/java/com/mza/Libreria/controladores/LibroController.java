@@ -9,6 +9,7 @@ import com.mza.Libreria.servicios.ServiceEditorial;
 import com.mza.Libreria.servicios.ServiceLibro;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,10 +56,10 @@ public class LibroController {
            servLibro.crearLibro(archivo,titulo,anio,idAutor,idEditorial);
            modelo.put("exito","¡Registro exitoso!");    
            //return "redirect:/libro/lista";
-           List<Autor> autores = servAutor.buscaActivos();
+           List<Autor> autores = servAutor.buscaActivosxOrdenAlf();
            modelo.addAttribute("autores", autores);
         
-           List<Editorial> editoriales = servEditorial.buscaActivas();
+           List<Editorial> editoriales = servEditorial.buscaActivasxOrdenAlf();
            modelo.addAttribute("editoriales", editoriales);
            return "nuevoLibro"; 
           //Forma profe Videos MVC 2
@@ -70,8 +71,11 @@ public class LibroController {
             //Logger.getLogger(LibroController.class.getName()).log(Level.SEVERE, null, ex); //Con esto nos tira el error por consola, lo podemos sacar
             modelo.put("titulo",titulo);
             modelo.put("anio",anio);
-            modelo.put("autor",idAutor);
-            modelo.put("editorial",idEditorial);
+            List<Autor> autores = servAutor.buscaActivosxOrdenAlf();
+            modelo.addAttribute("autores", autores);
+            List<Editorial> editoriales = servEditorial.buscaActivasxOrdenAlf();
+            modelo.addAttribute("editoriales", editoriales);
+            
             return "nuevoLibro"; 
         }  
     }
@@ -80,18 +84,38 @@ public class LibroController {
     //Clase THYMELEAF min 01:03:00
     @GetMapping("/lista")
     public String lista(ModelMap modelo){
-        List<Libro> librosLista = servLibro.listarTodos();
+        List<Libro> librosLista = servLibro.listarPorTitulo();
         modelo.addAttribute("libros",librosLista); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
          return "list-libro"; 
     }
         
     //IN PROCESS
     @GetMapping("/biblioteca") 
-    public String biblioteca(ModelMap modelo){
-       List<Libro> librosLista = servLibro.listarTodos();
-       modelo.addAttribute("libros",librosLista); 
+    public String biblioteca(ModelMap modelo,@RequestParam(required = false) String buscar) throws MiExcepcion{
+       
+       modelo.addAttribute("libros", servLibro.listaBuscadaActivos(buscar));
+   
        return "libros"; 
     }
+    
+    /**
+     * Get para llenar con una lista el modelo y poder recorrer y mostrar para renderizar una lista en la vista
+     * se sirve de dos métodos para crear la lista (en el service) en caso de que el parámetro buscar exista o no,
+     * como esta lista es accesible a los usuarios trae solo los libros activos y que posean ejemplares restantes
+     * @param modelo ModelMap
+//   * @param session HttpSession
+     * @param buscar String
+     * @return libros.html
+     * @throws MiExcepcion e
+     */
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
+//    @GetMapping("/vista")
+//    public String libro(ModelMap modelo, @RequestParam(required = false) String buscar) throws MiExcepcion {
+//
+//        modelo.addAttribute("libros", servLibro.listaBuscada(buscar));
+//
+//        return "librosAcamus";
+//    }
     
     
     @GetMapping("/libro/{id}") 
@@ -108,7 +132,7 @@ public class LibroController {
     public String modificar(@PathVariable String id,ModelMap modelo){
         List<Autor> autores = servAutor.buscaActivosxOrdenAlf();
         modelo.addAttribute("autores", autores);
-        
+      
         List<Editorial> editoriales = servEditorial.buscaActivasxOrdenAlf();
         modelo.addAttribute("editoriales", editoriales);
         
@@ -120,7 +144,7 @@ public class LibroController {
     public String modificar(ModelMap modelo,@RequestParam MultipartFile archivo,@PathVariable String id, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String idAutor,@RequestParam String idEditorial)throws Exception{
         try{
             servLibro.modificarLibro(archivo,id,titulo,anio,idAutor,idEditorial);
-            //modelo.put("exito","Modificación exitosa"); 
+            //modelo.put("exito","Modificación exitosa");
             //return "modif-Libro";
             //return "list-libro"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
             return "redirect:/libro/lista"; 
@@ -130,10 +154,14 @@ public class LibroController {
            // modelo.put("archivo",archivo);
             modelo.put("titulo",titulo);
             modelo.put("anio",anio);
+            List<Autor> autores = servAutor.buscaActivosxOrdenAlf();
+            modelo.addAttribute("autores", autores);
+            List<Editorial> editoriales = servEditorial.buscaActivasxOrdenAlf();
+            modelo.addAttribute("editoriales", editoriales);
             modelo.put("autor",idAutor);
             modelo.put("editorial",idEditorial);
             //return "redirect:/libro/lista"; 
-            //return "libro/modificar/{id}";
+//            return "libro/modificar/{id}";
             return "redirect:/libro/modificar/{id}";  
         }
     }
@@ -144,7 +172,7 @@ public class LibroController {
         try {
             servLibro.baja(id);
             return "redirect:/libro/lista";  
-        } catch (Exception ex) {
+        } catch (MiExcepcion ex) {
             modelo.put("error", ex.getMessage());
             return "redirect:/libro/lista"; 
         }
@@ -155,7 +183,7 @@ public class LibroController {
         try {
             servLibro.alta(id);
             return "redirect:/libro/lista";  
-        } catch (Exception ex) {
+        } catch (MiExcepcion ex) {
             modelo.put("error", ex.getMessage()); 
             return "redirect:/libro/lista"; 
         }
@@ -170,33 +198,6 @@ public class LibroController {
             modelo.put("error", ex.getMessage()); //La profe no lo puso pero fijarme si anda
             return "redirect:/libro/lista"; 
         }
-    }
-    
-    /**
-     * Get para llenar con una lista el modelo y poder recorrer y mostrar para renderizar una lista en la vista
-     * se sirve de dos métodos para crear la lista en caso de que el parámetro buscar exista o no, como esta
-     * lista es accesible a los usuarios trae solo los libros activos y que posean ejemplares restantes
-     * @param modelo ModelMap
-     * @param session HttpSession
-     * @param buscar String
-     * @return libros.html
-     * @throws MiExcepcion e
-     */
-    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
-    @GetMapping("/vista")
-    public String libro(ModelMap modelo, @RequestParam(required = false) String buscar) throws MiExcepcion {
-        //si el parametro "buscar" NO es nulo, agrega al modelo una lista de libros buscados activos
-        if (buscar != null) {
-            modelo.addAttribute("libros", servLibro.listaBuscadaActivos(buscar));
+    }   
 
-        } else //si no viene parametro de busqueda, agrega al modelo una lista con todos los libros activos
-        {
-            modelo.addAttribute("libros", servLibro.listaActivos());
-        }
-        return "librosAcamus";
-    }
-    
-    
-    
-    
 }

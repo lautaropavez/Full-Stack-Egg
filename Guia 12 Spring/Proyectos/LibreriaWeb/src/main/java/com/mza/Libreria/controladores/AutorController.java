@@ -49,7 +49,7 @@ public class AutorController {
     
     @GetMapping("/lista")
     public String lista(ModelMap modelo){
-        List<Autor> autoresLista = servAutor.buscaTodos();
+        List<Autor> autoresLista = servAutor.buscaActivosxOrdenAlf();
         modelo.addAttribute("autores",autoresLista); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
          return "list-autor"; // 
     }

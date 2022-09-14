@@ -8,9 +8,11 @@ import com.mza.Libreria.excepciones.MiExcepcion;
 import com.mza.Libreria.repositorios.AutorRepository;
 import com.mza.Libreria.repositorios.EditorialRepository;
 import com.mza.Libreria.repositorios.LibroRepository;
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -139,24 +141,37 @@ public class ServiceLibro {
         }
     }
 
-    @Transactional(readOnly = true) //Busca todos los libros activos e inactivos (para el administrador)
+    @Transactional(readOnly = true) //Busca todos los libros activos e inactivos (para el administrador) NO UTILIZADO
     public List<Libro> listarTodos() {
         return libroRepo.findAll();
     }
 
+    @Transactional(readOnly = true) //Busca todos los libros por orden alfabético del titulo y autor
+    public List<Libro> listarPorTitulo() {
+        return libroRepo.findAllOrderByTituloAsc();
+    }
+    
     @Transactional(readOnly = true) //Busca todos los libros que esten activos y tengan ejemplares > 0
     public List<Libro> listaActivos() {
         return libroRepo.listaActivos();
     }
-
+ 
+    //Método utilizado para la lista libros ya que accede el admin
     @Transactional(readOnly = true) //Busca todo, la variable buscar nos va a buscar ya sea libros editoriales o autores
     public List<Libro> listaBuscada(String buscar) {
-        return libroRepo.buscaTodo(buscar);
+        if(buscar != null){ //si no viene parametro de busqueda, agrega al modelo una lista con todos los libros ordenados afabéticamente
+            return libroRepo.buscaTodo(buscar);
+        }
+        return libroRepo.findAllOrderByTituloAsc();
     }
 
+    //Método utilizado para biblioteca, ya que acceden los usuarios
     @Transactional(readOnly = true) //Busca todo, la variable buscar nos va a buscar ya sea libros editoriales o autores que esten activos
     public List<Libro> listaBuscadaActivos(String buscar) {
-        return libroRepo.buscaTodoActivos(buscar);
+        if(buscar != null){ // Si no viene parametro de busqueda, agrega al modelo una lista con todos los libros ACTIVOS ordenados afabéticamente
+            return libroRepo.buscaTodoActivos(buscar);
+        }
+        return libroRepo.findAllActivosOrderByTituloAsc();
     }
 
     @Transactional(readOnly = true)

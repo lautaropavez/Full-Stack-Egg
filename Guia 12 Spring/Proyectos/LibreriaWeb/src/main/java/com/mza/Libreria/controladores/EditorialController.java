@@ -49,7 +49,7 @@ public class EditorialController {
      
     @GetMapping("/lista")
     public String lista(ModelMap modelo){
-        List<Editorial> editorialesLista = servEditorial.buscaTodas();
+        List<Editorial> editorialesLista = servEditorial.buscaActivasxOrdenAlf();
         modelo.addAttribute("editoriales",editorialesLista); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
          return "list-editorial"; // 
     }

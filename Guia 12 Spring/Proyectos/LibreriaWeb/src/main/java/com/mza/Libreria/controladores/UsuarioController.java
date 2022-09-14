@@ -26,7 +26,7 @@ public class UsuarioController {
     
     @GetMapping("/lista") //Clase THYMELEAF min 01:03:00
     public String lista(ModelMap modelo){
-        List<Usuario> usuariosLista = servUsuario.listarTodos();
+        List<Usuario> usuariosLista = servUsuario.listarTodosPorNombre();
         modelo.addAttribute("usuarios",usuariosLista); //Utilizo una llave("usuarios") y lo que viaja como valor es la lista usuariosLista
         return "list-usuario";  
     }
