@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.SimpleGrantedAuthority;
-//import org.springframework.security.core.userdetails.User;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -29,13 +29,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @author Lautaro Pavez
  */
 @Service
-//public class ServiceUsuario implements UserDetailsService{
-public class ServiceUsuario{     //Sin Spring Security
+public class ServiceUsuario implements UserDetailsService{
     @Autowired
     private UsuarioRepository usuarioRepo;
     
-    @Autowired
-    private ServiceNotificacion sNotific;
+//    @Autowired
+//    private ServiceNotificacion sNotific;
     
     @Transactional
     public void registrar(String nombre,String apellido,String mail,String clave, String clave2) throws MiExcepcion{
@@ -47,17 +46,15 @@ public class ServiceUsuario{     //Sin Spring Security
         usuario.setApellido(apellido);
         usuario.setMail(mail);
         usuario.setRol(Rol.USUARIO);
-//        String encriptada = new BCryptPasswordEncoder().encode(clave);
-//        usuario.setClave(encriptada);//Al usuario cuando lo persistimos en la BD lo persistimos con la clave encriptada 
-        
-        usuario.setClave(clave);
+        String encriptada = new BCryptPasswordEncoder().encode(clave);
+        usuario.setClave(encriptada);//Al usuario cuando lo persistimos en la BD lo persistimos con la clave encriptada 
         
         usuario.setAlta(new Date());
         usuario.setBaja(null);
         
         usuarioRepo.save(usuario);
         
-        //sNotific.enviarEmail("Bienvenidos a Biblioteca Virtual", "Libreria Web", usuario.getMail()); //en video 2 de mvc la comentamos pq no hemos configurado un servidor de correo todavia
+//        sNotific.enviarEmail("Bienvenidos a la Biblioteca Virtual EL CEIBO", "Libreria Web", usuario.getMail()); //en video 2 de mvc la comentamos pq no hemos configurado un servidor de correo todavia
     }
     
     @Transactional //Hacer lo mismo que en ServiceLibro de verificar de que hayan cambios antes de setear nuevamente
@@ -71,11 +68,9 @@ public class ServiceUsuario{     //Sin Spring Security
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
             usuario.setMail(mail);
-//            String encriptada = new BCryptPasswordEncoder().encode(clave);
-//            usuario.setClave(encriptada);
-            usuario.setClave(clave);
+            String encriptada = new BCryptPasswordEncoder().encode(clave);
+            usuario.setClave(encriptada);
 
-            
             usuarioRepo.save(usuario);
         }else{
          throw new MiExcepcion("No se encontró el usuario ingresado");   
@@ -94,7 +89,7 @@ public class ServiceUsuario{     //Sin Spring Security
 //        }
     }
     
-    
+    //No hace falta tener el if porque ya lo tengo en el html para ver si está o no de baja, si al método no lo uso para otro llamdo en controller eliminar el if
     @Transactional
     public void deshabilitar(String id)throws MiExcepcion{
         
@@ -159,7 +154,16 @@ public class ServiceUsuario{     //Sin Spring Security
     public List<Usuario> listarTodosPorNombre() {
         return usuarioRepo.findAllOrderByNombre();
     } 
-            
+     
+    //Método utilizado para la lista Usuarios ya que accede el admin
+    @Transactional(readOnly = true) //Busca todo, la variable buscar nos va a buscar ya sea libros editoriales o autores
+    public List<Usuario> listaBuscada(String buscar) {
+        if(buscar != null){ //si no viene parametro de busqueda, agrega al modelo una lista con todos los libros ordenados afabéticamente
+            return usuarioRepo.buscaTodo(buscar);
+        }
+        return listarTodosPorNombre();
+    }
+
     @Transactional(readOnly = true) //Busca todos los usuarios que esten activos, es distinto a listaActivos de libro porque en libro solo pusimos un boolean activo, acá dos fechas de activo e inactivo
     public List<Usuario> listaActivos(Date baja) {
         return usuarioRepo.listaActivos(baja);
@@ -191,36 +195,36 @@ public class ServiceUsuario{     //Sin Spring Security
         }
     }
 
-    // El método loadUserByUsernamees llamado cuando el usuario quiera autentificarse en la plataforma. Cuando un usuario tiene el formulario para autentificarse(formulario login), 
+    // El método loadUserByUsername es llamado cuando el usuario quiera autentificarse en la plataforma. Cuando un usuario tiene el formulario para autentificarse(formulario login), 
     // lo que hace Spring Security es llamar a este método de este servicio. El método busca el usuario por el mail y si existe es crearle estos tres permisos y va a pasarle 
     // a Spring security los datos del usuario, la clave y los permisos a los que tiene acceso ese usuario. 
     // Si nosotros trabajamos con más de un rol, por ejemplo un administrador que pudiese crear personas, en ese caso deberiamos a través de algún atributo de usuario, 
     // determinar que tipo de usuario es y dependiendo de eso, que permiso le asignamos. Por el momento lo dejamos así
     // El método recibe un nombre de usuario y lo transforma en un usuario de Spring Security
-//    @Override
-//    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
-//        Usuario usuario = usuarioRepo.buscarPorMail(mail); 
-//        if (usuario != null){ //si existe(si es distinto de null) lo que vamos a hacer es convertirlo en un usuario del dominio spring
-//            List<GrantedAuthority> permisos = new ArrayList<>(); //Creo una lista de permisos
-//            
-//            //Creo una lista de permisos! 
-//            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + usuario.getRol());//Creamos permisos para un usuario común
-//            permisos.add(p1);
-//            
-//            GrantedAuthority p2 = new SimpleGrantedAuthority("MODULO PORTADAS"); //CHEQUEAR SI DEJAR O NO
-//            permisos.add(p2); //Incluimos en la lista de permisos las variables que acabamos de crear
-//
-//            //Esto me permite guardar el OBJETO USUARIO LOG, para luego ser utilizado
-//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//            HttpSession session = attr.getRequest().getSession(true);
-//
-//            session.setAttribute("usuariosession", usuario); // llave + valor
-//           
-//            User user = new User(usuario.getMail(),usuario.getClave(), permisos); //El constructor de usuarios de Spring security nos pide: nombre de usario, clave, listado de permisos
-//           
-//            return user;
-//        }else{
-//            return null;
-//        } 
-//    }
+    @Override
+    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepo.buscarPorMail(mail); 
+        if (usuario != null){ //si existe(si es distinto de null) lo que vamos a hacer es convertirlo en un usuario del dominio spring
+            List<GrantedAuthority> permisos = new ArrayList<>(); //Creo una lista de permisos
+            
+            //Creo una lista de permisos! 
+            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + usuario.getRol());//Creamos permisos para un usuario común
+            permisos.add(p1);
+            
+            //CHEQUEAR SI DEJAR O NO
+            GrantedAuthority p2 = new SimpleGrantedAuthority("MODULO_PORTADAS"); 
+            permisos.add(p2); //Incluimos en la lista de permisos las variables que acabamos de crear
+
+            //Esto me permite guardar el OBJETO USUARIO LOG, para luego ser utilizado. Clase Spring security: En estas 3 lineas hago uso del http session que es lo que me va a permitir habilitar o deshabilitar este usuario logueado
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuariosession", usuario); // llave + valor
+           
+            User user = new User(usuario.getMail(),usuario.getClave(), permisos); //El constructor de usuarios de Spring security nos pide: nombre de usario, clave, listado de permisos
+           
+            return user;
+        }else{
+            return null;
+        } 
+    }
 }

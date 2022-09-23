@@ -23,6 +23,9 @@ public interface AutorRepository extends JpaRepository<Autor, String>{
     @Query("SELECT a FROM Autor a WHERE a.alta = true")
     List<Autor> buscaActivos();
     
+    @Query("SELECT a from Autor a WHERE a.nombre LIKE %?1% OR a.id LIKE %?1%")
+    List<Autor> buscaTodo(@Param("buscar") String buscar);
+    
     @Query("SELECT a FROM Autor a WHERE a.alta = true ORDER BY nombre asc")
     List<Autor> buscaActivosxOrdenAlf();
     

@@ -43,7 +43,7 @@ public class Spring {
         BUSCAR INFO (claseServiceUsuario) --> ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
                         HttpSession session = attr.getRequest().getSession(true);        
 
-                  POSIBLE RECURSO DE ESTUDIO - http://www.profesor-p.com/2-spring/
+        POSIBLE RECURSO DE ESTUDIO           - http://www.profesor-p.com/2-spring/
         DOCUMENTACIÓN: 
                                              - https://docs.spring.io/spring-restdocs/docs/current/reference/html5/
                                              - https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#application-properties.templating.spring.thymeleaf.reactive.media-types
@@ -61,10 +61,18 @@ public class Spring {
         Desarrollar Api Rest con Java Spring Boot https://www.youtube.com/watch?v=vTu2HQrXtyw
         Conceptos básicos: Spring framework, Spring MVC y Spring Boot  https://www.youtube.com/watch?v=cTozN8W6FGo
         Inicio de sesión y registro de usuarios con Spring Security + Thymeleaf + MySQL y Bootstrap https://www.youtube.com/watch?v=0wTsLRxS3gA&t=6s
+        
+        IMPORTANTE CURSO SPRING: Curso práctico de APIs REST en Spring Boot con JWT , Spring Security , MySQL y Spring Data JPA : https://www.youtube.com/watch?v=dJaY43Butm8
+        OTRO VIDEO IMPORTANTE DEL MISMO TIPO DEL CURSO: https://www.youtube.com/watch?v=s3CME_Pufww
+        
         QUERYS:(Acá también vemos que descargar para paginar a traves de Paginable)
                 https://www.bezkoder.com/spring-jpa-query/
                 https://www.baeldung.com/spring-data-jpa-query
                 https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#dependencies
+        Videos sobre QUERYS(Spring Data JPA): https://www.youtube.com/watch?v=RNmiRbWvFRc
+                                              https://www.youtube.com/watch?v=yXwHu6g-wlY
+        
+        
         VALIDACIÓN - VALIDATION : https://www.baeldung.com/spring-boot-bean-validation
                                   https://www.baeldung.com/javax-validation
                                   https://www.youtube.com/watch?v=0jJsrD6SmUw
@@ -75,7 +83,30 @@ public class Spring {
             Min 52 spring.jpa.properties.hibernate.format_sql=true : Esto es para que me muestre como hace la llamada en idioma sql en la consola
             Min 55 crea formulario
         
-        
+        INFO: https://stackoverflow.com/questions/16138217/how-exactly-does-param-work-java
+        How Exactly Does @param Work - Java --- Como funciona exactamente @param en Java?
+        blocks that start with /** and end with */                                             /**
+        are processed by javadoc only. They are treated as comments by Java compiler.
+        @param is a special format comment used by javadoc to generate documentation. it is used to denote
+        a description of the parameter (or parameters) a method can receive. there's also @return and @see 
+        used to describe return values and related information, respectively: http://www.oracle.com/technetwork/java/javase/documentation/index-137868.html#format
+        La ventaja de usar @parames: Al crear clases Java simples que contienen atributos y algunas etiquetas Javadoc personalizadas, permite que esas clases sirvan 
+        como una descripción de metadatos simple para la generación de código. Ejemplo:
+         
+        /** 
+         *@param testNumber
+         *@return integer
+         */
+        /*(Agregado por mi para que no me rompa los comentarios)
+        public int main testNumberIsValid(int testNumber){
+            if (testNumber < 6) {
+              //Something
+            }
+        }
+        *//*(Agregado por mi para que no me rompa los comentarios)
+        More info here: https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html
+                        https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html#format 
+                        https://www.baeldung.com/javadoc-reference-method-parameter
         ========================== Charla Informativa =========================== 
         
         Para usar Spring tenemos 2 opciones: 1)Podemos usar STS que es como el propio id de Spring o 2) Un Pluggin en Netbeans 
@@ -536,14 +567,57 @@ public class Spring {
         Min 53 Recomendable crear para cada Entidad un Controlador para segmentar
         Min 59 " SELECT a FROM Autor a.alta = :true " está mal porque los dos puntos se ponen cuando vos le envias una variable unicamente, por lo que deberia ser "... = true " sin ":"
         
-        ======================= Spring Security - Mañana(Profe Cristian) =========================
+        ======================= Spring Security - Mañana(Profe ...) =========================
         
         
         
-        ======================= Spring Security - Tarde (Profe Cristian) =========================
-        ======================= Consulta - Tarde 23-11 (Profe Cristian) =========================
-        ======================= Consulta - Tarde 24-11 (Profe Cristian) =========================
-        ======================= Consulta - Tarde 25-11 (Profe Cristian) =========================
+        ======================= Spring Security - Tarde (Profe Mari) =========================
+        Min 0-1 Hacemos un atributo en entidad usuario que es una enumeración para manejar de manera cómoda el tema de los roles
+                La enumeración la voy a utilizar como un String, pero yo la puedo utilizar también como posiciones porque la enumeración se comporta como un arreglo.
+        Min 2 Yo podría tener indefinidos roles, pero hay que tener criterio a la hora de hacerlos y tengo que utilizar los necesarios
+              En el caso de librería estaría bueno que un usuario común pueda hacer un préstamo pero que solo el admin tenga la capacidad de cargar nuevos libros, darle de baja, editarlos
+        Min 3 Cuando alguien se registra tengo que setearle el rol, los seteo como usuario a cualquier persona que registro porque lo correcot sería que el admin yo le de estos permisos a través de la BBDD o con una clave especial y que cualquier persona sea seteado como un usuario básico
+        Min 4 El loadByUsername es el método que utiliza la interface que me va a permitir crear sesiones de personas logueadas
+        Min 5 explica el método loadByUsername()
+        Min 6 Hago uso del http session
+              Siempre debemos tener una clase de seguridad donde daremos permisos de entrada y salida
+              Vemos clase Security/ConfiguracionSeguridad
+        Min 9 vemos Controller, en el método index manda lista de usuarios acctivos, al igual que el método inicio
+        
+        Min 10 puedo darle permiso a toda la clase o a un mapeo específico
+               Generalmente los principales portales Controladores solamente el método que lograste loguear es el que tiene la anotacion @PreAuthorize (preautorización)
+        Min 11 Yo también tengo la posilidad desde la clase Security/ConfiguracionSeguridad de darle acceso a todo lo el controladord
+               Profe crea un nuevo controlador que el @RequestParam es /admin
+        Min 12 con antMatchers.("/admin/*").hasRole("ADMIN") : Le digo el controlador /admin/* , si es ADMIN (hasRole admin) que entre ahí
+               Resumen: tenemos 3 opciones para dar permisos: 
+               1° Desde la clase de seguridad con el antMatchers le digo a queruta quiero que acceda un rol específico
+               2° Desde el controlador utilizo @PreAthorized con los roles espcificos que quiero que entren a cada mapeo puntual
+               3° Utilizo la opción @PreAthorized en la clase completa  
+        Min 16:31 Controlador admin 
+                  La lógica sería que el usuario admin lo creemos en BBDD y que solo esta persona acceda a una vista específica para poder cambiarle los servicios
+        Min 18 Yo puedo crear una lógica para crear al admin, ej: poner que si es x persona con tal legajo se cree automáticamente el rol de admin pero es mejor hacerlo manual, total los admin van a ser 3 personas como mucho solamente
+        Min 19 como hacer el controlador para loguearse
+        Min 20 vemos Controlador Usuario: /inicio, /login, 
+               vemos como agregar cosas específicas para los Administradores 
+        Min 22 vemos Controlador Usuario: /editarperfil 
+        Min 23 como encriptamos las contraseñas
+        Min 23-30 DUDAS
+        Min 29-30 IMPORTANTE /logincheck
+        Min 32 botones de si hay un usuario en sesion que aparezca el salir y sino el registrate
+               fragments
+        Min 34 vemos pom con dependencias
+               poner temporizador
+        Min 36 por defecto son 120 segundos que la sesión se cae
+               Desde el aplication context se modifican estas cosas(temporizador por ej)
+        Min 38 Profe dice que lo mejor es tener una clase aparte solo de @Configuracion y se ocupe de configurar nuestras páginas y en el Main solo dejamos el encriptado
+               Errores comunes: duplicar el extends WebSecurityConfigurerAdapter en el main y en la clase de seguridad, la otra es duplicar el método encriptador
+        Min 40 th:include es muy similar a th:replace
+        Min 42:20 vemos Controlador Usuario y Admin
+        
+        
+        ======================= Consulta - Tarde 23-11 (Profe ) =========================
+        ======================= Consulta - Tarde 24-11 (Profe ) =========================
+        ======================= Consulta - Tarde 25-11 (Profe ) =========================
 
         
        ###########################################################################################################################################################################################
@@ -628,7 +702,7 @@ public class Spring {
         
         Antes que nada descargo la dependencia del mail sender(nose si tengo que poner algo en application properties)
         Min 0 creamos método enviar
-        Min 2 marco método enviar como @Asinc (asíncrono): lo que hace esto es que el hilo de ejecución no espera a que se termine de enviar el mail, lo ejecuta en un hilo paralelo
+        Min 2 marco método enviar como @Async (asíncrono): lo que hace esto es que el hilo de ejecución no espera a que se termine de enviar el mail, lo ejecuta en un hilo paralelo
               Por eso el usuario tiene una respuesta inmediata, no tiene que esperar a que se termine de enviar el mail
         
         ========== Capa de servicios 7 - Transactional | Programación | Spring Framework | V10 ========== 
@@ -689,6 +763,8 @@ public class Spring {
         ========================= Configurar Spring Security en el login | Programación | Modelo Vista Controlador | V6 ==================================
         
         Min 1 Creamos ConfiguracionSeguridad y anotamos todo ahí
+              Pone el método encriptador en clase de secguridad
+        Min 2 explicación de método configure que maneja algunos aspectos del http
         Min 4 Modificamos el HTML
         Min 7 Modificamos el Controlador
         Min 8 agregamos la card para error al html

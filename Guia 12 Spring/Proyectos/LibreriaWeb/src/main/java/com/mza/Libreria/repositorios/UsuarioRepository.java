@@ -31,6 +31,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String>{
     @Query("SELECT a FROM Usuario a WHERE a.baja = NULL")
     List<Usuario> listaActivos(@Param("baja") Date baja); //fijarme si funciona así
     
+    @Query("SELECT u FROM Usuario u WHERE"
+            + " CONCAT(u.nombre,u.apellido,u.mail)"
+            + " LIKE %?1%")
+    List<Usuario> buscaTodo(@Param("buscar") String buscar);
+    
+    
     @Query("SELECT a FROM Usuario a ORDER BY a.nombre ASC, a.apellido ASC, a.id ASC, a.mail ASC")
     List<Usuario> findAllOrderByNombre();
 

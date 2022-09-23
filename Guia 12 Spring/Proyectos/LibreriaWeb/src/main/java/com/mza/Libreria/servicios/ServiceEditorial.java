@@ -52,6 +52,15 @@ public class ServiceEditorial {
         return editorialRepo.buscaActivas(); 
     }
     
+    //Método utilizado para la lista editoriales ya que accede el admin
+    @Transactional(readOnly = true) //Busca todo, la variable buscar nos va a buscar ya sea libros editoriales o autores
+    public List<Editorial> listaBuscada(String buscar) {
+        if(buscar != null){ //si no viene parametro de busqueda, agrega al modelo una lista con todos los libros ordenados afabéticamente
+            return editorialRepo.buscaTodo(buscar);
+        }
+        return buscaActivasxOrdenAlf();
+    }
+    
     //Busca todas las editoriales activas por orden alfabético
     @Transactional(readOnly = true)
     public List<Editorial> buscaActivasxOrdenAlf() {

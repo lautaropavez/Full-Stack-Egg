@@ -48,10 +48,11 @@ public class EditorialController {
     }
      
     @GetMapping("/lista")
-    public String lista(ModelMap modelo){
-        List<Editorial> editorialesLista = servEditorial.buscaActivasxOrdenAlf();
-        modelo.addAttribute("editoriales",editorialesLista); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
-         return "list-editorial"; // 
+    public String lista(ModelMap modelo,@RequestParam(required = false) String buscar){
+        
+        modelo.addAttribute("editoriales",servEditorial.listaBuscada(buscar));
+         
+        return "list-editorial";  
     }
     
     @GetMapping("/alta/{id}") 

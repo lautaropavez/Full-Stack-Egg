@@ -22,6 +22,9 @@ public interface EditorialRepository  extends JpaRepository<Editorial, String>{
     @Query("SELECT e FROM Editorial e WHERE e.alta = true")
     List<Editorial> buscaActivas();
     
+    @Query("SELECT e from Editorial e WHERE e.nombre LIKE %?1% OR e.id LIKE %?1%")
+    List<Editorial> buscaTodo(@Param("buscar") String buscar);
+    
     @Query("SELECT e FROM Editorial e WHERE e.alta = true ORDER BY nombre asc")
     List<Editorial> buscaActivasxOrdenAlf();
     

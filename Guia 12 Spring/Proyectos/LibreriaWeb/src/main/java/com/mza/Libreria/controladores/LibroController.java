@@ -80,24 +80,15 @@ public class LibroController {
         }  
     }
 
-    
     //Clase THYMELEAF min 01:03:00
     @GetMapping("/lista")
-    public String lista(ModelMap modelo){
-        List<Libro> librosLista = servLibro.listarPorTitulo();
-        modelo.addAttribute("libros",librosLista); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
-         return "list-libro"; 
+    public String lista(ModelMap modelo,@RequestParam(required = false) String buscar){
+        
+        modelo.addAttribute("libros",servLibro.listaBuscada(buscar)); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
+         
+        return "list-libro"; 
     }
         
-    //IN PROCESS
-    @GetMapping("/biblioteca") 
-    public String biblioteca(ModelMap modelo,@RequestParam(required = false) String buscar) throws MiExcepcion{
-       
-       modelo.addAttribute("libros", servLibro.listaBuscadaActivos(buscar));
-   
-       return "libros"; 
-    }
-    
     /**
      * Get para llenar con una lista el modelo y poder recorrer y mostrar para renderizar una lista en la vista
      * se sirve de dos métodos para crear la lista (en el service) en caso de que el parámetro buscar exista o no,
@@ -109,21 +100,27 @@ public class LibroController {
      * @throws MiExcepcion e
      */
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
-//    @GetMapping("/vista")
-//    public String libro(ModelMap modelo, @RequestParam(required = false) String buscar) throws MiExcepcion {
-//
-//        modelo.addAttribute("libros", servLibro.listaBuscada(buscar));
-//
-//        return "librosAcamus";
-//    }
+    @GetMapping("/biblioteca") 
+    public String biblioteca(ModelMap modelo,@RequestParam(required = false) String buscar) throws MiExcepcion{
+       
+       modelo.addAttribute("libros", servLibro.listaBuscadaActivos(buscar));
+   
+       return "libros"; 
+    }
     
-    
+    /**
+     * Get para mostrar mas información sobre un libro o solicitar un préstamos
+     * como aquí los libros son accesible a los usuarios trae solo los libros activos y que posean ejemplares restantes
+     * @param id
+     * @param modelo ModelMap
+     * @return libro.html
+     */
     @GetMapping("/libro/{id}") 
     public String libro(@PathVariable String id,ModelMap modelo){
-//       List<Libro> librosLista = servLibro.listarTodos();
-//       modelo.addAttribute("libros",librosLista); 
-       modelo.put("libro",servLibro.buscarPorId(id));
-       return "libro"; 
+       
+        modelo.put("libro",servLibro.buscarPorId(id));
+       
+        return "libro"; 
     }
     
     //CREAR TRY AND CATCH

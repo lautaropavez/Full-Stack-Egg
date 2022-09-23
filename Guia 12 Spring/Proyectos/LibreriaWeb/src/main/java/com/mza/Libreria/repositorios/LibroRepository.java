@@ -17,11 +17,16 @@ public interface LibroRepository  extends JpaRepository<Libro, String>{
     @Query("SELECT l FROM Libro l WHERE l.id = :id")
     Libro buscarPorId(@Param("id")String id);
 
-    // Con esta query se obtiene contenido parecido a, LIKE %?1% remplaza a LIKE :variable
-    @Query("SELECT lib from Libro lib WHERE lib.alta = true AND (lib.titulo LIKE %?1% OR lib.autor.nombre LIKE %?1% OR lib.editorial.nombre LIKE %?1%)")
+    // Con esta query se obtiene contenido parecido a algo, LIKE %?1% remplaza a LIKE :variable
+    @Query("SELECT lib from Libro lib WHERE "
+            + "lib.alta = true AND lib.ejemplaresRestantes > 0 AND "
+            + "(lib.titulo LIKE %?1% OR lib.autor.nombre LIKE %?1% OR lib.editorial.nombre LIKE %?1%) "
+            + "ORDER BY lib.titulo ASC, lib.autor.nombre ASC")
     List<Libro> buscaTodoActivos(@Param("buscar") String buscar);
-
-    @Query("SELECT p from Libro p WHERE p.titulo LIKE %?1% or p.autor.nombre LIKE %?1% or p.editorial.nombre LIKE %?1%")
+    
+    @Query("SELECT p from Libro p WHERE"
+            + " CONCAT(p.titulo,p.editorial.nombre,p.autor.nombre,p.isbn,p.anio)"
+            + " LIKE %?1%")
     List<Libro> buscaTodo(@Param("buscar") String buscar);
     
     @Query("SELECT l from Libro l WHERE l.alta = true AND l.ejemplaresRestantes > 0")

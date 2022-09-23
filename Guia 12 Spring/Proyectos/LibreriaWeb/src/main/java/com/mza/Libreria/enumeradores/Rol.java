@@ -11,5 +11,4 @@ package com.mza.Libreria.enumeradores;
  */
 public enum Rol {
     ADMIN, USUARIO
-
 }

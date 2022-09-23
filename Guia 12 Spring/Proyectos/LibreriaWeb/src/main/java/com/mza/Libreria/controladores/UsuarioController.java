@@ -23,11 +23,12 @@ public class UsuarioController {
     
     @Autowired
     private ServiceUsuario servUsuario;
-    
+
     @GetMapping("/lista") //Clase THYMELEAF min 01:03:00
-    public String lista(ModelMap modelo){
-        List<Usuario> usuariosLista = servUsuario.listarTodosPorNombre();
-        modelo.addAttribute("usuarios",usuariosLista); //Utilizo una llave("usuarios") y lo que viaja como valor es la lista usuariosLista
+    public String lista(ModelMap modelo,@RequestParam(required = false) String buscar){
+        
+        modelo.addAttribute("usuarios",servUsuario.listaBuscada(buscar));
+        
         return "list-usuario";  
     }
     
@@ -43,8 +44,8 @@ public class UsuarioController {
         try{
             servUsuario.modificar(id,nombre,apellido,mail,clave,clave2);
             modelo.put("exito","Modificación exitosa"); 
-            return lista(modelo); //nos devuelve a la página de inicio
-            //return "list-usuario"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
+            //return lista(modelo,buscar); //nos devuelve a la página de inicio
+            return "redirect:/usuario/lista";   //Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
             
         }catch(Exception e){
             modelo.put("error","Falto algún dato"); 

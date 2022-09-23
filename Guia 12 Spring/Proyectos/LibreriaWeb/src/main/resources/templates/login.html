@@ -64,18 +64,15 @@
                             <form action="/logincheck" method="POST" id="form">
                                 <div class="form">
                                     <h2 class=" align-content-center">¡Ingresa, tus libros te están esperando!</h2>
-                                    <div th:if="${exito}!=null" class="card text-white bg-success">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Exito</h5>
-                                            <p class="card-text" th:text="${exito}"></p>
+                                    <div th:replace="/fragments/message :: div"></div>
+                                    <div class="container m-auto">
+                                        <div th:if="${logout}!=null" class="card text-white bg-success mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center">Exito</h5>
+                                                <p class="card-text text-center" th:text="${logout}"></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div th:if="${error != null}" class="card text-white bg-danger">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Error</h5>
-                                            <p class="card-text" th:text="${error}"></p>
-                                        </div>               
-                                    </div>
+                                    </div>                                    
                                     <div class="grupo">
                                         <input type="email" name="username" required><span class="barra"></span>
                                         <label >Email</label>

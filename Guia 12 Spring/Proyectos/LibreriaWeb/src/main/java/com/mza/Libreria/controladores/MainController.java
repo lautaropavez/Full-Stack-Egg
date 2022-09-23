@@ -28,12 +28,16 @@ public class MainController {
     }
     
     @GetMapping("/login")
-    public String login(@RequestParam(required = false) String error, ModelMap modelo){
+    public String login(@RequestParam(required = false) String error, @RequestParam(required = false) String logout, ModelMap modelo){
         if(error != null){
             modelo.put("error","Nombre de usuario o clave incorrectos");
         }
+        if(logout != null){
+            modelo.put("logout","Ha cerrado sesión correctamente.");
+        }
         return "login.html";
     }
+    
     @GetMapping("/registro")
     public String registro(){
         return "registro.html";

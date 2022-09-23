@@ -9,25 +9,18 @@
     <body id="body">
         <!-- Navigation-->
         <nav th:replace="/fragments/nav :: nav"></nav>
-        <!-- Header-->
-        <header class="bg-info bg-gradient py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Los libros que vos buscas</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Tenemos mas de 10.000 libros para vos, lo pedís lo tenés.</p>
-                </div>
-            </div>
+        <!-- Header -->
+        <header>
+            <img src="/img/biblioteca.webp"width="100%" >
         </header>
-        <!-- form youtube -->
         <form th:action="@{/libro/biblioteca}" method="get" class="row g-3">
             <div class="col-10">
                 <input type="text" style="width: 100%;" name="buscar" class="m-4 form-control" placeholder="Buscar">
             </div>
             <div class="col-2">
-                <button type="submit" class="btn btn-info m-4">Buscar</button>
-            </div>    
+                <button type="submit" class="btn btn-info mt-4 ms-4">Buscar</button>
+            </div> 
         </form>  
-          
         <div th:replace="/fragments/message :: div"></div>
         <div th:replace="/fragments/sidebar :: div"></div>
         <!-- Contenido -->

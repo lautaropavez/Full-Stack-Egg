@@ -46,12 +46,13 @@ public class AutorController {
             return "nuevoAutor";
         }
     }
-    
+     
     @GetMapping("/lista")
-    public String lista(ModelMap modelo){
-        List<Autor> autoresLista = servAutor.buscaActivosxOrdenAlf();
-        modelo.addAttribute("autores",autoresLista); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
-         return "list-autor"; // 
+    public String lista(ModelMap modelo,@RequestParam(required = false) String buscar){
+        
+        modelo.addAttribute("autores",servAutor.listaBuscada(buscar)); 
+         
+        return "list-autor";  
     }
      
     
