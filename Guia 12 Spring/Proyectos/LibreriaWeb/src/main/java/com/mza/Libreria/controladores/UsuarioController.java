@@ -1,10 +1,9 @@
 package com.mza.Libreria.controladores;
 
-import com.mza.Libreria.entidades.Usuario;
 import com.mza.Libreria.excepciones.MiExcepcion;
 import com.mza.Libreria.servicios.ServiceUsuario;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +23,7 @@ public class UsuarioController {
     @Autowired
     private ServiceUsuario servUsuario;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/lista") //Clase THYMELEAF min 01:03:00
     public String lista(ModelMap modelo,@RequestParam(required = false) String buscar){
         
@@ -33,20 +33,21 @@ public class UsuarioController {
     }
     
     //Clase THYMELEAF min 01:27:00 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/modificar/{id}") //PATHVARIABLE
     public String modificar(@PathVariable String id,ModelMap modelo){ //Acá recibo un id que viene por URL --> /modificar/${id} y ese id es el que uso para buscar el usuario y mostrarlo, lo enviamos tambien por url 
         modelo.put("usuario",servUsuario.buscarPorId(id));
         return "modif-Usuario"; 
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/modificar/{id}") 
     public String modificar(ModelMap modelo,@PathVariable String id,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave,@RequestParam String clave2)throws Exception{
         try{
             servUsuario.modificar(id,nombre,apellido,mail,clave,clave2);
             modelo.put("exito","Modificación exitosa"); 
             //return lista(modelo,buscar); //nos devuelve a la página de inicio
-            return "redirect:/usuario/lista";   //Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
-            
+            return "redirect:/usuario/lista";   //Profe en clase thy pone este return pero se lo devuelve vacío min 1:57  
         }catch(Exception e){
             modelo.put("error","Falto algún dato"); 
             return "modif-Usuario"; 
@@ -54,6 +55,7 @@ public class UsuarioController {
     }
     
     //Clase THYMELEAF Tarde min 01:28:00
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/baja/{id}") //PATHVARIABLE
     public String baja(@PathVariable String id,ModelMap modelo){
         try {
@@ -67,6 +69,7 @@ public class UsuarioController {
     }
     
     //Clase THYMELEAF Tarde min 01:28:00
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/alta/{id}") //PATHVARIABLE
     public String alta(@PathVariable String id,ModelMap modelo){ //Acá recibo un id que viene por URL --> /modificar/${id} y ese id es el que uso para buscar el usuario y mostrarlo, lo enviamos tambien por url 
         try {
@@ -79,6 +82,7 @@ public class UsuarioController {
         }
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/eliminar/{id}") //PATHVARIABLE
     public String eliminar(@PathVariable String id,ModelMap modelo) throws Exception{
         try {

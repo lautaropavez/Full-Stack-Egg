@@ -1,10 +1,12 @@
 package com.mza.Libreria.controladores;
 
 import com.mza.Libreria.excepciones.MiExcepcion;
+import com.mza.Libreria.servicios.ServiceLibro;
 import com.mza.Libreria.servicios.ServiceUsuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,9 @@ public class MainController {
     @Autowired //En video 2 MVC l agregamos
     private ServiceUsuario servUsuario;
     
+    @Autowired
+    private ServiceLibro servLibro;
+   
     @GetMapping("/")
     public String index(){
         return "index.html";
@@ -37,6 +42,27 @@ public class MainController {
         }
         return "login.html";
     }
+    
+    /**
+     * Get para llenar con una lista el modelo y poder recorrer y mostrar para renderizar una lista en la vista
+     * se sirve de dos métodos para crear la lista (en el service) en caso de que el parámetro buscar exista o no,
+     * como esta lista es accesible a los usuarios trae solo los libros activos y que posean ejemplares restantes
+     * @param modelo ModelMap
+//   * @param session HttpSession
+     * @param buscar String
+     * @return libros.html
+     * @throws MiExcepcion e
+     */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
+    @GetMapping("/inicio") 
+    public String biblioteca(ModelMap modelo,@RequestParam(required = false) String buscar) throws MiExcepcion{
+       
+       modelo.addAttribute("libros", servLibro.listaBuscadaActivos(buscar));
+   
+       return "libros"; 
+    }
+    
+    
     
     @GetMapping("/registro")
     public String registro(){

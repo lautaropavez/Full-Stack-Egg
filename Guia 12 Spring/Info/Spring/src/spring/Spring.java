@@ -72,12 +72,15 @@ public class Spring {
         Videos sobre QUERYS(Spring Data JPA): https://www.youtube.com/watch?v=RNmiRbWvFRc
                                               https://www.youtube.com/watch?v=yXwHu6g-wlY
         
+        Video sobre creación de página de errores(400,401,403,404,500): https://www.youtube.com/watch?v=YW5AqKI9w-0
+                                                                        Creación de title genérico para todos los html con th:replace (otra manera distinta a la que tengo)
+                                                                        Creación Controller
         
         VALIDACIÓN - VALIDATION : https://www.baeldung.com/spring-boot-bean-validation
                                   https://www.baeldung.com/javax-validation
                                   https://www.youtube.com/watch?v=0jJsrD6SmUw
         
-        Video de creación Pryecto desde cero(+ importante crea Buscador que filtra lo que hay en la lista):  https://www.youtube.com/watch?v=Lq7ueg1z4WA
+        Video de creación Proyecto desde cero(+ importante crea Buscador que filtra lo que hay en la lista):  https://www.youtube.com/watch?v=Lq7ueg1z4WA
             Min 42:30 : ModelAndView 
             Min 49 : LIKE %?1% : Esto es para indicarle que voy a buscar al producto por su nombre
             Min 52 spring.jpa.properties.hibernate.format_sql=true : Esto es para que me muestre como hace la llamada en idioma sql en la consola
@@ -772,11 +775,29 @@ public class Spring {
         
         ========================== Agregar seguridad a los accesos a la aplicación | Programación | Modelo Vista Controlador | V7 =========================
         
-
+        Min 1 Utilizamos la anotación @PreAuthorize, le decimos que Spring security autorice a ingresar a esa URL y que solo lo puedan hacer quienes tengan algunos de los roles que le pasamos como parámetro en el método que teniamos en el servicio
+              vemos servicio Usuario el método loadByUserName
+        Min 3-4 explicación
         
         ========================= Recuperar y utilizar información de la sesión | Programación | Modelo Vista Controlador | V8 ============================
+        
+        Min 0:30 Como ponemos datos del usuario logueado en la pantalla
+                 en método loadByUserName, vamos a insertar una llamada para guardar ese usuario que traigo de la BBDD y meterlo en la sesión web
+        Min 1:51 Ponemos un saludo con el nombre del usuario cuando ingrese a la plataforma th:if session...
+        Min 3:00 A través de Spring security hemos autenticado al usuario contra los usuarios registrados en la BBDD, una vez autenticado el usuario hemos entrado a la página que está con seguridad y solo se puede acceder con un perfil
+                 Vamos a ver como configurar un controlador para que no me muestre los errores sin formato o con el formato que tiene el servidor web sino con un formato de aplicación
+        Min 3:30 Creamos página error.html
+        Min 4:00 Creamos controlador Errores, que tiene que implementar de ErrorController que es una clase del framework de Spring
+        Min 6 muestra la vista (página error.html)
+        
         ========================= Registración de Usuario Completa | Programación | Modelo Vista Controlador | V9 =========================================
+        
+        Min 1
+        
         ========================= Securización | Programación | Modelo Vista Controlador | V10 ============================================================
+        
+        
+        
         ========================= Controlador para devolver una imagen | Programación | Modelo Vista Controlador | V11 ====================================
         
         Min 17:30-19:43 muestra métodos en clase MultimediaService que no conozco, creo que para devolver imagen también
@@ -785,8 +806,12 @@ public class Spring {
                Entonces le decimos que el id que necesitamos en el método del controlador lo va a sacar de lo que venga por la URL con path variable
         
         ========================= Desarrollo del Modulo de Mascotas 1 | Programación | Modelo Vista Controlador | V12 =====================================
-        ========================= Desarrollo del Modulo de Mascotas 2 | Programación | Modelo Vista Controlador | V12 =====================================
+       
+        Vamos a hacer 
+        
+        ========================= Desarrollo del Modulo de Mascotas 2 | Programación | Modelo Vista Controlador | V13 =====================================
 
+        
         
         =========================================== DOCUMENTACIÓN DE THYMELEAF =========================================================
         

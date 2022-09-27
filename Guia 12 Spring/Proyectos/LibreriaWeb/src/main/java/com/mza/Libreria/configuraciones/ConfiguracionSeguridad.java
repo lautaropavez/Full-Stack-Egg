@@ -36,7 +36,7 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
             .loginProcessingUrl("/logincheck") //Como voy a llamar el proceso cuando tenga éxito. Acá va cuál va a ser la URL que va a utilizar Spring Security, esta URL es la que hay que usar en el formulario login de la pagina login.html
             .usernameParameter("username") // Como viajan los datos del logueo (usamos username pero podemos usar cualquiera)
             .passwordParameter("password")// Como viajan los datos del logueo (usamos password pero podemos usar cualquiera)
-            .defaultSuccessUrl("/libro/biblioteca") // A que URL viaja si el usuario se autentico con éxito
+            .defaultSuccessUrl("/inicio") // A que URL viaja si el usuario se autentico con éxito
             .permitAll()
             .and().logout() // Aca configuro la salida
             .logoutUrl("/logout") // Cuando el usuario ingrese a "/logout", Spring security deberia desloguear al usuario del sistema

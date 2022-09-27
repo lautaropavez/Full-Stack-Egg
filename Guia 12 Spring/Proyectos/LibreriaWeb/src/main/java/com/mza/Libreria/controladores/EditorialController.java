@@ -1,14 +1,12 @@
 package com.mza.Libreria.controladores;
 
-import com.mza.Libreria.entidades.Editorial;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.mza.Libreria.excepciones.MiExcepcion;
 import com.mza.Libreria.servicios.ServiceEditorial;
 import com.mza.Libreria.servicios.ServiceLibro;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,11 +26,13 @@ public class EditorialController {
     @Autowired
     private ServiceLibro servLibro; 
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/registroEditorial")
     public String formulario() {
         return "nuevaEditorial";
     }
-
+    
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/registrarEditorial") 
     public String crear(ModelMap modelo,@RequestParam String nombre){ 
         try{
@@ -46,7 +46,8 @@ public class EditorialController {
             return "nuevaEditorial"; 
         }  
     }
-     
+    
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/lista")
     public String lista(ModelMap modelo,@RequestParam(required = false) String buscar){
         
@@ -55,6 +56,7 @@ public class EditorialController {
         return "list-editorial";  
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/alta/{id}") 
     public String alta(@PathVariable String id,ModelMap modelo){
         try {
@@ -66,6 +68,7 @@ public class EditorialController {
         }
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/baja/{id}")
     public String baja(@PathVariable String id,ModelMap modelo){
         try {
@@ -77,6 +80,7 @@ public class EditorialController {
         }
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/eliminar/{id}") //PATHVARIABLE
     public String eliminar(@PathVariable String id,ModelMap modelo) throws Exception{
         try {
@@ -87,5 +91,5 @@ public class EditorialController {
             return "redirect:/editorial/lista"; 
         }
     }   
-    
+   
 }

@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,20 +30,20 @@ public class PortadaController {
 //   @GetMapping("/libro")
 //   public ResponseEntity<byte[]> portadaLibro(@RequestParam String id) throws MiExcepcion{ 
 //  (2° Forma que aprendimos) Para pasarle el id por la URL con PathVariable
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/libro/{id}")
     public ResponseEntity<byte[]> portadaLibro(@PathVariable String id) throws MiExcepcion {
         try {
             Libro libro = servLibro.findbyId(id);
             if (libro.getPortada() == null) {
-                throw new MiExcepcion("El libro no tiene foto de portada");
-                
+                throw new MiExcepcion("El libro no tiene foto de portada");  
             }
             byte[] portada = libro.getPortada().getContenido(); // Accedemos al contenido que es un arreglo de bytes, que es el que tenemos que hacer que descargue el navegador con una URL pq las fotos en HTML se consumen con una URL
 
             HttpHeaders headers = new HttpHeaders(); //Las cabeceras le vana  decir al navegador que yo estoy devolviendo una imagen
             headers.setContentType(MediaType.IMAGE_JPEG);
             return new ResponseEntity<>(portada, headers, HttpStatus.OK); // El response entity puede recibir tres parámetros: 1° contenido, 2° cabecera 3° estado en el que se determina ese proceso, osea con que código vamos a devolver el pedido(HTTP STATUS 200,500,400,etc.)
-        } catch (Exception e) {
+        } catch (MiExcepcion e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

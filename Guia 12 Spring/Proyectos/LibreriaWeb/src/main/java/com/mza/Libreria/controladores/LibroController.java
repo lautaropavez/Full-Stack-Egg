@@ -2,14 +2,13 @@ package com.mza.Libreria.controladores;
 
 import com.mza.Libreria.entidades.Autor;
 import com.mza.Libreria.entidades.Editorial;
-import com.mza.Libreria.entidades.Libro;
 import com.mza.Libreria.excepciones.MiExcepcion;
 import com.mza.Libreria.servicios.ServiceAutor;
 import com.mza.Libreria.servicios.ServiceEditorial;
 import com.mza.Libreria.servicios.ServiceLibro;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +37,7 @@ public class LibroController {
     @Autowired
     private ServiceEditorial servEditorial; 
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/registro") 
     public String formulario(ModelMap modelo){
         
@@ -50,6 +50,7 @@ public class LibroController {
         return "nuevoLibro";
     }	
       
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/registrar") 
     public String crear(ModelMap modelo,@RequestParam MultipartFile archivo,@RequestParam String titulo,@RequestParam Integer anio, @RequestParam String idAutor,@RequestParam String idEditorial){ 
         try{
@@ -81,31 +82,13 @@ public class LibroController {
     }
 
     //Clase THYMELEAF min 01:03:00
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/lista")
     public String lista(ModelMap modelo,@RequestParam(required = false) String buscar){
         
         modelo.addAttribute("libros",servLibro.listaBuscada(buscar)); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
          
         return "list-libro"; 
-    }
-        
-    /**
-     * Get para llenar con una lista el modelo y poder recorrer y mostrar para renderizar una lista en la vista
-     * se sirve de dos métodos para crear la lista (en el service) en caso de que el parámetro buscar exista o no,
-     * como esta lista es accesible a los usuarios trae solo los libros activos y que posean ejemplares restantes
-     * @param modelo ModelMap
-//   * @param session HttpSession
-     * @param buscar String
-     * @return libros.html
-     * @throws MiExcepcion e
-     */
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
-    @GetMapping("/biblioteca") 
-    public String biblioteca(ModelMap modelo,@RequestParam(required = false) String buscar) throws MiExcepcion{
-       
-       modelo.addAttribute("libros", servLibro.listaBuscadaActivos(buscar));
-   
-       return "libros"; 
     }
     
     /**
@@ -115,6 +98,7 @@ public class LibroController {
      * @param modelo ModelMap
      * @return libro.html
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/libro/{id}") 
     public String libro(@PathVariable String id,ModelMap modelo){
        
@@ -125,6 +109,7 @@ public class LibroController {
     
     //CREAR TRY AND CATCH
     //Clase THYMELEAF min 01:02:00
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id,ModelMap modelo){
         List<Autor> autores = servAutor.buscaActivosxOrdenAlf();
@@ -137,6 +122,7 @@ public class LibroController {
         return "modif-Libro"; // ya esta creado el form en el archivo form-perro.html (de la clase)
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificar(ModelMap modelo,@RequestParam MultipartFile archivo,@PathVariable String id, @RequestParam String titulo,@RequestParam Integer anio, @RequestParam String idAutor,@RequestParam String idEditorial)throws Exception{
         try{
@@ -164,6 +150,7 @@ public class LibroController {
     }
     
     //Alta y Baja Clase THYMELEAF Tarde min 01:28:00
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/baja/{id}")
     public String baja(@PathVariable String id,ModelMap modelo){
         try {
@@ -175,6 +162,7 @@ public class LibroController {
         }
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/alta/{id}") 
     public String alta(@PathVariable String id,ModelMap modelo){
         try {
@@ -186,6 +174,7 @@ public class LibroController {
         }
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/eliminar/{id}") //PATHVARIABLE
     public String eliminar(@PathVariable String id,ModelMap modelo) throws Exception{
         try {

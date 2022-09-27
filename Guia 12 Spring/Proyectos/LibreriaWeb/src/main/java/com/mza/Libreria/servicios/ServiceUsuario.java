@@ -5,7 +5,6 @@ import com.mza.Libreria.entidades.Usuario;
 import com.mza.Libreria.enumeradores.Rol;
 import com.mza.Libreria.excepciones.MiExcepcion;
 import com.mza.Libreria.repositorios.UsuarioRepository;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -215,10 +214,10 @@ public class ServiceUsuario implements UserDetailsService{
             GrantedAuthority p2 = new SimpleGrantedAuthority("MODULO_PORTADAS"); 
             permisos.add(p2); //Incluimos en la lista de permisos las variables que acabamos de crear
 
-            //Esto me permite guardar el OBJETO USUARIO LOG, para luego ser utilizado. Clase Spring security: En estas 3 lineas hago uso del http session que es lo que me va a permitir habilitar o deshabilitar este usuario logueado
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("usuariosession", usuario); // llave + valor
+            // Esto me permite guardar el OBJETO USUARIO LOG, para luego ser utilizado. Clase Spring security: En estas 3 lineas hago uso del http session que es lo que me va a permitir habilitar o deshabilitar este usuario logueado
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); // Video 7 MVC: Esta llamada va a recuperar los atributos del Request Http (la solicitud http)
+            HttpSession session = attr.getRequest().getSession(true); // Video 7 MVC: Una vez que trae la solicitud, va a solicitar los datos de sesión de esa solicitud http
+            session.setAttribute("usuariosession", usuario); // Video 7 MVC: En los datos de sesión va a guardar o crear un atributo(usuariosession) y ese atributo va a guardar el objeto usuario que acabo de ir a buscar a la BBDD
            
             User user = new User(usuario.getMail(),usuario.getClave(), permisos); //El constructor de usuarios de Spring security nos pide: nombre de usario, clave, listado de permisos
            
