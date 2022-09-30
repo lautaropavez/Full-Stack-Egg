@@ -28,7 +28,8 @@ public class Libro {
     
     @Column(nullable = false, length = 50)
     private String titulo;
-    
+
+    private String descripcion;
     private Integer anio;
     private Integer nroejemplares;
     private Integer ejemplaresPrestados;
@@ -73,6 +74,14 @@ public class Libro {
         this.titulo = titulo;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
     public Integer getAnio() {
         return anio;
     }

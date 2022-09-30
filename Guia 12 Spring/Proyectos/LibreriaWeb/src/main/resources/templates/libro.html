@@ -64,13 +64,14 @@
                                <h6 class="mb-0 " th:text="${libro.ejemplaresRestantes}"></h6>
                              </div>
                            </li>
-                               <!-- 
+                            
                            <li class="list-group-item">
                              <div class="d-flex w-100 justify-content-between sino-item">
-                               <div th:text="${libro.sinopsis}"></div>
+                               <h5 class="mb-0">Descripción:</h5>
+                               <div th:text="${libro.descripcion} == null ? 'sin registro' : ${libro.descripcion}"></div>
                              </div>
                            </li>
-                               -->
+                           <!--  -->
                                <!-- 
                            <li class="list-group-item">
                              <div class="d-flex w-100 justify-content-center">

@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 /**
  *
@@ -35,9 +36,8 @@ public class Usuario{
     @Column(nullable = false)
     private String clave; 
 
-    //hago que los email sean una columna con valores unicos en la base 
-    //ya que se va a usar como variable de logeo, y para que no haya conflictos
-    //de roles debe ser unica
+    //hago que los email sean una columna con valores unicos en la base, ya que se va a usar como variable de logeo,
+    // y para que no haya conflictos de roles debe ser unica
     @Column(unique = true)
     private String mail;
    
@@ -54,7 +54,10 @@ public class Usuario{
     @OneToMany(mappedBy = "usuario")
     private List<Prestamo> prestamos;
     
-    //private Boolean alta;
+    @OneToOne
+    private Portada imagen;
+
+//private Boolean alta;
 
     public String getId() {
         return id;
@@ -135,6 +138,22 @@ public class Usuario{
     public void setPrestamos(List<Prestamo> prestamos) {
         this.prestamos = prestamos;
     }
-    
+
+    //GETTERS Y SETTERS A IMPLEMENTAR    
+    public Integer getCantPrestamos() {
+        return cantPrestamos;
+    }
+
+    public void setCantPrestamos(Integer cantPrestamos) {
+        this.cantPrestamos = cantPrestamos;
+    }
+
+    public Portada getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Portada imagen) {
+        this.imagen = imagen;
+    }
     
 }

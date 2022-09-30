@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Lautaro Pavez
  */
 
+//@PreAuthorize("hasAnyRole('ROLE_ADMIN')")  //Si no voy a poner acá el método de que el usuario se modifique su propio perfil, puedo poner el preauthorize solo para el admin en todo este controller
 @Controller 
 @RequestMapping("/usuario") 
 public class UsuarioController {
@@ -23,7 +24,7 @@ public class UsuarioController {
     @Autowired
     private ServiceUsuario servUsuario;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/lista") //Clase THYMELEAF min 01:03:00
     public String lista(ModelMap modelo,@RequestParam(required = false) String buscar){
         

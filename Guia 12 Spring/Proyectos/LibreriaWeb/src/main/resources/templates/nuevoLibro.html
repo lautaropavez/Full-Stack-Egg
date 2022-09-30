@@ -17,6 +17,9 @@
                         <label class="mt-3">Año</label> <input th:value="${anio}" type="number" name="anio" class="form-control mt-2"  placeholder="Año del libro">
                     </div>
                     <div class="form-group col-md-6">
+                        <label class="mt-3">Ejemplares</label> <input th:value="${ejemplares}" type="number" name="ejemplares" class="form-control mt-2"  placeholder="Cantidad de ejemplares">
+                    </div>
+                    <div class="form-group col-md-6">
                         <label class="mt-3">Portada</label> <input type="file" name="archivo" class="form-control mt-2"  placeholder="Portada del libro">
                     </div>
                     <div class="row">
@@ -47,7 +50,7 @@
                 <section class="py-5 text-center container">
                     <div class="row py-lg-5">
                         <div class="col-lg-6 col-md-8 mx-auto">
-                            <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
+                            <a th:href="@{/inicio}" class="btn btn-primary my-2">Volver</a>
                         </div>
                     </div>
                 </section>

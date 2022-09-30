@@ -32,7 +32,7 @@
                 </div>
             </a>
             <!-- Hacer que solo pueda entrar el Admin -->
-            <a href="/usuario/lista">
+            <a href="/usuario/lista" sec:authorize="hasRole('ADMIN')">
                 <div class="option">
                     <i class="fa-solid fa-users" title="Usuarios"></i>
                     <h4>Usuarios</h4>
