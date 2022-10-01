@@ -41,9 +41,9 @@ public class ServiceLibro {
     private ServicePortada sPortada;
 
     @Transactional
-    public void crearLibro(MultipartFile archivo, String titulo, Integer anio,Integer ejemplares, String idAutor, String idEditorial) throws MiExcepcion {
+    public void crearLibro(MultipartFile archivo, String titulo, Integer anio,Integer ejemplares, String idAutor, String idEditorial, String descripcion) throws MiExcepcion {
 
-        validacion(titulo, anio, ejemplares, idAutor, idEditorial);
+        validacion(titulo, anio, ejemplares, descripcion, idAutor, idEditorial);
         
         Libro l = libroRepo.buscarPorTitulo(titulo);
         if (l != null && l.getAutor().getId().equals(idAutor)) {
@@ -55,6 +55,7 @@ public class ServiceLibro {
         lib.setTitulo(titulo.trim());//Remuevo espacios al principio y al final del título
         lib.setAnio(anio);
         lib.setAlta(Boolean.TRUE);
+        lib.setDescripcion(descripcion);
         //Le asigno a los ejemplares restantes la misma cantidad de registrados y prestados a cero
         lib.setNroejemplares(ejemplares);
         lib.setEjemplaresRestantes(ejemplares);
@@ -63,13 +64,10 @@ public class ServiceLibro {
         //int ejemplares = (int) (Math.random() * 999 + 1);
         //int prestados = ejemplares - (int) (Math.random() * 88 + 1);
         lib.setIsbn((long) (int) (Math.random() * 999999 + 1));
-
         Autor autor = sAutor.buscarporId(idAutor);
         lib.setAutor(autor);
-
         Editorial editorial = sEditorial.buscarporId(idEditorial);
         lib.setEditorial(editorial);
-        
         Portada portada = sPortada.guardar(archivo); //En el caso de que yo no mande un archivo adjunto, no hay problema pq está contemplado y el método guardar me va a devolver null entonces el usuario va a quedar sin foto.
         lib.setPortada(portada);
 
@@ -78,9 +76,9 @@ public class ServiceLibro {
 
     //Pasar los throws al controllator y ver si solo se puede editar todo desde el libro o hace falta llamar a los métodos de los otros servicios
     @Transactional
-    public void modificarLibro(MultipartFile archivo, String id, String titulo, Integer anio, Integer ejemplares, String idAutor, String idEditorial) throws MiExcepcion {
+    public void modificarLibro(MultipartFile archivo, String id, String titulo, Integer anio, Integer ejemplares, String idAutor, String idEditorial, String descripcion) throws MiExcepcion {
 
-        validacion(titulo, anio, ejemplares, idAutor, idEditorial);
+        validacion(titulo, anio, ejemplares, descripcion, idAutor, idEditorial);
 
         Libro libro = libroRepo.buscarPorId(id);
         if (libro != null) {
@@ -114,6 +112,11 @@ public class ServiceLibro {
             }
             if (!libro.getNroejemplares().equals(ejemplares)) {
                 libro.setTitulo(titulo.toUpperCase());
+            }
+            if (!descripcion.equals(libro.getDescripcion())) {
+                if (!descripcion.isEmpty()) {
+                    libro.setDescripcion(descripcion);
+                }
             }
             libroRepo.save(libro);
         } else {
@@ -286,22 +289,28 @@ public class ServiceLibro {
     }
 
     //Servicios Spring - Tarde: Min 11:30 muestra método de validación que tiene ella en su clase
-    public void validacion(String titulo, Integer anio,Integer ejemplares, String idAutor, String idEditorial) throws MiExcepcion {
+    public void validacion(String titulo, Integer anio,Integer ejemplares,String descripcion, String idAutor, String idEditorial) throws MiExcepcion {
 
         if (titulo == null || titulo.isEmpty()) {
-            throw new MiExcepcion("Debe indicar el título");
+            throw new MiExcepcion("Debe indicar el título.");
         }
         if (anio == null || anio < 0 || anio > 2080) {
-            throw new MiExcepcion("Debe indicar el año");
+            throw new MiExcepcion("Debe indicar el año.");
         }
         if (ejemplares == null || ejemplares < 0 || ejemplares > 100000) {
-            throw new MiExcepcion("Debe indicar la cantidad de ejemplares");
+            throw new MiExcepcion("Debe indicar la cantidad de ejemplares.");
+        }
+        if (descripcion.isEmpty()) {
+            descripcion = null;
+        }
+        if (descripcion.length() > 900) {
+            throw new MiExcepcion("Limite de 900 caracteres excedido.");
         }
         if (idAutor == null || idAutor.trim().isEmpty()) {
-            throw new MiExcepcion("Debe indicar el Autor");
+            throw new MiExcepcion("Debe indicar el Autor.");
         }
         if (idEditorial == null || idAutor.trim().isEmpty()) {
-            throw new MiExcepcion("Debe indicar la Editorial");
+            throw new MiExcepcion("Debe indicar la Editorial.");
         }
     }
 

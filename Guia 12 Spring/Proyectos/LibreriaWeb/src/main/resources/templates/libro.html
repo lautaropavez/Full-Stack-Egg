@@ -37,13 +37,13 @@
                            <li class="list-group-item">
                              <div class="d-flex w-100 justify-content-between">
                                <h5 class="mb-0"><b>Autor:</b></h5>
-                               <h5 class="mb-0 " th:text="${libro.autor.nombre}"></h5>
+                               <h5 class="mb-0 " th:text="${libro.autor.nombre} == null ? 'sin registro' : ${libro.autor.nombre}"></h5>
                              </div>
                            </li>
                            <li class="list-group-item">
                              <div class="d-flex w-100 justify-content-between ">
                                <h5 class="mb-0">Editorial:</h5>
-                               <h6 class="mb-0 " th:text="${libro.editorial.nombre}"></h6>   
+                               <h6 class="mb-0 " th:text="${libro.editorial.nombre} == null ? 'sin registro' : ${libro.editorial.nombre}"></h6>   
                              </div>
                            </li>
                            <li class="list-group-item">
@@ -67,11 +67,10 @@
                             
                            <li class="list-group-item">
                              <div class="d-flex w-100 justify-content-between sino-item">
-                               <h5 class="mb-0">Descripción:</h5>
-                               <div th:text="${libro.descripcion} == null ? 'sin registro' : ${libro.descripcion}"></div>
+                               <h5 class="mb-1">Descripción:</h5>
                              </div>
+                               <div th:text="${libro.descripcion} == null ? 'sin registro' : ${libro.descripcion}"></div>
                            </li>
-                           <!--  -->
                                <!-- 
                            <li class="list-group-item">
                              <div class="d-flex w-100 justify-content-center">

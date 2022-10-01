@@ -28,7 +28,8 @@ public class Libro {
     
     @Column(nullable = false, length = 50)
     private String titulo;
-
+    
+    @Column(length = 2000)
     private String descripcion;
     private Integer anio;
     private Integer nroejemplares;

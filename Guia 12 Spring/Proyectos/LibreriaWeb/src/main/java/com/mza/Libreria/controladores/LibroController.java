@@ -52,9 +52,9 @@ public class LibroController {
       
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/registrar") 
-    public String crear(ModelMap modelo,@RequestParam MultipartFile archivo,@RequestParam String titulo,@RequestParam Integer anio,@RequestParam Integer ejemplares, @RequestParam String idAutor,@RequestParam String idEditorial){ 
+    public String crear(ModelMap modelo,@RequestParam MultipartFile archivo,@RequestParam String titulo,@RequestParam Integer anio,@RequestParam Integer ejemplares, @RequestParam String idAutor,@RequestParam String idEditorial,@RequestParam(required = false) String descripcion){ 
         try{
-           servLibro.crearLibro(archivo,titulo,anio,ejemplares,idAutor,idEditorial);
+           servLibro.crearLibro(archivo,titulo,anio,ejemplares,idAutor,idEditorial,descripcion);
            modelo.put("exito","¡Registro exitoso!");    
            //return "redirect:/libro/lista";
            List<Autor> autores = servAutor.buscaActivosxOrdenAlf();
@@ -73,6 +73,7 @@ public class LibroController {
             modelo.put("titulo",titulo);
             modelo.put("anio",anio);
             modelo.put("ejemplares",ejemplares);
+            modelo.put("descripcion",descripcion);
             List<Autor> autores = servAutor.buscaActivosxOrdenAlf();
             modelo.addAttribute("autores", autores);
             List<Editorial> editoriales = servEditorial.buscaActivasxOrdenAlf();
@@ -125,9 +126,9 @@ public class LibroController {
     
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
-    public String modificar(ModelMap modelo,@RequestParam MultipartFile archivo,@PathVariable String id, @RequestParam String titulo,@RequestParam Integer anio,@RequestParam Integer ejemplares, @RequestParam String idAutor,@RequestParam String idEditorial)throws Exception{
+    public String modificar(ModelMap modelo,@RequestParam MultipartFile archivo,@PathVariable String id, @RequestParam String titulo,@RequestParam Integer anio,@RequestParam Integer ejemplares, @RequestParam String idAutor,@RequestParam String idEditorial, @RequestParam(required = false) String descripcion)throws Exception{
         try{
-            servLibro.modificarLibro(archivo,id,titulo,anio,ejemplares,idAutor,idEditorial);
+            servLibro.modificarLibro(archivo,id,titulo,anio,ejemplares,idAutor,idEditorial,descripcion);
             //modelo.put("exito","Modificación exitosa");
             //return "modif-Libro";
             //return "list-libro"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
@@ -139,6 +140,7 @@ public class LibroController {
             modelo.put("titulo",titulo);
             modelo.put("anio",anio);
             modelo.put("ejemplares",ejemplares);
+            modelo.put("descripcion",descripcion);
             List<Autor> autores = servAutor.buscaActivosxOrdenAlf();
             modelo.addAttribute("autores", autores);
             List<Editorial> editoriales = servEditorial.buscaActivasxOrdenAlf();
