@@ -1,7 +1,9 @@
 package com.mza.Libreria.controladores;
 
+import com.mza.Libreria.entidades.Usuario;
 import com.mza.Libreria.excepciones.MiExcepcion;
 import com.mza.Libreria.servicios.ServiceUsuario;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 /**
  *
  * @author Lautaro Pavez
@@ -23,7 +26,39 @@ public class UsuarioController {
     
     @Autowired
     private ServiceUsuario servUsuario;
-
+  
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
+    @GetMapping("/editar-perfil") // /editar-perfil/{id}
+    public String editarPerfil(ModelMap modelo,@RequestParam String id){
+        
+        try {
+            modelo.addAttribute("perfil",servUsuario.buscarPorId(id));
+        } catch (Exception e) {
+            modelo.addAttribute("error",e.getMessage());
+        }
+        
+        return "perfil.html";  
+    }
+    
+    //Ver si ponerlo en el main para poner en el 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
+    @PostMapping("/actualizar-perfil") // @RequestParam MultipartFile archivo,
+    public String regitrar(ModelMap modelo,HttpSession session,@RequestParam String id,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave1,@RequestParam String clave2){
+        Usuario usuario = null;
+        try{
+            usuario = servUsuario.buscarPorId(id);
+            servUsuario.modificar(id,nombre,apellido,mail,clave1,clave2);
+            modelo.put("exito","Modificación exitosa"); 
+            session.setAttribute("usuariosession",usuario); 
+            return "redirect:/inicio";    
+        }catch(MiExcepcion ex){
+            modelo.put("error",ex.getMessage()); 
+            modelo.put("perfil",usuario); 
+            return "perfil.html"; 
+        }
+    }
+    
+    
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/lista") //Clase THYMELEAF min 01:03:00
     public String lista(ModelMap modelo,@RequestParam(required = false) String buscar){
@@ -31,7 +66,7 @@ public class UsuarioController {
         modelo.addAttribute("usuarios",servUsuario.listaBuscada(buscar));
         
         return "list-usuario";  
-    }
+    } 
     
     //Clase THYMELEAF min 01:27:00 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
@@ -49,8 +84,8 @@ public class UsuarioController {
             modelo.put("exito","Modificación exitosa"); 
             //return lista(modelo,buscar); //nos devuelve a la página de inicio
             return "redirect:/usuario/lista";   //Profe en clase thy pone este return pero se lo devuelve vacío min 1:57  
-        }catch(Exception e){
-            modelo.put("error","Falto algún dato"); 
+        }catch(MiExcepcion ex){
+            modelo.put("error",ex.getMessage()); 
             return "modif-Usuario"; 
         }
     }

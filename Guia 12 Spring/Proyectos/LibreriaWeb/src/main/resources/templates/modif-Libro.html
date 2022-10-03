@@ -7,7 +7,7 @@
         </header>
         <div th:replace="/fragments/sidebar :: div"></div>
         <main>
-            <h1 class="text-center mt-2">Modificación Libro</h1><br>   
+            <h1 class="text-center mt-2"><b>Modificación Libro</b></h1><br>   
             <div th:replace="/fragments/message :: div"></div>
 
             <form th:action="@{/libro/modificar/__${libro.id}__}" method="POST" id="form" enctype="multipart/form-data">
@@ -19,10 +19,10 @@
                         <label class="m-1 mt-3"><b>Año</b></label> <input th:value="${libro.anio}" type="number" name="anio" class="form-control"  placeholder="Año del libro">
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="mt-3"><b>Ejemplares</label> <input th:value="${libro.nroejemplares}" type="number" name="ejemplares" class="form-control mt-2"  placeholder="Cantidad de ejemplares">
+                        <label class="mt-3"><b>Ejemplares</b></label> <input th:value="${libro.nroejemplares}" type="number" name="ejemplares" class="form-control mt-2"  placeholder="Cantidad de ejemplares">
                     </div>
                     <!-- <div class="form-group">
-                        <label>ISBN</label> <input type="number" name="clave2" class="form-control"  placeholder=" ISBN ">   
+                        <label>ISBN</label> <input type="number" name="" class="form-control"  placeholder="ISBN">   
                     </div> -->
                     <div class="form-group col-md-6">
                         <label class="mt-3"><b>Descripcion</b></label><input th:value="${libro.descripcion}" type="text" name="descripcion" class="form-control mt-2"  placeholder="Descripcion del libro">
@@ -38,29 +38,21 @@
                         <label class="mt-3">Editorial</label> <input th:value="${libro.editorial.nombre}" type="text" name="nombreEdit" class="form-control"  placeholder="Nombre de la editorial">                       
                     </div> -->
                     <div class="row">
-                        <div class="input-group mt-2">
-                            <h6 class="m-1 mb-0 mt-3"><b>Autor: </b></h6>
-                            <h6 class="m-1 mb-0 mt-3" th:text="${libro.autor.nombre}"> </h6>
-                        </div>
                         <label class="m-1 mb-0 mt-3"><b>Modificar autor</b></label>    
                         <div class="input-group mt-2">
                             <div>
                              <select class="form-control" name="idAutor">                             
-                                <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}" name="autor"></option>
+                                <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}" th:selected="${libro.autor != null && autor.id == libro.autor.id}" name="autor"></option>
                             </select>   
                             </div>
                             <!-- Botón nuevo Autor-->
                             <a th:href="@{/autor/registroAutor}" class="btn btn-primary">Agregar</a>
                         </div>
-                        <div class="input-group mt-2">
-                            <h6 class="m-1 mb-0 mt-3"><b>Editorial:</b></h6>
-                            <h6 class="m-1 mb-0 mt-3" th:text="${libro.editorial.nombre}"></h6>
-                        </div>  
                         <label class="m-1 mb-0 mt-3"><b>Modificar editorial</b></label>
                         <div class="input-group mt-2 ">
                             <div>
                                 <select class="form-control" name="idEditorial">    
-                                    <option th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}" name="editorial" ></option>
+                                    <option th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}" th:selected="${libro.editorial != null && editorial.id == libro.editorial.id}" name="editorial" ></option>
                                 </select>
                             </div>
                             <!-- Botón nueva Editorial-->

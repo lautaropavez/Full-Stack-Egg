@@ -792,7 +792,18 @@ public class Spring {
         
         ========================= Registración de Usuario Completa | Programación | Modelo Vista Controlador | V9 =========================================
         
-        Min 1
+        Min 0:00 Vamos a hacer que un usuario que se encuentre registrado pueda configurar su perfil
+                 Tenemos que sacar info del usuario logueado para que cuando yo presione en configurar perfil se abra una interfaz con todos sus datos
+        Min 1:00 En ControllerUsuario vemos método Get editar perfil y lo explica
+        Min 2:55 Vemos vista perfil HTML
+        Min 4:25 Editamos botón que manda a editarperfil
+                 Vemos como mostrar el nombre del usuario, lo copie en navbar
+        Min 5:15 Tenemos que hacer que el link del botón configurar usuario contenga el id del usuario para que envie el id como parámetro de este link pq el controlador lo recibe como parámetro
+        Min 7:39 vemos perfil HTML
+        Min 8 vemos inputs y explica
+        Min 9 vemos método POST actualizar Usuario en Controller Usuario
+              A diferencia del formulario de registro recibe tambien el id del usuario
+        Min 14 Agregamos Http session
         
         ========================= Securización | Programación | Modelo Vista Controlador | V10 ============================================================
         

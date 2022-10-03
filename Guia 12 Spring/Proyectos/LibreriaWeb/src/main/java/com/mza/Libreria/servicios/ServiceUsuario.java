@@ -32,6 +32,9 @@ public class ServiceUsuario implements UserDetailsService{
     @Autowired
     private UsuarioRepository usuarioRepo;
     
+    @Autowired
+    private ServicePortada sImagen;
+    
 //    @Autowired
 //    private ServiceNotificacion sNotific;
     

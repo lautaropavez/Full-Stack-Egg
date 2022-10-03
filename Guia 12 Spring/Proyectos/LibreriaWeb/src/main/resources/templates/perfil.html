@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es-AR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="/fragments/head :: head (pageTitle='Libreria El Ceibo - Editar perfil')"></head>
+    <body id="body">
+        <header>
+            <nav th:replace="/fragments/nav :: nav"></nav>
+        </header>
+        <div th:replace="/fragments/sidebar :: div"></div>
+        <main>
+            <!-- Content section 1-->
+            <section>
+               <div class="container px-5">
+                    <div class="row gx-5 align-items-center">
+                        <!-- <h2 class="text-center" th:if="${session.usuariosession != null}" th:text="${'¡Bienvenida ' + perfil.nombre + ' ' + perfil.apellido + '!'}" style="color:rgba(255,0,0,0.6);"></h2> -->                        
+                        <div class="col-lg-6 order-lg-2">
+                            <div class="p-5"><img class="img-fluid rounded-circle" src="/img/librofantasiavector.eps" alt="..." /></div>
+                        </div>
+                        <h2 class="text-center m-2"><b>Editar Perfil</b></h2>
+                        <div th:replace="/fragments/message :: div"></div>
+                        <div class="col-lg-6 order-lg-1">
+                            <div class="p-5">
+                                <!-- @{/usuario/editar-perfil/__${usuario.id}__} -->
+                                <form action="/usuario/actualizar-perfil" method="POST" id="form">  <!-- enctype="multipart/form-data" Cuando yo haga click en registrarme, va a ejecutar una action que es una URL, entonces action le ponemos el nombre de la action que se va a ejecutar en el servidor-->
+                                    <div class="form">
+                                        <!--<p th:if="${error != null}" th:text="${error}" style="color:red"></p> Forma que lo hace profe MVC vid 2 .Este if va a imprimir o mostrar el contenido de este párrafo si se cumple la condición que ponemos dentro, si en el modelo viene la variable error voy a mostrar este párrafo -->
+                                        <input type="hidden" th:value= "${perfil.id}" name= "id">
+                                        <div class="form-group col-md-6 mt-3">
+                                            <label><b>Nombre</b></label> <input th:value="${perfil.nombre}" type="text" name="nombre" class="form-control"  placeholder="nombre">
+                                        </div>
+                                        <div class="form-group col-md-6 mt-3"> 
+                                            <label><b>Apellido</b></label> <input th:value="${perfil.apellido}" type="text" name="apellido" class="form-control"  placeholder="apellido">
+                                        </div>                                       
+                                        <!-- 
+                                        <div class="form-group col-md-6 mt-2">
+                                            <input th:value="${perfil.archivo}" name="archivo" id="archivo" type="file" placeholder="Foto de perfil" required><span class="barra"></span>
+                                            <label>Foto de perfil</label>                       
+                                        </div>   
+                                        -->
+                                        <div class="form-group col-md-6 mt-3">
+                                            <label><b>Email</b></label><input th:value="${perfil.mail}" type="email" name="mail" class="form-control"  placeholder="mail"> 
+                                        </div>
+                                        <div class="form-group col-md-6 mt-3">
+                                            <label><b>Contraseña</b></label><input th:value="${clave1}" type="password" name="clave1" class="form-control"  placeholder="clave">                            
+                                        </div>
+                                        <div class="form-group col-md-6 mt-3">
+                                            <label><b>Repetir Contraseña</b></label><input th:value="${clave2}" type="password" name="clave2" class="form-control"  placeholder="Ingrese la clave nuevamente">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-5">Guardar</button>  
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-5 text center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-2 col-md-8 mx-auto">
+                        <a th:href="@{/}" class="btn btn-primary btn-xl rounded-pill mt-5">Volver</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+        <!-- Bootstrap core JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Sidebar js -->
+        <script src="/js/sidebar.js"></script>
+    </body>
+</html>
+
+<!--  
+<h1 class="text-center"><b>Modificación Usuario</b></h1><br>   
+            <div th:replace="/fragments/message :: div"></div>
+            <form th:action="@{/usuario/modificar/__${usuario.id}__}" method="POST" id="form">
+                <input type="hidden" th:value= "${id}" name= "id">
+                    <div class="form-group col-md-6">
+                        <label><b>Nombre</b></label> <input th:value="${usuario.nombre}" type="text" name="nombre" class="form-control"  placeholder="nombre">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label><b>Apellido</b></label> <input th:value="${usuario.apellido}" type="text" name="apellido" class="form-control"  placeholder="apellido">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label><b>Email</b></label> <input th:value="${usuario.mail}" type="email" name="mail" class="form-control"  placeholder="mail">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label><b>Clave</b></label> <input type="password" name="clave" class="form-control"  placeholder="clave">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label><b>Clave</b></label> <input type="password" name="clave2" class="form-control"  placeholder="Ingrese la clave nuevamente">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+                    <p class="warnings" id="warnings"></p>      
+            </form>
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <a th:href="@{/usuario/lista}" class="btn btn-primary my-2">Volver</a>
+                    </div>
+                </div>
+            </section>    
+-->

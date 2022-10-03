@@ -20,6 +20,8 @@
             <div class="col-2">
                 <button type="submit" class="btn btn-info mt-4 ms-4">Buscar</button>
             </div> 
+        <!-- Para mostrar nombre del usuario en un lugar donde no llame al objeto uso esto -->
+        <h2 class="text-center" th:if="${session.usuariosession != null}" th:text="${'¡Bienvenida ' + session.usuariosession.nombre + ' ' + session.usuariosession.apellido + '!'}" style="color:rgba(255,0,0,0.6);"></h2>
         </form>  
         <div th:replace="/fragments/message :: div"></div>
         <div th:replace="/fragments/sidebar :: div"></div>

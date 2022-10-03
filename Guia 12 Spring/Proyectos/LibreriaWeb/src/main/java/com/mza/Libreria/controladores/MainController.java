@@ -62,8 +62,6 @@ public class MainController {
        return "libros"; 
     }
     
-    
-    
     @GetMapping("/registro")
     public String registro(){
         return "registro.html";
