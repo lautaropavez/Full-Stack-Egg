@@ -29,8 +29,14 @@ public class UsuarioController {
   
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/editar-perfil") // /editar-perfil/{id}
-    public String editarPerfil(ModelMap modelo,@RequestParam String id){
+    public String editarPerfil(ModelMap modelo,HttpSession session,@RequestParam String id){
         
+        // Yo acá recupero el usuario de la sesión, ya que cuando el usuario se loguea, en loadByUsername en service usuario, busca el usuario en la BBDD y lo guarda en la sesión con el nombre "usuariosession"
+        // Le digo al controlador que el método va a usar la sesión cuando le pongo el Httpsession como parámetro. A la session le pido el atributo "usuariosession" lo casteo y lo guardo en una variable que se llama login
+        Usuario login = (Usuario)session.getAttribute("usuariosession");
+        if(login == null || !login.getId().equals(id)){ //Si login es null significa que no hay ningun usuario en la session O si no es null pero el id del usuario logueado(login.getId()) no es igual al id del usuario que quiero modificar (id que tengo como parámetro) 
+            return "redirect:/inicio";                  // Los redirecciono al inicio
+        }
         try {
             modelo.addAttribute("perfil",servUsuario.buscarPorId(id));
         } catch (Exception e) {
@@ -42,12 +48,16 @@ public class UsuarioController {
     
     //Ver si ponerlo en el main para poner en el 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
-    @PostMapping("/actualizar-perfil") // @RequestParam MultipartFile archivo,
-    public String regitrar(ModelMap modelo,HttpSession session,@RequestParam String id,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave1,@RequestParam String clave2){
+    @PostMapping("/actualizar-perfil") //
+    public String registrar(ModelMap modelo,HttpSession session, @RequestParam MultipartFile archivo,@RequestParam String id,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave1,@RequestParam String clave2){
         Usuario usuario = null;
         try{
+            Usuario login = (Usuario)session.getAttribute("usuariosession");
+            if(login == null || !login.getId().equals(id)){ //Si login es null significa que no hay ningun usuario en la session O si no es null pero el id del usuario logueado(login.getId()) no es igual al id del usuario que quiero modificar (id que tengo como parámetro) 
+                return "redirect:/inicio";                  // Los redirecciono al inicio
+            }
             usuario = servUsuario.buscarPorId(id);
-            servUsuario.modificar(id,nombre,apellido,mail,clave1,clave2);
+            servUsuario.modificar(archivo,id,nombre,apellido,mail,clave1,clave2);
             modelo.put("exito","Modificación exitosa"); 
             session.setAttribute("usuariosession",usuario); 
             return "redirect:/inicio";    
@@ -78,9 +88,9 @@ public class UsuarioController {
     
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/modificar/{id}") 
-    public String modificar(ModelMap modelo,@PathVariable String id,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave,@RequestParam String clave2)throws Exception{
+    public String modificar(ModelMap modelo, @RequestParam MultipartFile archivo,@PathVariable String id,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String mail,@RequestParam String clave,@RequestParam String clave2)throws Exception{
         try{
-            servUsuario.modificar(id,nombre,apellido,mail,clave,clave2);
+            servUsuario.modificar(archivo,id,nombre,apellido,mail,clave,clave2);
             modelo.put("exito","Modificación exitosa"); 
             //return lista(modelo,buscar); //nos devuelve a la página de inicio
             return "redirect:/usuario/lista";   //Profe en clase thy pone este return pero se lo devuelve vacío min 1:57  

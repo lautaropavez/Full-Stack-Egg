@@ -13,5 +13,4 @@ public class Ejercicio3 {
         String nombre = leer.nextLine();
         System.out.println("Su nombre es " + nombre);
     }
-
 }

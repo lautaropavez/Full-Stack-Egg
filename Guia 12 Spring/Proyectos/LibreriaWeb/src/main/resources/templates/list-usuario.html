@@ -31,6 +31,7 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
+                                <th>Foto</th>
                                 <th>Mail</th>
                                 <th>Rol</th>
                                 <th>Estado</th>
@@ -45,6 +46,10 @@
                                 <td th:text="${usuario.id}"></td>
                                 <td th:text="${usuario.nombre}"></td>
                                 <td th:text="${usuario.apellido}"></td>
+                                <td>
+                                    <img th:if="${usuario.imagen == null}" class="img-fluid rounded-circle" src="/img/sinperfil.jpg" style="max-height: 70px;"> <!-- style="max-height: 70px;""--> 
+                                    <img th:if="${usuario.imagen != null}" class="img-fluid rounded-circle" th:src="${'/imagen/usuario/' + usuario.id}" style="width: auto; height: 70px;"> 
+                                </td>
                                 <td th:text="${usuario.mail}"></td>
                                 <td th:text="${usuario.rol}"></td>
                                 <!--  == true ? 'Activo' : 'Baja' (NO ME SIRVIÓ DE ESTA MANERA)  Con esa instruccion consulto si el campo alta es true cambia 

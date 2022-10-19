@@ -31,7 +31,7 @@
                        <div class="col-sm-12 col-md-12 mb-5">
                          <ul class="list-group">
                            <li class="list-group-item">
-                             <img th:if="${libro.portada != null}" th:src="${'/portada/libro/' + libro.id}" alt="" width="30%">
+                             <img th:if="${libro.portada != null}" th:src="${'/imagen/libro/' + libro.id}" alt="" width="30%">
                              <img th:if="${libro.portada == null}" src="/img/noimage.jpg" alt=""  width="30%">
                            </li>
                            <li class="list-group-item">
@@ -69,15 +69,14 @@
                              <div class="d-flex w-100 justify-content-between sino-item">
                                <h5 class="mb-1">Descripción:</h5>
                              </div>
-                               <div th:text="${libro.descripcion} == null ? 'sin registro' : ${libro.descripcion}"></div>
+                               <div th:text="${libro.descripcion} == null ? 'sin descripción' : ${libro.descripcion}"></div>
                            </li>
-                               <!-- 
                            <li class="list-group-item">
                              <div class="d-flex w-100 justify-content-center">
-                               <a class="btn btn-success btn-sm mr-2 p-2" th:href="@{/prestamos/solicitud/__${libro.id}__}"><i class="fa fa-arrow-up"></i> Solicitar</a> <!--FLECHITA-->
-                        <!--   <a class=" btn btn-success btn-sm mr-2 " href="/prestamos/solicitud"> Solicitar</a>  -->
-                        <!-- </div>
-                           </li> -->        
+                               <a class="btn btn-success mr-2" th:href="@{/prestamos/solicitud/__${libro.id}__}"><i class="fa fa-arrow-up"></i> Solicitar</a> <!--FLECHITA-->
+                               <!-- <a class=" btn btn-success btn-sm mr-2 " href="/prestamos/solicitud"> Solicitar</a>  -->
+                             </div>
+                           </li>      
                          </ul>
                        </div>
                       <!--Fin libro-->
@@ -91,7 +90,7 @@
         <section class="py-5 text-center container">
           <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-              <a th:href="@{/libro/biblioteca}" class="btn btn-primary my-2">Volver</a>
+              <a th:href="@{/inicio}" class="btn btn-primary my-2">Volver</a>
             </div>
           </div>
         </section>

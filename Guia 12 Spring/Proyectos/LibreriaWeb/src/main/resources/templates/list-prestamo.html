@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es-AR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="/fragments/head :: head (pageTitle='Libreria El Ceibo - Lista de Prestamos Totales')"></head>
+    <body id="body">
+        <header>
+            <nav th:replace="/fragments/nav :: nav"></nav>
+        </header>
+        <div th:replace="/fragments/sidebar :: div"></div>
+        <div th:replace="/fragments/message :: div"></div>
+        <!-- Lista -->
+        <div class="container-fluid m-3">
+            <div class="card mt-2">
+              <div class="card-header d-flex bg-dark text-white-50">
+                <h1>Lista de Prestamos Registrados</h1>
+              </div>
+                <div class="card-body">              
+                    <table class="table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Id Prestamo</th>
+                                <th>Libro</th>
+                                <th>Portada</th>
+                                <th>Préstamo</th>
+                                <th>Devolución</th>
+                                <th>Usuario</th>
+                                <th>Mail</th>
+                                <th>Estado</th>
+                                <th>Administración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Si quiero que solo se muestren segun el tributo alta debo agregar la linea  th:if="${p.alta} == TRUE" -->
+                        <!-- Usamos un auxiliar que se llama usuario que va a recorrer una lista que se llama usuarios(entre el ${} le pasamos la variable)-->
+                            <tr th:each="prestamo,iterator : ${prestamos}">
+                                <td th:text="${iterator.index+1}"></td>
+                                <td th:text="${prestamo.id}"></td>
+                                <td th:text="${prestamo.libro.titulo}"></td>
+                                <td>
+                                    <img th:if="${prestamo.libro.portada == null}" class="bd-placeholder-img card-img-top" src="/img/noimage.jpg" style="width: auto; height: 70px;">
+                                    <img th:if="${prestamo.libro.portada != null}" class="bd-placeholder-img card-img-top" th:src="${'/imagen/libro/' + prestamo.libro.id}" style="width: auto; height: 70px;"> 
+                                </td> 
+                                <td th:text="${prestamo.prestamo}"></td>
+                                <td th:text="${prestamo.devolucion}"></td>
+                                <td th:text="${prestamo.usuario.nombre + ' ' + prestamo.usuario.apellido}"></td>
+                                <td th:text="${prestamo.usuario.mail}"></td>
+                                <td>
+                                    <span th:if="${prestamo.alta}" style="color: chartreuse;"><p>Activo</p></span>
+                                    <span th:unless="${prestamo.alta}" style="color:rgb(231, 67, 17)"><p>Inactivo</p></span>
+                                </td>
+                                <td>
+                                  <a th:if="${prestamo.alta} == true" class="btn btn-danger" title="Desactivar" th:href="@{/prestamos/baja/__${prestamo.id}__}">Desactivar</a>
+                                  <a th:if="${prestamo.alta} == false" class="btn btn-success" title="Activar" th:href="@{/prestamos/alta/__${prestamo.id}__}" >Activar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <p th:if="${prestamos.isEmpty}">No hay libros para mostrar</p>
+                    </table>
+                </div>
+            </div>
+        </div> 
+        <!-- Footer-->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+        <!-- Bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- Sidebar js -->
+        <script src="/js/sidebar.js"></script>   
+    </body>
+</html>
+    

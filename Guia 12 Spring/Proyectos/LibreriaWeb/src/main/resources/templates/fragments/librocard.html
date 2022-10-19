@@ -3,7 +3,7 @@
         <!-- Insignia agotado -->
         <div th:if="${libro.ejemplaresRestantes == 0}" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Agotado</div>
         <!-- Product image -->
-        <img class="card-img-top" th:if="${libro.portada != null}" th:src="${'/portada/libro/' + libro.id}" title="${libro.titulo}" alt="" width="100px" height="310px">
+        <img class="card-img-top" th:if="${libro.portada != null}" th:src="${'/imagen/libro/' + libro.id}" title="${libro.titulo}" alt="" width="100px" height="310px">
         <img class="card-img-top" th:if="${libro.portada == null}" src="/img/noimage.jpg" alt="" width="100px" height="310px">
         <!-- Detalles Libro -->
         <div class="card-body p-4">

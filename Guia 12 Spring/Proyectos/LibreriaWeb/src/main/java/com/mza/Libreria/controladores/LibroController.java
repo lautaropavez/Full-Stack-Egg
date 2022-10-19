@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+//import javax.servlet.http.HttpServletResponse;
+//import java.io.IOException;
+//import com.mza.Libreria.pdf.LibrosPDF;
+//import com.mza.Libreria.pdf.PDFGenerator;
+//import java.util.Map;
 
 /**
  *
@@ -28,6 +33,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/libro")
 public class LibroController {
 
+//    @Autowired
+//    private LibrosPDF librosPDF;
+//    
+//    @Autowired
+//    private PDFGenerator PDFGenerator;
+    
     @Autowired
     private ServiceLibro servLibro; 
     
@@ -90,9 +101,23 @@ public class LibroController {
         
         modelo.addAttribute("libros",servLibro.listaBuscada(buscar)); //Utilizo una llave("libros") y lo que viaja como valor es la lista librosLista
          
-        return "list-libro"; 
+        return "list-libros"; 
     }
-    
+//    
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
+//    @GetMapping("/pdf/generate")
+//    public void generatePDF(HttpServletResponse response,Map<String, Object> model) throws IOException{
+//        response.setContentType("application/pdf");
+//        
+//        //Debemos settear el header a response
+//        String headerKey = "Content-Disposition"; //Este header le dice al browser que tipo de archivo devolvemos
+//        String headerValue = "attachment; filename=pdf_" + "Lista de libros"+ ".pdf"; //nombre del archivo
+//        response.setHeader(headerKey, headerValue);
+//        
+//        PDFGenerator.export(response,model);
+//    } 
+//    
+//    
     /**
      * Get para mostrar mas información sobre un libro o solicitar un préstamos
      * como aquí los libros son accesible a los usuarios trae solo los libros activos y que posean ejemplares restantes
@@ -131,7 +156,7 @@ public class LibroController {
             servLibro.modificarLibro(archivo,id,titulo,anio,ejemplares,idAutor,idEditorial,descripcion);
             //modelo.put("exito","Modificación exitosa");
             //return "modif-Libro";
-            //return "list-libro"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
+            //return "list-libros"; Profe en clase thy pone este return pero se lo devuelve vacío min 1:57
             return "redirect:/libro/lista"; 
         }catch(MiExcepcion ex){
             modelo.put("error",ex.getMessage());

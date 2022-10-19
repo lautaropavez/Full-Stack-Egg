@@ -1,6 +1,6 @@
-
 package com.mza.Libreria.servicios;
 
+import com.mza.Libreria.entidades.Portada;
 import com.mza.Libreria.entidades.Usuario;
 import com.mza.Libreria.enumeradores.Rol;
 import com.mza.Libreria.excepciones.MiExcepcion;
@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -53,23 +54,39 @@ public class ServiceUsuario implements UserDetailsService{
         
         usuario.setAlta(new Date());
         usuario.setBaja(null);
-        
+        usuario.setCantPrestamos(0);
         usuarioRepo.save(usuario);
         
 //        sNotific.enviarEmail("Bienvenidos a la Biblioteca Virtual EL CEIBO", "Libreria Web", usuario.getMail()); //en video 2 de mvc la comentamos pq no hemos configurado un servidor de correo todavia
     }
     
-    @Transactional //Hacer lo mismo que en ServiceLibro de verificar de que hayan cambios antes de setear nuevamente
-    public void modificar(String id,String nombre,String apellido,String mail,String clave,String clave2) throws MiExcepcion{
+    @Transactional //  Hacer lo mismo que en ServiceLibro de verificar de que hayan cambios antes de setear nuevamente
+    public void modificar(MultipartFile archivo,String id,String nombre,String apellido,String mail,String clave,String clave2) throws MiExcepcion{
         
         validacion(nombre,apellido,mail,clave,clave2);
         
         Optional<Usuario> respuesta = usuarioRepo.findById(id); //Este método nos devuelve una clase Optional como respuesta 
         if(respuesta.isPresent()){ //Y nos dice si el resultado está presente, osea si encontró un resultado con este id
             Usuario usuario = respuesta.get();
-            usuario.setNombre(nombre);
-            usuario.setApellido(apellido);
-            usuario.setMail(mail);
+             if (!archivo.isEmpty()) { // Si el archivo no viene vacío, osea si mando algo
+                if (usuario.getImagen()!= null) { // Si existe el id
+                    String idImagen = usuario.getImagen().getId();
+                    Portada imagen = sImagen.actualizar(idImagen, archivo);
+                    usuario.setImagen(imagen);
+                } else {
+                    Portada imagen = sImagen.guardar(archivo);
+                    usuario.setImagen(imagen);
+                }
+            }
+            if (!usuario.getNombre().equalsIgnoreCase(nombre)) {
+                usuario.setNombre(nombre);
+            }
+            if (!usuario.getApellido().equalsIgnoreCase(apellido)) {
+                usuario.setApellido(apellido);
+            }
+            if (!usuario.getMail().equalsIgnoreCase(mail)) {
+                usuario.setMail(mail);
+            }
             String encriptada = new BCryptPasswordEncoder().encode(clave);
             usuario.setClave(encriptada);
 

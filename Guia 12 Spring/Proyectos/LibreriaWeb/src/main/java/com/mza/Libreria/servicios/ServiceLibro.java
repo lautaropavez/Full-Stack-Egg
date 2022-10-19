@@ -82,7 +82,7 @@ public class ServiceLibro {
 
         Libro libro = libroRepo.buscarPorId(id);
         if (libro != null) {
-            if (archivo != null) { // Si el archivo no es nulo, osea si existe
+            if (!archivo.isEmpty()) { // Si el archivo no viene vacío, osea si mando algo
                 if (libro.getPortada() != null) { // Si existe el id
                     String idPortada = libro.getPortada().getId();
                     Portada portada = sPortada.actualizar(idPortada, archivo);

@@ -110,6 +110,29 @@ public class Spring {
         More info here: https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html
                         https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html#format 
                         https://www.baeldung.com/javadoc-reference-method-parameter
+       
+        video de como exportar pdf: https://www.youtube.com/watch?v=DKlUZAk6cqE&list=PLxxZ0339925EflXGlNai0UjAQAR8To3ck&index=4
+        target="_blank" : Ponemos esto en algún botón en nuestra página html para que cuando lo apretemos nos abra la URL en otra página
+        img-responsive center-box (Bootstrap)
+        float-right
+        
+        ============== Data de donde sacar para hacer que funcione el pdf =======================
+        Github donde lo sacamos(ya lo descargamos): https://github.com/acamus79/BibliotecaWeb/blob/main/BibliotecaWeb%20v0.02/pom.xml
+        clase para crearlo(igual en la que estamos ahora): https://github.com/acamus79/BibliotecaWeb/blob/main/BibliotecaWeb%20v0.02/src/main/java/com/mza/biblioteca/util/ListaLibrosPDF.java
+
+        DATA DE DONDE PUDO HABER SACADO LA INFO DE PDF (REPO DE GITHUB DONDE ESTÁ SUBIDO EL PROYECTO)
+        https://github.com/LibrePDF/OpenPDF
+        https://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
+        https://librepdf.github.io/OpenPDF/docs-1-3-17/
+        https://github.com/LibrePDF/OpenPDF/wiki/Tutorial
+
+        INFO EXTRA
+        https://www.baeldung.com/java-pdf-creation  vienen las dos juntas  https://itextpdf.com/blog/technical-notes/how-do-i-make-sure-my-software-complies-agpl-how-can-i-use-itext-free
+        https://www.geeksforgeeks.org/formatting-the-text-in-a-pdf-using-java/
+        https://picodotdev.github.io/blog-bitix/2019/08/ejemplo-sencillo-de-como-crear-un-documento-pdf-con-java-y-pdfbox/
+        https://www.tutorialspoint.com/pdfbox/pdfbox_inserting_image.htm
+
+        
         ========================== Charla Informativa =========================== 
         
         Para usar Spring tenemos 2 opciones: 1)Podemos usar STS que es como el propio id de Spring o 2) Un Pluggin en Netbeans 
@@ -807,23 +830,127 @@ public class Spring {
         
         ========================= Securización | Programación | Modelo Vista Controlador | V10 ============================================================
         
-        
+        Min 1 Vamos a ver como determinados servicios o controladores sean accedidos por usuarios logueados con un rol en particular
+        Min 2 Vemos @PreAuthorize("hasAnyRole('ROL_USUARIO')")
+        Min 3:30 Método loadByUsername podríamos hacerlo dinámico, el usuario podría tener más de un rol asignado
+        Min 4 @PreAuthorize lo puedo poner arriba del controlador y decir que todos los métodos del controlador pueden ser accedidos por usuarios con este ROL
+        Min 8 Problema de securización: Si yo mando el id por URL es un problema ya que alguien puede poner mi id y me puede configurar mi perfil
+        Min 9 Muestra como se podría hackear (cambia la url nomás)
+        Min 11 Les pone @PreAuthorize a métodos editar perfil
+        Min 12 Vemos como NO permitimos que un usuario modifique a otro, con un Http session
+               Lo hacemos en método get
+        Min 14 "Lo casteo" --> Definición: El casteo (casting) es un procedimiento para transformar una variable primitiva de un tipo a otro, o transformar un objeto de una clase a otra clase siempre y cuando haya una relación de herencia entre ambas. 
+                                           Existen distintos tipos de casteo (casting) de acuerdo a si se utilizan tipos de datos o clases.
+        Min 16 Lo hacemos en método get
         
         ========================= Controlador para devolver una imagen | Programación | Modelo Vista Controlador | V11 ====================================
-        
-        Min 17:30-19:43 muestra métodos en clase MultimediaService que no conozco, creo que para devolver imagen también
+
+        Min 2 Creamos controlador Imagen que a través de una URL nos descargue la foto de usuario,libro,etc.
+        Min 3 Creamos método que nos devuelve un ResponseEntity y este ResponseEntity va a tener el contenido de la foto en un arreglo de bytes
+        Min 4 Las fotos en el html se consumen con una URL
+        Min 8 HttpHeaders es una clase de Spring Framework
+        Min 9 Funcionamiento del método: Recibimos como parámetro el id del usuario y el método devuelve un ResponseEntity con el contenido de la foto para eso en los encabezados de esa solicitud Http le indicamos al navegador que el contenido
+              que le vamos a devolver es de tipo foto. Luego retornamos un ResponseEntity con: 1° El arreglo de la foto que viene de BBDD, 2° Las cabeceras(headers), 3° Código 200(OK) de que esto se efectuo de manera correcta
+        Min 10 si hay un error en el try sol devolvemos un NOT FOUND(ERROR 404)
+        Min 12-15 Testing
+        Min 15-17 Problemas de profe
+        Min 17:30-19:30 modifica HTML para mostrar foto
+        Min 19:43 muestra métodos en clase MultimediaService que no conozco, creo que para devolver imagen también
         Min 20 Hay veces que no conviene por una cuestión de cache y navegador, que no conviene que las imagenes usen el id como parámetro sino pasarlo como una ruta completa y distinta para cada usuario, 
                sobre todo para las búsquedas, para Google que no guarda las imagenes por parámetros sino que las URLs completas o también para hacer URLS amigables
+        Min 21 Modificamos método de ImagenController
                Entonces le decimos que el id que necesitamos en el método del controlador lo va a sacar de lo que venga por la URL con path variable
         
         ========================= Desarrollo del Modulo de Mascotas 1 | Programación | Modelo Vista Controlador | V12 =====================================
        
-        Vamos a hacer 
+        Min 0 Vemos Clase Mascota service 
+        Min 2 Creamos HTML para crear y modificar mascota (usamos el mismo para las 2 cosas) y lo modificamos
+        Min 4 Creamos mascotaController
+        Min 5 Modificamos mascotaController 
+        Min 6 creamos botón Agregar mascota en HTML inicio
+        Min 7 Modifica método de mascotaController
+        Min 8:50 IMPORTANTE vemos th:text="${perfil.id == null ? 'Crear' : 'Actualizar'}"  esto me va a servir para que ese título me sea dinámico, es un operador condicional    
+                 En el th:text decimos: Si viene un id de mascota (si es != de null) entonces el titulo de la página me va a decir actualizar y si es nulo significa que la estoy creando y me va a decir crear
+        Min 10 seguimos modificando HTML mascota(para crear y editar)
+        Min 10:20 vemos entidad Mascota
+        Min 10:30 creamos tipo de mascota con ENUM: perro,gato,conejo
+        Min 11 Creamos atributo en entidad Mascota
+        Min 11 Modificamos método editarPerfil en mascotaController
+        Min 11:40 El tipo de mascota y sexo lo llenamos con unos combos
+        Min 12:00 La enumeración trae el método values que  me va a devolver un array con todos los valores de la enumeración
+        Min 12:30 modificamos HTML mascota(editar perfil) y le agregamos las combos
+        Min 13:30 En combo muestra como marcar como seleccionado si ya tiene algún tipo
+        Min 15:20 Creamos método actualizar en mascotaController
+        Min 17:40 vemos Mascota servicio 
+        Min 18:20 El método modificar mascota del serviceMascota nos pide el id Usuario
+        Min 18:30 Sacamos el id Usuario de la session iniciada(ya que el usuario sólo puede modificar a su mascota)
+        Min 19:00 Hace método crearMascota y modificar en mismo método de actualizarPerfil
+                  El problema creo yo que no podrias agregar varias mascotas a un mismo dueño, siendo que en la entidad mascota tenemos un ManyToOne que sería para tener varias mascotas
+        Min 20:00 Modificamos métodos en servicio Mascota para agregarle enum tipo 
+        Min 21:00 Modificamos en clase mascotaController que sucede cuando tira algún error -->
+                  Le pasamos model.put (atributos cargados)
+        Min 22 en mascotaServicio creamos buscar por Id(lo sacamos de usuarioServicio)
+        Min 23 Le agregamos los atributos pasados por parámetro a la mascota por si llega a fallar (LO CAMBIAMOS DE LUGAR EN MIN 24)
+        Min 23:50 Este método va a crear un objeto mascota, le va a setear un nombre, sexo, tipo, va a buscar el usuario en la session
+                  Si el id de la mascota es null, va a llamar al servicio el método agregarMascota y le pasa los datos para crearlas
+                  Si no es null, busco la mascota, va a llamar al servicio el método modificarMascota y la modifico
+                  Si hay un error le mando los sexos,tipos, error y perfil(que tiene los datos de la mascota con los datos que habia cargado el usuario)
+        Min 24:00 Pongo los mascota.set() con los atributos pasados por parámetro a la mascota por si llega a fallar en el catch
+        Min 25:00 El atributo mascota solo lo necesitamos en caso de que me falle el método, si me falla yo quiero que me aparezcan los métodos que mando el usuario
+        Min 25:30 Testing
+        Min 26:00 ERROR NullPointerException 
+        Min 26:30 Modificamos el método en mascotaCoontroller
+        Min 27:30 Vemor ERROR en FotoController
+        Min 28:00 Modifica en serviceFoto(Portada) que si viene vacío no lo guarde (Yo ya lo tenía hecho)
+        Min 29 Testing 
+        Min 30 Modificamos el método editarPerfil en mascotaController
+        Min 31 Pone en método editarPerfil en mascotaController, si la session es null y queremos entrar a modificar perfil, nos redirige a inicio
+               Lo cual a nosotros no nos afectaría ya que le hemos puesto el hasAnyRole al método para que solo entren usuarios registrados a esa vista
+        Min 32 Modifica en método actualizar en mascotaController, para que quede igual que método de arriba
+        Min 32:30 ERROR 500
+        Min 33 Testing 
+        Min 33:50 ERROR no me sale la foto (pq no cree método en FotoController)
+        Min 34:00 vemos HTML
+        Min 34:20 creamos método fotoMascota en FotoController
+        Min 35:20 IMPORTANTE vemos como cambiar nombre a objeto en toda la clase, para no cambiarlo de a uno
+                  Lo hacemos poniendonos sobre el nombre del objeto, ej: Usuario usuario(aquí), click derecho refactor cambiamos nombre y listo
+        Min 35:40-36 Testing
+        Min 36:00 Explicacion Final
         
         ========================= Desarrollo del Modulo de Mascotas 2 | Programación | Modelo Vista Controlador | V13 =====================================
 
-        
-        
+        Min 0:30 Creamos HTML mascotas(lista de mascotas)
+        Min 1:40 Creamos tabla en HTML
+        Min 4:20 Creamos método mis-mascotas(lista de mascotas) en mascotaController
+        Min 5:30 Le pone Http session para que entre el usuario logueado y sino lo mande al inicio
+        Min 6:10 Creamos Lista que traiga mascotas en mascotaServicio
+        Min 7:00 Testing
+        Min 7:45 Modifico HTML mascotas
+        Min 10:00 Agrego columna Editar(Acciones)
+        Min 12:00 Agrego Eliminar(Acciones)
+        Min 13:00 Agrego columna Imagen
+        Min 14:30 Modifico tamaño Imagen
+        Min 18:00 Modificamos el th text y ponemos accion para hacer: editar, crear, eliminar todo en un mismo form
+        Min 18:40 Mandamos el String accion como parámetro
+        Min 19:00 Modificamos el método editarPerfil
+        Min 20:30 Hacemos lógica con th en botón HTML
+        Min 21:00 Pone 2 botones 
+        Min 22:00 formaction
+        Min 22:30 Pone formmethod="POST" en botón y lo saca del formulario
+                  Para el motón eliminar pone formmethod="DELETE"
+        Min 23:30 Creamos método eliminar(delete) en mascotaController
+                  Anotación @DeleteMapping
+        Min 26:00 Agregamos accion a iconos de tabla Mascotas
+        Min 27:30 th:if La foto deberia solamente eliminarse si la acción no es eliminar
+        Min 28:00 th:disable desactiva el campo(input) para que no se pueda modificar
+        Min 29 Testing
+        Min 29:30 ERROR 405
+        Min 32 Testing 
+               No los elimina solo los da de baja
+        Min 35 Modifica QUERY, solo trae los activos a la tabla
+        Min 36 IMPORTANTE vemos como inspeccionar elemento en la web
+        Min 39 Agrega botón volver
+
         =========================================== DOCUMENTACIÓN DE THYMELEAF =========================================================
         
         3.2)
