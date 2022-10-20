@@ -116,6 +116,18 @@ public class Spring {
         img-responsive center-box (Bootstrap)
         float-right
         
+        ============== Envío de mails(MailSender) Documentacion =======================
+        https://javaee.github.io/javamail/docs/api/com/sun/mail/smtp/package-summary.html
+        https://www.tutorialspoint.com/javamail_api/javamail_api_smtp_servers.htm
+        video con el que lo hacemos: https://www.youtube.com/watch?v=kyL0m9y1n0A 
+        - Si es verdadero, habilita el uso del comando STARTTLS (si el servidor lo admite) para cambiar la conexión a una conexión protegida por TLS antes de emitir cualquier comando de inicio de sesión. Si el servidor no es compatible con STARTTLS,
+        - la conexión continúa sin el uso de TLS; consulte la propiedad mail.smtp.starttls.required para fallar si STARTTLS no es compatible. Tenga en cuenta que se debe configurar un almacén de confianza adecuado para que el cliente confíe en el certificado del servidor. El valor predeterminado es falso.
+        #spring.mail.properties.mail.smtp.starttls.enable=true
+        - Si es verdadero, requiere el uso del comando STARTTLS. Si el servidor no admite el comando STARTTLS o el comando falla, el método de conexión fallará. El valor predeterminado es falso.
+        #spring.mail.properties.mail.smtp.starttls.required=true
+        - If set to false, the QUIT command is sent and the connection is immediately closed. If set to true (the default), causes the transport to wait for the response to the QUIT command.
+        #spring.mail.properties.mail.smtp.quitwait=false
+        
         ============== Data de donde sacar para hacer que funcione el pdf =======================
         Github donde lo sacamos(ya lo descargamos): https://github.com/acamus79/BibliotecaWeb/blob/main/BibliotecaWeb%20v0.02/pom.xml
         clase para crearlo(igual en la que estamos ahora): https://github.com/acamus79/BibliotecaWeb/blob/main/BibliotecaWeb%20v0.02/src/main/java/com/mza/biblioteca/util/ListaLibrosPDF.java

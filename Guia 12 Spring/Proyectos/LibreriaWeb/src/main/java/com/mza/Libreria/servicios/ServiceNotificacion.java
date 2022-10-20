@@ -38,6 +38,14 @@ public class ServiceNotificacion {
         System.out.println("Mail enviado...");
     }
     
+    /**
+     * Igual que método anterior + envío de archivo
+     * @param cuerpo
+     * @param titulo
+     * @param mail
+     * @param archivo
+     * @throws javax.mail.MessagingException
+     */
     public void enviarEmailConArchivo(String cuerpo, String titulo, String mail, String archivo) throws MessagingException{
         
         MimeMessage mimeMessage = mailSender.createMimeMessage();
