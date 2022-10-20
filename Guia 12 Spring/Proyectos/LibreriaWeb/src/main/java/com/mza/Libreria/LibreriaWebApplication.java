@@ -45,6 +45,6 @@ public class LibreriaWebApplication{
     //MAIL
 //    @EventListener(ApplicationReadyEvent.class)
 //    public void sendMail(){
-//        servNotif.enviarEmail("Hola Gaspar...","Mensaje para Gaspar","lautapavez@gmail.com");
+//        servNotif.enviarEmail("Hola Gaspar...","Mensaje para Gaspar","elceibolibreria@gmail.com");
 //    } 
 }

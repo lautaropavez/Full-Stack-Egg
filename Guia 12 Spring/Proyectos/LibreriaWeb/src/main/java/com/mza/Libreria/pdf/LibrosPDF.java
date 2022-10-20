@@ -72,10 +72,6 @@ public class LibrosPDF extends AbstractPdfView{
         document.setMargins(-25, -30, 20, 10);
         //Abro el documento 
         document.open();
-
-
-        //PdfPCell nro = new 
-
         
         /*
         Para rellenar la tablaLibros:
@@ -93,7 +89,7 @@ public class LibrosPDF extends AbstractPdfView{
             tablaLibros.addCell(listaLibros.get(i).getEjemplaresRestantes().toString());
             tablaLibros.addCell(listaLibros.get(i).getAlta().toString());
         }
-
+        
         document.addTitle("LISTA DE LIBROS REGISTRADOS");
         document.add(tablaTitulo);
         document.add(tablaNomb);

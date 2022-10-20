@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,11 +37,11 @@ public class ServiceUsuario implements UserDetailsService{
     @Autowired
     private ServicePortada sImagen;
     
-//    @Autowired
-//    private ServiceNotificacion sNotific;
+    @Autowired
+    private ServiceNotificacion sNotific;
     
     @Transactional
-    public void registrar(String nombre,String apellido,String mail,String clave, String clave2) throws MiExcepcion{
+    public void registrar(String nombre,String apellido,String mail,String clave, String clave2) throws MiExcepcion, MessagingException{
    
         validacion(nombre,apellido,mail,clave,clave2);
         
@@ -57,10 +58,11 @@ public class ServiceUsuario implements UserDetailsService{
         usuario.setCantPrestamos(0);
         usuarioRepo.save(usuario);
         
-//        sNotific.enviarEmail("Bienvenidos a la Biblioteca Virtual EL CEIBO", "Libreria Web", usuario.getMail()); //en video 2 de mvc la comentamos pq no hemos configurado un servidor de correo todavia
+//        sNotific.enviarEmail("Bienvenidos a la Biblioteca Virtual EL CEIBO", "Libreria Web - Registro Usuario", usuario.getMail()); //en video 2 de mvc la comentamos pq no hemos configurado un servidor de correo todavia
+        sNotific.enviarEmailConArchivo("Bienvenidos a la Biblioteca Virtual EL CEIBO", "Libreria Web - Registro Usuario", usuario.getMail(),"C:\\Users\\Toshiba\\Desktop\\usuarios\\welcome.webp"); //en video 2 de mvc la comentamos pq no hemos configurado un servidor de correo todavia
     }
     
-    @Transactional //  Hacer lo mismo que en ServiceLibro de verificar de que hayan cambios antes de setear nuevamente
+    @Transactional //Hacer lo mismo que en ServiceLibro de verificar de que hayan cambios antes de setear nuevamente
     public void modificar(MultipartFile archivo,String id,String nombre,String apellido,String mail,String clave,String clave2) throws MiExcepcion{
         
         validacion(nombre,apellido,mail,clave,clave2);
