@@ -51,8 +51,11 @@ public class ServiceLibro {
         }
         
         Libro lib = new Libro();
-
-        lib.setTitulo(titulo.trim());//Remuevo espacios al principio y al final del título
+        
+        //Remuevo espacios al principio y al final del título 
+        titulo = titulo.trim();
+        titulo = titulo.substring(0, 1).toUpperCase() + titulo.substring(1).toLowerCase();
+        lib.setTitulo(titulo);
         lib.setAnio(anio);
         lib.setAlta(Boolean.TRUE);
         lib.setDescripcion(descripcion);
@@ -92,8 +95,10 @@ public class ServiceLibro {
                     libro.setPortada(portada);
                 }
             }
-            if (!libro.getTitulo().equalsIgnoreCase(titulo)) {
-                libro.setTitulo(titulo.toUpperCase());
+            if (!libro.getTitulo().equals(titulo)) {
+                titulo = titulo.trim();
+                titulo = titulo.substring(0, 1).toUpperCase() + titulo.substring(1).toLowerCase();
+                libro.setTitulo(titulo);
             }
             if (!libro.getAnio().equals(anio)) {
                 libro.setAnio(anio);
@@ -302,9 +307,10 @@ public class ServiceLibro {
         }
         if (descripcion.isEmpty()) {
             descripcion = null;
-        }
-        if (descripcion.length() > 900) {
+        }else{
+            if (descripcion.length() > 900) {
             throw new MiExcepcion("Limite de 900 caracteres excedido.");
+        }
         }
         if (idAutor == null || idAutor.trim().isEmpty()) {
             throw new MiExcepcion("Debe indicar el Autor.");

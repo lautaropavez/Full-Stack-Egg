@@ -1,12 +1,11 @@
 package EjerciciosJava;
-
-import java.util.Random;
-import java.util.Scanner;
-
 /**
  * 24. Recorrer un vector de N enteros contabilizando cuántos números son de 1
  * dígito, cuántos de 2 dígitos, etcétera (hasta 5 dígitos).
  */
+import java.util.Random;
+import java.util.Scanner;
+
 public class Ejercicio24 {
 
     public static void main(String[] args) {

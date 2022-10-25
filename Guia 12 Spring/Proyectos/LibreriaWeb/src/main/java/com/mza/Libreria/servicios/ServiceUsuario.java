@@ -46,7 +46,11 @@ public class ServiceUsuario implements UserDetailsService{
         validacion(nombre,apellido,mail,clave,clave2);
         
         Usuario usuario = new Usuario();
+        nombre = nombre.trim();
+        nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1).toLowerCase();
         usuario.setNombre(nombre);
+        apellido = apellido.trim();
+        apellido = apellido.substring(0, 1).toUpperCase() + apellido.substring(1).toLowerCase();
         usuario.setApellido(apellido);
         usuario.setMail(mail);
         usuario.setRol(Rol.USUARIO);
@@ -80,10 +84,14 @@ public class ServiceUsuario implements UserDetailsService{
                     usuario.setImagen(imagen);
                 }
             }
-            if (!usuario.getNombre().equalsIgnoreCase(nombre)) {
+            if (!usuario.getNombre().equals(nombre)) {
+                nombre = nombre.trim();
+                nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1).toLowerCase();
                 usuario.setNombre(nombre);
             }
-            if (!usuario.getApellido().equalsIgnoreCase(apellido)) {
+            if (!usuario.getApellido().equals(apellido)) {
+                apellido = apellido.trim();
+                apellido = apellido.substring(0, 1).toUpperCase() + apellido.substring(1).toLowerCase();
                 usuario.setApellido(apellido);
             }
             if (!usuario.getMail().equalsIgnoreCase(mail)) {

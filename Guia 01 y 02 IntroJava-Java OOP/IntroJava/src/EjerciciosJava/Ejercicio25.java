@@ -1,7 +1,7 @@
 package EjerciciosJava;
-//  25_Realizar un programa que rellene un matriz de 4 x 4 de valores aleatorios y
-//  muestre traspuesta.
-
+/** 25_Realizar un programa que rellene un matriz de 4 x 4 de valores aleatorios y
+ *  muestre traspuesta.
+*/
 import java.util.Random;
 import java.util.Scanner;
 

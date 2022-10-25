@@ -1,6 +1,5 @@
 package EjerciciosJava;
-
-/* 15.Realizar un programa que pida dos números enteros positivos por teclado y muestre por pantalla el siguiente menú:
+/** 15.Realizar un programa que pida dos números enteros positivos por teclado y muestre por pantalla el siguiente menú:
               MENU
               1. Sumar
               2. Restar
@@ -13,7 +12,7 @@ package EjerciciosJava;
    opción 5. Tener en cuenta que, si el usuario selecciona la opción 5, en vez de salir
    del programa directamente, se debe mostrar el siguiente mensaje de confirmación:
    ¿Está seguro que desea salir del programa (S/N)? Si el usuario selecciona el
-   carácter ‘S’ se sale del programa, caso contrario se vuelve a mostrar el menú.
+   carácter 'S' se sale del programa, caso contrario se vuelve a mostrar el menú.
  */
 import java.util.Scanner;
 
@@ -35,12 +34,12 @@ public class Ejercicio15 {
         division = ((double) num1 / (double) num2);
         do {
             System.out.println("------MENU-------\n"
-                    + "1) Sumar."
-                    + "2) Restar."
-                    + "3) Multiplicar."
-                    + "4) Dividir."
-                    + "5) Salir"
-                    + "Elija la opción deseada:.");
+                    + "1) Sumar.\n"
+                    + "2) Restar.\n"
+                    + "3) Multiplicar.\n"
+                    + "4) Dividir.\n"
+                    + "5) Salir\n"
+                    + "Elija la opción deseada:\n");
             opcion = entrada.nextInt();
             if (opcion <= 0 || opcion > 5) {
                 System.out.println("OPCIÓN INCORRECTA.");
@@ -50,30 +49,30 @@ public class Ejercicio15 {
             switch (opcion) {
                 case 1:
                     System.out.println("Usted eligió la opción " + opcion + ").");
-                    System.out.println("La suma de " + num1 + " + " + num2 + " es =" + (num1 + num2));
+                    System.out.println("La suma de " + num1 + " + " + num2 + " es = " + (num1 + num2));
                     break;
                 case 2:
                     System.out.println("Usted eligió la opción " + opcion + ").");
-                    System.out.println("La resta de " + num1 + " - " + num2 + " es =" + (num1 - num2));
+                    System.out.println("La resta de " + num1 + " - " + num2 + " es = " + (num1 - num2));
                     break;
                 case 3:
                     System.out.println("Usted eligió la opción " + opcion + ").");
-                    System.out.println("La multiplicación de " + num1 + " * " + num2 + " es =" + (num1 * num2));
+                    System.out.println("La multiplicación de " + num1 + " * " + num2 + " es = " + (num1 * num2));
                     break;
                 case 4:
                     System.out.println("Usted eligió la opción " + opcion + ").");
-                    System.out.println("La division de " + num1 + "/" + num2 + " es =" + division);
+                    System.out.println("La division de " + num1 + "/" + num2 + " es = " + division);
                     break;
                 case 5:
                     System.out.println("Usted eligió la opción " + opcion + ").");
                     System.out.println("¿Está seguro que desea salir del programa (S/N)?");
                     salida = entrada.next().charAt(0);
                     salida = Character.toLowerCase(salida);
-                    
+                    if(salida != 's' || salida != 'n'){
+                        System.out.println("ELECCIÓN INCORRECTA");
+                    }
             }
-
         } while (salida != 's');
         System.out.println("Gracias por utilizar nuestro sistema, buen viaje!!");
     }
-
 }

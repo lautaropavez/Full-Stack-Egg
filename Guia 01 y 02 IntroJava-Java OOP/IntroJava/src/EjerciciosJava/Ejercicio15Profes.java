@@ -1,7 +1,4 @@
 package EjerciciosJava;
-
-import java.util.Scanner;
-
 /* 15.Realizar un programa que pida dos números enteros positivos por teclado y muestre por pantalla el siguiente menú:
               MENU
               1. Sumar
@@ -16,7 +13,9 @@ import java.util.Scanner;
    del programa directamente, se debe mostrar el siguiente mensaje de confirmación:
    ¿Está seguro que desea salir del programa (S/N)? Si el usuario selecciona el
    carácter ‘S’ se sale del programa, caso contrario se vuelve a mostrar el menú.
- */
+*/
+import java.util.Scanner;
+
 public class Ejercicio15Profes {
 
     public static void main(String[] args) {

@@ -1,16 +1,16 @@
 package EjerciciosJava;
-// 6. Escribir un programa que lea un número entero por teclado y muestre por pantalla
-// el doble, el triple y la raíz cuadrada de ese número. Nota: investigar la función
-// Math.sqrt().
-
+/** 6. Escribir un programa que lea un número entero por teclado y muestre por pantalla
+ *  el doble, el triple y la raíz cuadrada de ese número. Nota: investigar la función
+ *  Math.sqrt().
+ */
 import java.util.Scanner;
 
 public class Ejercicio6 {
 
     public static void main(String[] args) {
 
-        System.out.println("Por favor ingrese un número entero:");
         Scanner leer = new Scanner(System.in);
+        System.out.println("Por favor ingrese un número entero:");
         int numero = leer.nextInt();
 
         System.out.println("El doble de " + numero + " es: " + (numero * 2));

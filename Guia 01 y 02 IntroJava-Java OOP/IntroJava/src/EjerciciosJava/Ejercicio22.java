@@ -1,6 +1,7 @@
 package EjerciciosJava;
-//22.Realizar un algoritmo que rellene un vector con los 100 primeros números enteros y
-//los muestre por pantalla en orden descendente.
+/** 22.Realizar un algoritmo que rellene un vector con los 100 primeros números enteros y
+ *  los muestre por pantalla en orden descendente.
+ */
 public class Ejercicio22 {
         
     public static void main(String[] args) {
